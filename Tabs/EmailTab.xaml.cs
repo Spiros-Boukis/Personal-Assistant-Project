@@ -28,10 +28,10 @@ namespace Personal_Assistant.Tabs
             InitializeComponent();
 
             Emails = new List<EmailEntry>();
-            Emails.Add(new EmailEntry("qwer@hotmail.com", "myemail@hotmail.com", "Hey there", "Hi friend how are you?"));
-            Emails.Add(new EmailEntry("scammer@hotmail.com", "myemail@hotmail.com", "Important announchemtne", "blablablabla"));
-            Emails.Add(new EmailEntry("abla@hotmail.com", "myemail@hotmail.com", "Hey there", "Hi friend how are you?"));
-            Emails.Add(new EmailEntry("qwer@hotmail.com", "myemail@hotmail.com", "Hey there", "Hi friend how are you?"));
+            Emails.Add(new EmailEntry("qwer@hotmail.com", "myemail@hotmail.com", "Hey there", "Hi friend how are you?",false));
+            Emails.Add(new EmailEntry("scammer@hotmail.com", "myemail@hotmail.com", "Important announchemtne", "blablablabla", false));
+            Emails.Add(new EmailEntry("abla@hotmail.com", "myemail@hotmail.com", "Hey there", "Hi friend how are you?", true));
+            Emails.Add(new EmailEntry("qwer@hotmail.com", "myemail@hotmail.com", "Hey there", "Hi friend how are you?",true));
 
             emailsListView.ItemsSource = Emails;
             emailsListView.Items.Refresh();

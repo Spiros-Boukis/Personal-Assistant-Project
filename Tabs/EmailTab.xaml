@@ -4,10 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Personal_Assistant.Tabs"
+             xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
+xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
              mc:Ignorable="d" 
              Height="auto" Width="auto">
 
     <UserControl.Resources>
+        <local1:EmailPreviewStyleSelector x:Key="styleSelector"/>
+        <Style x:Key="UnreadEmailPreviewStyleTemplate" TargetType="local2:EmailPreviewControl">
+            <Setter Property=""></Setter>
+        </Style>
+        <Style x:Key="ReadEmailPreviewStyleTemplate" TargetType="local2:EmailPreviewControl">
+
+        </Style>
         <DataTemplate x:Key="EmailPreviewTemplate">
             
         </DataTemplate>
