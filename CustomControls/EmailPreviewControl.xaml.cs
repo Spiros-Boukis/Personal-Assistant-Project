@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Personal_Assistant.Tabs
+namespace Personal_Assistant.CustomControls
 {
     /// <summary>
-    /// Interaction logic for CalendarWindow.xaml
+    /// Interaction logic for EmailPreviewControl.xaml
     /// </summary>
-    public partial class CalendarWindow : Window
+    public partial class EmailPreviewControl : UserControl
     {
-        public CalendarWindow()
+        public EmailPreviewControl()
         {
             InitializeComponent();
         }

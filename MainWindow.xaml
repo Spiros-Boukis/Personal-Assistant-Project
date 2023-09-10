@@ -53,85 +53,22 @@
                 <TabItem.Header>
                     <Image Width="150" Height="150" Source="Resources/Images/calendar-flat.png"/>
                 </TabItem.Header>
-                
-                <StackPanel Orientation="Vertical">
-                    <Label HorizontalContentAlignment="Center" FontSize="60" FontWeight="Bold" Content="Calendar"></Label>
-                    <Viewbox MaxHeight="500" MaxWidth="500">
-
-                        <Calendar  x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged">
-                            <Calendar.CalendarDayButtonStyle>
-                                <Style TargetType="{x:Type CalendarDayButton}">
-                                    <Setter Property="helpers:DateHelper.Date" Value="{Binding}" />
-                                    <Style.Triggers>
-                                        <Trigger Property="helpers:DateHelper.HasEntries" Value="True">
-                                            <Setter Property="Background" Value="LightGreen" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Calendar.CalendarDayButtonStyle>
-                        </Calendar>
-                    </Viewbox>
-                    <StackPanel x:Name="calendarStackPanel" Orientation="Vertical">
-                        <ToolBar>
-                            <ToolBar.Items>
-                                <Button Click="NewAppointment_Click">
-                                    <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
-                                </Button>
-                                <Button>
-                                    <Image Source="Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
-
-                                </Button>
-                                <Button Click="Delete_Click">
-                                    <Image  HorizontalAlignment="Right" Source="Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
-
-                                </Button>
-                            </ToolBar.Items>
-                        </ToolBar>
-                        <StackPanel x:Name="newAppointmentControl" Orientation="Horizontal" Width="auto">
-
-                            <Button Click="saveNewAppointment">
-                                <Image Source="/Resources/Images/save_icon.png" Width="40" Height="40"/>
-
-                            </Button>
-                            <Button Click="cancelNewAppointment">
-                                <Image Source="/Resources/Images/cancel_icon.png" Width="40" Height="40"/>
-
-                            </Button>
-                            <TextBox x:Name="newEntryText" MinWidth="500" FontSize="40" Text=". . . ."></TextBox>
-                        </StackPanel>
-                        <ListView x:Name="AppointmentsListView"  ItemTemplateSelector="{StaticResource  appointmentSelector }">
-                            
-                        </ListView>
-                        </StackPanel>
-                   
-                    
-                    </StackPanel>
-               
-
-
+                <local4:CalendarTab Width="auto" Height="auto"></local4:CalendarTab>
             </TabItem>
-            
             <TabItem>
                 <TabItem.Header>
                     <Image Width="150" Height="150" Source="Resources/Images/mail-icon_.png"  />
                 </TabItem.Header>
-                
-                    <StackPanel Orientation="Vertical" MinHeight="300" MinWidth="300">
-                        <Label HorizontalContentAlignment="Center" FontSize="60" FontWeight="Bold" Content="E-Mail"></Label>
-                        <StackPanel Orientation="Horizontal" Height="100"></StackPanel>
-                        
-                            
-                    </StackPanel>
 
-                
+                <local4:EmailTab Width="auto" Height="auto"></local4:EmailTab>
+
+
             </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <Image Width="150" Height="150" Source="Resources/Images/smart-home.png"  />
                 </TabItem.Header>
-                <!--Bind TextBlock.Text to the TextBox on the first
-TabItem.-->
-                <TextBlock Text="Email Area"/>
+                
             </TabItem>
         </TabControl>
     </Grid>

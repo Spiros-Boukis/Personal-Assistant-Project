@@ -1,15 +1,15 @@
-﻿<Window x:Class="Personal_Assistant.Tabs.CalendarWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-         xmlns:local="clr-namespace:Personal_Assistant" xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
- xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
- xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
-        
-        mc:Ignorable="d"
-        Title="CalendarWindow" Height="auto" Width="auto">
-    <Window.Resources>
+﻿<UserControl x:Class="Personal_Assistant.Tabs.CalendarTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                           xmlns:local="clr-namespace:Personal_Assistant" xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
+xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
+xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
+             mc:Ignorable="d" 
+             Height="auto" Width="auto">
+
+    <UserControl.Resources>
 
         <Style x:Key="cdbKey" TargetType="CalendarDayButton">
             <Style.Triggers>
@@ -31,7 +31,7 @@
 
 
                 <TextBlock FontSize="40" Text="{Binding Title}"></TextBlock>
-                <Image Source="Resources/Images/important_icon.png" Width="40" Height="40"></Image>
+                <Image Source="/Resources/Images/important_icon.png" Width="40" Height="40"></Image>
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="DeadlineAppointmentTemplate">
@@ -41,11 +41,8 @@
                 <TextBlock FontSize="40" Text="{Binding Title}"></TextBlock>
             </StackPanel>
         </DataTemplate>
-    </Window.Resources>
-
-
+    </UserControl.Resources>
     <Grid>
-
         <StackPanel Orientation="Vertical">
             <Label HorizontalContentAlignment="Center" FontSize="60" FontWeight="Bold" Content="Calendar"></Label>
             <Viewbox MaxHeight="500" MaxWidth="500">
@@ -90,8 +87,16 @@
 
                     </Button>
                     <TextBox x:Name="newEntryText" MinWidth="500" FontSize="40" Text=". . . ."></TextBox>
+                    <StackPanel Orientation="Vertical">
+                        <Label FontSize="30">Προτεραιότητα</Label>
+                    <ComboBox x:Name="priorityComboBox" FontSize="25">
+                        <ComboBoxItem FontSize="25" IsSelected="True" x:Name="normal">Normal</ComboBoxItem>
+                            <ComboBoxItem x:Name="important">Σημαντικό</ComboBoxItem >
+                            <ComboBoxItem x:Name="deadline">Deadline</ComboBoxItem >
+                    </ComboBox>
+                    </StackPanel>
                 </StackPanel>
-                <ListView x:Name="AppointmentsListView"  ItemTemplateSelector="{StaticResource  appointmentSelector }">
+                <ListView x:Name="AppointmentsListView"  ItemTemplateSelector="{StaticResource appointmentSelector}">
 
                 </ListView>
             </StackPanel>
@@ -99,4 +104,4 @@
 
         </StackPanel>
     </Grid>
-</Window>
+</UserControl>
