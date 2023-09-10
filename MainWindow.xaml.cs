@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -29,25 +30,46 @@ namespace Personal_Assistant
         public MainWindow()
         {
             InitializeComponent();
+            
             newAppointmentControl.Visibility = Visibility.Collapsed;    
             Appointments = new Dictionary<string, List<AppointmentEntry>>();
-            Appointments.Add("2732023", new List<AppointmentEntry>());
-            Appointments.Add("2712023", new List<AppointmentEntry>());
-            var temp = Appointments["2732023"];
+            var today = DateTime.Today.ToShortDateString();
+            var threedaysLater = DateTime.Today.AddDays(3).ToShortDateString();
+            Appointments.Add(today, new List<AppointmentEntry>());
+            Appointments.Add(threedaysLater, new List<AppointmentEntry>());
+            var temp = Appointments[today];
             temp.Add(new AppointmentEntry("Giatros stis 17:00","",1));
             temp.Add(new AppointmentEntry("Cafe me ton giannis stis 21:00","",0));
-            var temp1 = Appointments["2712023"];
+            var temp1 = Appointments[threedaysLater];
             temp1.Add(new AppointmentEntry("Klirosi stis 10", "", 0));
             temp1.Add(new AppointmentEntry("kati exw na kanw ", "", 0));
             temp1.Add(new AppointmentEntry("Rantevou gia douleia", "", 1));
+
+
+            AppointmentsListView.ItemsSource = Appointments[today];
+            AppointmentsListView.Items.Refresh();
+            Style s = (Style)this.Resources["cdbKey"];
+            foreach (var date in Appointments)
+            {
+                var _value = DateTime.Parse(date.Key);
+                var _formattedDate = _value.Month.ToString()+"/"+_value.Day + "/" + _value.Year;
+                
+
+                DataTrigger dataTrigger = new DataTrigger() { Binding = new Binding("Date"), Value = _formattedDate };
+                dataTrigger.Setters.Add(new Setter(CalendarDayButton.BackgroundProperty, Brushes.LightGreen));
+                s.Triggers.Add(dataTrigger);
+            }
+
+            CalendarControl.SelectedDate = DateTime.Today;
+
         }
 
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            var _date = CalendarControl.SelectedDate.Value;
-            CalendarControl.SelectedDates.Add(_date);
-            var test = _date.DayOfYear.ToString() + _date.Year.ToString();
-            if (Appointments.ContainsKey(test))
+            var _date = CalendarControl.SelectedDate.Value.ToShortDateString();
+            //CalendarControl.SelectedDates.Add(_date);
+            var test = _date;
+            if (Appointments.ContainsKey(_date))
             {
                 AppointmentsListView.ItemsSource = Appointments[test];
             }
@@ -69,9 +91,9 @@ namespace Personal_Assistant
             }
             else
             {
-                var _date = CalendarControl.SelectedDate.Value;
-                CalendarControl.SelectedDates.Add(_date);
-                var test = _date.DayOfYear.ToString() + _date.Year.ToString();
+                var _date = CalendarControl.SelectedDate.Value.ToShortDateString();
+
+                var test = _date.ToString();
                 var prompt = MessageBox.Show("Θέλετε να διαγράψετε αυτό το ραντεβού?", "Διαγραφή", MessageBoxButton.YesNo);
                 if (prompt == MessageBoxResult.Yes)
                 {
@@ -101,15 +123,26 @@ namespace Personal_Assistant
             entry.Title = newEntryText.Text;
             entry.Description = "";
             entry.Type = 1;
+            var selectedDate = CalendarControl.SelectedDate.Value;
+            var _formattedDate = selectedDate.Month.ToString() + "/" + selectedDate.Day + "/" + selectedDate.Year;
+            var _date = CalendarControl.SelectedDate.Value.ToShortDateString();
 
-            if(Appointments.ContainsKey(FormattedDate()))
+            if (Appointments.ContainsKey(_date))
             {
-                Appointments[FormattedDate()].Add(entry);
+                Appointments[_date].Add(entry);
             }
             else
             {
-                Appointments.Add(FormattedDate(),new List<AppointmentEntry>());
-                Appointments[FormattedDate()].Add(entry);
+                Appointments.Add(_date, new List<AppointmentEntry>());
+                Appointments[_date].Add(entry);
+                Style s = (Style)this.Resources["cdbKey"];
+
+                
+
+                DataTrigger dataTrigger = new DataTrigger() { Binding = new Binding("Date"), Value = _formattedDate };
+                dataTrigger.Setters.Add(new Setter(CalendarDayButton.BackgroundProperty, Brushes.LightGreen));
+                s.Triggers.Add(dataTrigger);
+            
             }
 
             AppointmentsListView.ItemsSource = Appointments[FormattedDate()];
@@ -128,10 +161,11 @@ namespace Personal_Assistant
 
         private string FormattedDate()
         {
-            var _date = CalendarControl.SelectedDate.Value;
-            CalendarControl.SelectedDates.Add(_date);
-            var test = _date.DayOfYear.ToString() + _date.Year.ToString();
-            return test;
+            var _date = CalendarControl.SelectedDate.Value.ToShortDateString();
+            return _date;
+            //CalendarControl.SelectedDates.Add(_date);
+            //var test = _date.DayOfYear.ToString() + _date.Year.ToString();
+            //return test;
         }
 
     }

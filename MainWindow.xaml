@@ -9,6 +9,13 @@
         Title="MainWindow" Height="auto" Width="1100">
     <Window.Resources>
 
+        <Style x:Key="cdbKey" TargetType="CalendarDayButton">
+            <Style.Triggers>
+               
+
+            </Style.Triggers>
+        </Style>
+
         <local1:AppointmentEntrySelector x:Key="appointmentSelector"/>
         <DataTemplate x:Key="NormalAppointmentTemplate">
             <StackPanel Orientation="Horizontal">
@@ -51,7 +58,7 @@
                     <Label HorizontalContentAlignment="Center" FontSize="60" FontWeight="Bold" Content="Calendar"></Label>
                     <Viewbox MaxHeight="500" MaxWidth="500">
                         
-                        <Calendar  x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged"></Calendar>
+                        <Calendar CalendarDayButtonStyle="{StaticResource cdbKey}"  x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged"></Calendar>
                     </Viewbox>
                     <StackPanel x:Name="calendarStackPanel" Orientation="Vertical">
                         <ToolBar>
