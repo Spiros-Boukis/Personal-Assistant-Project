@@ -8,7 +8,7 @@
  xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         
         mc:Ignorable="d"
-        Title="CalendarWindow" Height="450" Width="800">
+        Title="CalendarWindow" Height="auto" Width="auto">
     <Window.Resources>
 
         <Style x:Key="cdbKey" TargetType="CalendarDayButton">
@@ -46,6 +46,57 @@
 
     <Grid>
 
+        <StackPanel Orientation="Vertical">
+            <Label HorizontalContentAlignment="Center" FontSize="60" FontWeight="Bold" Content="Calendar"></Label>
+            <Viewbox MaxHeight="500" MaxWidth="500">
 
+                <Calendar  x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged">
+                    <Calendar.CalendarDayButtonStyle>
+                        <Style TargetType="{x:Type CalendarDayButton}">
+                            <Setter Property="helpers:DateHelper.Date" Value="{Binding}" />
+                            <Style.Triggers>
+                                <Trigger Property="helpers:DateHelper.HasEntries" Value="True">
+                                    <Setter Property="Background" Value="LightGreen" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Calendar.CalendarDayButtonStyle>
+                </Calendar>
+            </Viewbox>
+            <StackPanel x:Name="calendarStackPanel" Orientation="Vertical">
+                <ToolBar>
+                    <ToolBar.Items>
+                        <Button Click="NewAppointment_Click">
+                            <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
+                        </Button>
+                        <Button>
+                            <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
+
+                        </Button>
+                        <Button Click="Delete_Click">
+                            <Image  HorizontalAlignment="Right" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
+
+                        </Button>
+                    </ToolBar.Items>
+                </ToolBar>
+                <StackPanel x:Name="newAppointmentControl" Orientation="Horizontal" Width="auto">
+
+                    <Button Click="saveNewAppointment">
+                        <Image Source="/Resources/Images/save_icon.png" Width="40" Height="40"/>
+
+                    </Button>
+                    <Button Click="cancelNewAppointment">
+                        <Image Source="/Resources/Images/cancel_icon.png" Width="40" Height="40"/>
+
+                    </Button>
+                    <TextBox x:Name="newEntryText" MinWidth="500" FontSize="40" Text=". . . ."></TextBox>
+                </StackPanel>
+                <ListView x:Name="AppointmentsListView"  ItemTemplateSelector="{StaticResource  appointmentSelector }">
+
+                </ListView>
+            </StackPanel>
+
+
+        </StackPanel>
     </Grid>
 </Window>
