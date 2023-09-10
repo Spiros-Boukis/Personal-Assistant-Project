@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Height="auto" Width="auto">
     <Grid>
-        <StackPanel Orientation="Horizontal" Width="auto">
+        <StackPanel Orientation="Horizontal" Width="auto" MinWidth="850">
 
             <Button Click="saveNewAppointment">
                 <Image Source="/Resources/Images/save_icon.png" Width="40" Height="40"/>

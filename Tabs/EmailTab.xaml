@@ -14,12 +14,16 @@
     </UserControl.Resources>
     <Grid ShowGridLines="True" MinHeight="500">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition MinWidth="500"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Grid.Column="0">
-            <Label FontSize="40" FontWeight="Bold">Εισερχόμενα</Label>
-            <Label FontSize="40" FontWeight="Bold">Εξερχόμενα</Label>
+        <StackPanel Orientation="Vertical" Grid.Column="0" Width="auto">
+            <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
+            <Label Style="{StaticResource EmailFolderHeaderStyle}">Εισερχόμενα</Label>
+            </Border>
+            <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
+            <Label Style="{StaticResource EmailFolderHeaderStyle}">Εξερχόμενα</Label>
+            </Border>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <ListView Width="auto" Height="auto" x:Name="emailsListView" >
