@@ -27,6 +27,10 @@ namespace Personal_Assistant
     {
 
         public Dictionary<string, List<AppointmentEntry>> Appointments;
+       
+
+        
+        Style s;
         public MainWindow()
         {
             InitializeComponent();
@@ -48,7 +52,7 @@ namespace Personal_Assistant
 
             AppointmentsListView.ItemsSource = Appointments[today];
             AppointmentsListView.Items.Refresh();
-            Style s = (Style)this.Resources["cdbKey"];
+            /*s = (Style)this.Resources["cdbKey"];
             foreach (var date in Appointments)
             {
                 var _value = DateTime.Parse(date.Key);
@@ -59,7 +63,7 @@ namespace Personal_Assistant
                 dataTrigger.Setters.Add(new Setter(CalendarDayButton.BackgroundProperty, Brushes.LightGreen));
                 s.Triggers.Add(dataTrigger);
             }
-
+            */
             CalendarControl.SelectedDate = DateTime.Today;
 
         }
@@ -135,14 +139,14 @@ namespace Personal_Assistant
             {
                 Appointments.Add(_date, new List<AppointmentEntry>());
                 Appointments[_date].Add(entry);
-                Style s = (Style)this.Resources["cdbKey"];
+                
 
                 
 
-                DataTrigger dataTrigger = new DataTrigger() { Binding = new Binding("Date"), Value = _formattedDate };
-                dataTrigger.Setters.Add(new Setter(CalendarDayButton.BackgroundProperty, Brushes.LightGreen));
-                s.Triggers.Add(dataTrigger);
-            
+               //aTrigger dataTrigger = new DataTrigger() { Binding = new Binding("Date"), Value = _formattedDate };
+               //aTrigger.Setters.Add(new Setter(CalendarDayButton.BackgroundProperty, Brushes.LightGreen));
+               // s.Triggers.Add(dataTrigger);
+
             }
 
             AppointmentsListView.ItemsSource = Appointments[FormattedDate()];

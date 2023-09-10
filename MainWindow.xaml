@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Personal_Assistant" xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
+        xmlns:local="clr-namespace:Personal_Assistant" xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
         xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
+        xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         mc:Ignorable="d"
         Title="MainWindow" Height="auto" Width="1100">
     <Window.Resources>
@@ -52,13 +53,23 @@
                 <TabItem.Header>
                     <Image Width="150" Height="150" Source="Resources/Images/calendar-flat.png"/>
                 </TabItem.Header>
-
                 
                 <StackPanel Orientation="Vertical">
                     <Label HorizontalContentAlignment="Center" FontSize="60" FontWeight="Bold" Content="Calendar"></Label>
                     <Viewbox MaxHeight="500" MaxWidth="500">
-                        
-                        <Calendar CalendarDayButtonStyle="{StaticResource cdbKey}"  x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged"></Calendar>
+
+                        <Calendar  x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged">
+                            <Calendar.CalendarDayButtonStyle>
+                                <Style TargetType="{x:Type CalendarDayButton}">
+                                    <Setter Property="helpers:DateHelper.Date" Value="{Binding}" />
+                                    <Style.Triggers>
+                                        <Trigger Property="helpers:DateHelper.HasEntries" Value="True">
+                                            <Setter Property="Background" Value="LightGreen" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Calendar.CalendarDayButtonStyle>
+                        </Calendar>
                     </Viewbox>
                     <StackPanel x:Name="calendarStackPanel" Orientation="Vertical">
                         <ToolBar>
@@ -88,7 +99,7 @@
                             </Button>
                             <TextBox x:Name="newEntryText" MinWidth="500" FontSize="40" Text=". . . ."></TextBox>
                         </StackPanel>
-                        <ListView x:Name="AppointmentsListView" ItemTemplateSelector="{StaticResource appointmentSelector}">
+                        <ListView x:Name="AppointmentsListView"  ItemTemplateSelector="{StaticResource  appointmentSelector }">
                             
                         </ListView>
                         </StackPanel>
