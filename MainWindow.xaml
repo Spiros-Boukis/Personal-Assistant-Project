@@ -1,0 +1,120 @@
+﻿<Window x:Class="Personal_Assistant.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Personal_Assistant" xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
+        xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="auto" Width="1100">
+    <Window.Resources>
+
+        <local1:AppointmentEntrySelector x:Key="appointmentSelector"/>
+        <DataTemplate x:Key="NormalAppointmentTemplate">
+            <StackPanel Orientation="Horizontal">
+
+                
+                <TextBlock FontSize="40" Text="{Binding Path=Title}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="ImportantAppointmentTemplate">
+            <StackPanel Orientation="Horizontal">
+
+                
+                <TextBlock FontSize="40" Text="{Binding Title}"></TextBlock>
+                <Image Source="Resources/Images/important_icon.png" Width="40" Height="40"></Image>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="DeadlineAppointmentTemplate">
+            <StackPanel Orientation="Horizontal">
+
+                
+                <TextBlock FontSize="40" Text="{Binding Title}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+          
+        </Grid.RowDefinitions>
+        <TabControl  TabStripPlacement="Left">
+            <TabItem>
+                <TabItem.Header>
+                    <Image Width="150" Height="150" Source="Resources/Images/calendar-flat.png"/>
+                </TabItem.Header>
+
+                
+                <StackPanel Orientation="Vertical">
+                    <Label HorizontalContentAlignment="Center" FontSize="60" FontWeight="Bold" Content="Calendar"></Label>
+                    <Viewbox MaxHeight="500" MaxWidth="500">
+                        
+                        <Calendar  x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged"></Calendar>
+                    </Viewbox>
+                    <StackPanel x:Name="calendarStackPanel" Orientation="Vertical">
+                        <ToolBar>
+                            <ToolBar.Items>
+                                <Button Click="NewAppointment_Click">
+                                    <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
+                                </Button>
+                                <Button>
+                                    <Image Source="Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
+
+                                </Button>
+                                <Button Click="Delete_Click">
+                                    <Image  HorizontalAlignment="Right" Source="Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
+
+                                </Button>
+                            </ToolBar.Items>
+                        </ToolBar>
+                        <StackPanel x:Name="newAppointmentControl" Orientation="Horizontal" Width="auto">
+
+                            <Button Click="saveNewAppointment">
+                                <Image Source="/Resources/Images/save_icon.png" Width="40" Height="40"/>
+
+                            </Button>
+                            <Button Click="cancelNewAppointment">
+                                <Image Source="/Resources/Images/cancel_icon.png" Width="40" Height="40"/>
+
+                            </Button>
+                            <TextBox x:Name="newEntryText" MinWidth="500" FontSize="40" Text=". . . ."></TextBox>
+                        </StackPanel>
+                        <ListView x:Name="AppointmentsListView" ItemTemplateSelector="{StaticResource appointmentSelector}">
+                            
+                        </ListView>
+                        </StackPanel>
+                   
+                    
+                    </StackPanel>
+               
+
+
+            </TabItem>
+            
+            <TabItem>
+                <TabItem.Header>
+                    <Image Width="150" Height="150" Source="Resources/Images/mail-icon_.png"  />
+                </TabItem.Header>
+                
+                    <StackPanel Orientation="Vertical" MinHeight="300" MinWidth="300">
+                        <Label HorizontalContentAlignment="Center" FontSize="60" FontWeight="Bold" Content="E-Mail"></Label>
+                        <StackPanel Orientation="Horizontal" Height="100"></StackPanel>
+                        
+                            
+                    </StackPanel>
+
+                
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Image Width="150" Height="150" Source="Resources/Images/smart-home.png"  />
+                </TabItem.Header>
+                <!--Bind TextBlock.Text to the TextBox on the first
+TabItem.-->
+                <TextBlock Text="Email Area"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

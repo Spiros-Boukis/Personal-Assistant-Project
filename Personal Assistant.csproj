@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>Personal_Assistant</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\add_icon.png" />
+    <None Remove="Resources\Images\calandar-icon.png" />
+    <None Remove="Resources\Images\calendar-flat.png" />
+    <None Remove="Resources\Images\cancel_icon.png" />
+    <None Remove="Resources\Images\delete_icon.png" />
+    <None Remove="Resources\Images\edit_icon.png" />
+    <None Remove="Resources\Images\important_icon.png" />
+    <None Remove="Resources\Images\mail-icon_.png" />
+    <None Remove="Resources\Images\save_icon.png" />
+    <None Remove="Resources\Images\smart-home.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\add_icon.png" />
+    <Resource Include="Resources\Images\cancel_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\important_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\calandar-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\calendar-flat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\delete_icon.png" />
+    <Resource Include="Resources\Images\edit_icon.png" />
+    <Resource Include="Resources\Images\mail-icon_.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\save_icon.png" />
+    <Resource Include="Resources\Images\smart-home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
