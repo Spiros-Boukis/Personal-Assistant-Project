@@ -37,14 +37,14 @@ namespace Personal_Assistant.Helpers
         private static bool CheckHasEntries(DateTime date)
         {
             var _formattedDate = date.Month.ToString() + "/" + date.Day + "/" + date.Year;
-            //if (Appoi.ContainsKey[_formattedDate])
-            //{
+             if(Appoi.ContainsKey[_formattedDate])
+            {
                 return false;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
+            }
+            else
+            {
+                return false;
+            }
 
         }
 

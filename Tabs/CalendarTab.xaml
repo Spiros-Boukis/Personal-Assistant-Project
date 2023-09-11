@@ -6,6 +6,7 @@
                            xmlns:local="clr-namespace:Personal_Assistant" xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
 xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
 xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              Height="auto" Width="auto">
 
@@ -22,9 +23,8 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         <DataTemplate x:Key="NormalAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
                 <StackPanel Width="650" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
-                    <TextBox FontSize="30" Background="Azure" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        18:00
-                    </TextBox>
+                    <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                   
 
 
                 <TextBlock FontSize="40" Text="{Binding Path=Title}"></TextBlock>
@@ -34,10 +34,8 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         <DataTemplate x:Key="ImportantAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBox FontSize="30" Background="Azure" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        18:00
-                    </TextBox>
                     <Image Source="/Resources/Images/important_icon.png" Width="40" Height="40" Margin="5"></Image>
+                    <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
                     <TextBlock FontWeight="Bold" FontSize="40" Text="{Binding Title}"></TextBlock>
 
                 </StackPanel>
@@ -48,9 +46,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
             <Border Style="{StaticResource appointmentBorderStyle}">
                 <StackPanel Orientation="Horizontal">
 
-                    <TextBox FontSize="30" Background="Azure" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        18:00
-                    </TextBox>
+                    <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
                     <TextBlock FontSize="40" Text="{Binding Title}"></TextBlock>
                 </StackPanel>
             </Border>
@@ -75,49 +71,58 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                         </Calendar.CalendarDayButtonStyle>
                     </Calendar>
                 </Viewbox>
-                <StackPanel x:Name="calendarStackPanel" Orientation="Vertical">
-                    <ToolBar MinWidth="850">
-                        <ToolBar.Items>
-                            <Button Click="NewAppointment_Click">
-                                <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
-                            </Button>
-                            <Button>
-                                <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
+                <Border BorderThickness="3" BorderBrush="#9aa8b4" CornerRadius="7">
+                    <StackPanel x:Name="calendarStackPanel" Orientation="Vertical">
+
+                        <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" x:Name="currentDate"></Label>
+                        <ToolBar MinWidth="850">
+                            <ToolBar.Items>
+                                <Button Click="NewAppointment_Click">
+                                    <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
+                                </Button>
+                                <Button>
+                                    <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
+
+                                </Button>
+                                <Button Click="Delete_Click">
+                                    <Image  HorizontalAlignment="Right" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
+
+                                </Button>
+                            </ToolBar.Items>
+                        </ToolBar>
+                        <StackPanel x:Name="newAppointmentControl" Orientation="Horizontal" Width="auto">
+
+                            <Button Click="saveNewAppointment">
+                                <Image Source="/Resources/Images/save_icon.png" Width="40" Height="40"/>
 
                             </Button>
-                            <Button Click="Delete_Click">
-                                <Image  HorizontalAlignment="Right" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
+                            <Button Click="cancelNewAppointment">
+                                <Image Source="/Resources/Images/cancel_icon.png" Width="40" Height="40"/>
 
                             </Button>
-                        </ToolBar.Items>
-                    </ToolBar>
-                    <StackPanel x:Name="newAppointmentControl" Orientation="Horizontal" Width="auto">
-
-                        <Button Click="saveNewAppointment">
-                            <Image Source="/Resources/Images/save_icon.png" Width="40" Height="40"/>
-
-                        </Button>
-                        <Button Click="cancelNewAppointment">
-                            <Image Source="/Resources/Images/cancel_icon.png" Width="40" Height="40"/>
-
-                        </Button>
-                        <TextBox x:Name="newEntryText" MinWidth="500" FontSize="40" Text=". . . ."></TextBox>
-                        <StackPanel Orientation="Vertical">
-                            <Label FontSize="30">Προτεραιότητα</Label>
-                            <ComboBox x:Name="priorityComboBox" FontSize="25">
-                                <ComboBoxItem FontSize="25" IsSelected="True" x:Name="normal">Normal</ComboBoxItem>
-                                <ComboBoxItem x:Name="important">Σημαντικό</ComboBoxItem >
-                                <ComboBoxItem x:Name="deadline">Deadline</ComboBoxItem >
-                            </ComboBox>
+                            <TextBox x:Name="newEntryText" MinWidth="500" FontSize="40" Text=". . . ."></TextBox>
+                            <Border BorderBrush="#9aa8b4" BorderThickness="2">
+                                <xctk:TimePicker x:Name="timePicker" AllowTextInput="False" FontSize="25" Width="100"></xctk:TimePicker>
+                            </Border>
+                            
+                            <StackPanel Orientation="Vertical">
+                                <Label FontSize="30">Προτεραιότητα</Label>
+                                <ComboBox x:Name="priorityComboBox" FontSize="25">
+                                    <ComboBoxItem FontSize="25" IsSelected="True" x:Name="normal">Normal</ComboBoxItem>
+                                    <ComboBoxItem x:Name="important">Σημαντικό</ComboBoxItem >
+                                    <ComboBoxItem x:Name="deadline">Deadline</ComboBoxItem >
+                                </ComboBox>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                    <ListView x:Name="AppointmentsListView"   ItemTemplateSelector="{StaticResource appointmentSelector}">
-                                
-                    </ListView>
-                </StackPanel>
+                        <Label HorizontalAlignment="Center" Content="Ραντεβού Ημέρας"  FontSize="40" FontWeight="Bold"></Label>
+                        <ListView x:Name="AppointmentsListView"   ItemTemplateSelector="{StaticResource appointmentSelector}">
 
+                        </ListView>
+                
             </StackPanel>
-            
+                </Border>
+            </StackPanel>
+        
 
         </StackPanel>
     </Grid>

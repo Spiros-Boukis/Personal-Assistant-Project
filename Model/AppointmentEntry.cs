@@ -13,17 +13,19 @@ namespace Personal_Assistant.Model
         public string Description { get; set; }
         public int Type; // 0 = normal , 1 = important , 2 = Deadline
 
+        public DateTime? Time { get; set; }
 
         public AppointmentEntry()
         {
                 
         }
-        public AppointmentEntry(string _title,string description, int type)
+        public AppointmentEntry(string _title,string description, int type,DateTime? time)
         {
             Title = _title;
             Description = description;
             Type = type;
             Id = Guid.NewGuid();
+            Time = time;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Personal_Assistant.Tabs
         public CalendarTab()
         {
             InitializeComponent();
-
+            
             newAppointmentControl.Visibility = Visibility.Collapsed;
             Appointments = new Dictionary<string, List<AppointmentEntry>>();
             var today = DateTime.Today.ToShortDateString();
@@ -42,13 +42,14 @@ namespace Personal_Assistant.Tabs
             Appointments.Add(today, new List<AppointmentEntry>());
             Appointments.Add(threedaysLater, new List<AppointmentEntry>());
             var temp = Appointments[today];
-            temp.Add(new AppointmentEntry("Giatros stis 17:00", "", 1));
-            temp.Add(new AppointmentEntry("Cafe me ton giannis stis 21:00", "", 0));
+            temp.Add(new AppointmentEntry("Giatros stis 17:00", "", 1,new DateTime(1000, 1, 1, 15,00,00)));
+            temp.Add(new AppointmentEntry("Cafe me ton giannis stis 21:00", "", 0, new DateTime(1000, 1, 1, 21, 45, 00)));
             var temp1 = Appointments[threedaysLater];
-            temp1.Add(new AppointmentEntry("Klirosi stis 10", "", 0));
-            temp1.Add(new AppointmentEntry("kati exw na kanw ", "", 0));
-            temp1.Add(new AppointmentEntry("Rantevou gia douleia", "", 1));
-            
+            temp1.Add(new AppointmentEntry("Klirosi stis 10", "", 0, new DateTime(1000, 1, 1, 13, 10, 00)));
+            temp1.Add(new AppointmentEntry("kati exw na kanw ", "", 0, new DateTime(1000, 1, 1, 22, 00, 00)));
+            temp1.Add(new AppointmentEntry("Rantevou gia douleia", "", 1, new DateTime(1000, 1, 1, 5, 00, 00)));
+            //timePicker.Text = "12:00";
+            //timePicker.Value = "12:00";
 
             AppointmentsListView.ItemsSource = Appointments[today];
             AppointmentsListView.Items.Refresh();
@@ -65,12 +66,15 @@ namespace Personal_Assistant.Tabs
             }
             */
             CalendarControl.SelectedDate = DateTime.Today;
+            timePicker.Value = DateTime.Now;
 
         }
 
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             var _date = CalendarControl.SelectedDate.Value.ToShortDateString();
+            currentDate.Content = _date;
             //CalendarControl.SelectedDates.Add(_date);
             var test = _date;
             if (Appointments.ContainsKey(_date))
@@ -123,6 +127,7 @@ namespace Personal_Assistant.Tabs
 
         private void saveNewAppointment(object sender, RoutedEventArgs e)
         {
+            var time = timePicker.Value;
             var entry = new AppointmentEntry();
             entry.Title = newEntryText.Text;
             entry.Description = "";
@@ -141,6 +146,7 @@ namespace Personal_Assistant.Tabs
                 entry.Type = 2;
             }
 
+            entry.Time = time;
     
             var selectedDate = CalendarControl.SelectedDate.Value;
             var _formattedDate = selectedDate.Month.ToString() + "/" + selectedDate.Day + "/" + selectedDate.Year;

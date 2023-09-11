@@ -52,17 +52,23 @@ namespace Personal_Assistant.Tabs
         private void emailsListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
             StackPanel test = (StackPanel) sender;
-
-           // var index = emailsListView.SelectedIndex;
-
-            //Emails.ElementAt(index).IsRead = true;
-
-            //emailsListView.Items.Refresh();
-
+            var children = test.Children[0];
             
+            // var index = emailsListView.SelectedIndex;
+            //Emails.ElementAt(index).IsRead = true;
             TextBox text = (TextBox)test.FindName("mailBody");
-
-
+            //emailsListView.Items.Refresh();
+            
+            StackPanel inner = (StackPanel)children;
+            //text1.FontWeight = FontWeights.Normal;
+            Label text1 = (Label)inner.Children[0];
+            Label text2 = (Label)inner.Children[1];
+            Label text3 = (Label)inner.Children[2];
+            Label text4 = (Label)inner.Children[3];
+            text1.FontWeight = FontWeights.Normal;
+            text2.FontWeight = FontWeights.Normal;
+            text3.FontWeight = FontWeights.Normal;
+            text4.FontWeight = FontWeights.Normal;
             if (text.Visibility == Visibility.Visible)
             {
                 text.Visibility = Visibility.Collapsed;

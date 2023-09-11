@@ -16,11 +16,11 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
             
                 <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
                 <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
-                        <StackPanel Orientation="Horizontal" Background="Yellow">
-                            <Label FontSize="20"    Width="auto" Height="35">From:</Label>
-                            <Label FontSize="20"   Content="{Binding From}" Width="auto" Height="35"/>
-                            <Label VerticalAlignment="Center" FontSize="14" Width="auto" Height="auto">Title</Label>
-                            <Label VerticalAlignment="Center" FontSize="20" Content="{Binding Title}" Width="auto" Height="auto"/>
+                        <StackPanel x:Name="innerPanel" Orientation="Horizontal">
+                            <Label FontSize="20" x:Name="fromLabel"   Width="auto" Height="35">From:</Label>
+                        <Label FontSize="20" x:Name="fromValue"  Content="{Binding From}" Width="auto" Height="35"/>
+                        <Label x:Name="titleLabel" VerticalAlignment="Center" FontSize="14" Width="auto" Height="auto">Title</Label>
+                        <Label x:Name="titleValue" VerticalAlignment="Center" FontSize="20" Content="{Binding Title}" Width="auto" Height="auto"/>
                         </StackPanel>
 
 
