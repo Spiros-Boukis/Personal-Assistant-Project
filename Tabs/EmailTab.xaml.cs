@@ -51,11 +51,11 @@ namespace Personal_Assistant.Tabs
 
         private void emailsListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
-            StackPanel test = (StackPanel)sender;
+            StackPanel test = (StackPanel) sender;
 
-            var index = emailsListView.SelectedIndex;
+           // var index = emailsListView.SelectedIndex;
 
-            Emails.ElementAt(index).IsRead = true;
+            //Emails.ElementAt(index).IsRead = true;
 
             //emailsListView.Items.Refresh();
 
@@ -72,9 +72,6 @@ namespace Personal_Assistant.Tabs
                 text.Visibility = Visibility.Visible;
             }
 
-            
-
-           
 
         }
 
@@ -90,6 +87,34 @@ namespace Personal_Assistant.Tabs
             var test = temp.TestVar;
             
             window.ShowDialog();
+        }
+
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListViewItem test = (ListViewItem)sender;
+        
+           var index = emailsListView.SelectedIndex;
+
+
+
+            Emails.ElementAt(0).IsRead = true;
+
+            //emailsListView.Items.Refresh();
+           
+
+            TextBox text = (TextBox)test.FindName("mailBody");
+
+
+            if (text.Visibility == Visibility.Visible)
+            {
+                text.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                text.Visibility = Visibility.Visible;
+            }
+           test.ContentTemplate = FindResource("ReadEmailPreviewTemplate") as DataTemplate;
+
         }
     }
 }

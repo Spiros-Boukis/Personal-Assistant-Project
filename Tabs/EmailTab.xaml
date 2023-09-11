@@ -13,39 +13,43 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
         <local1:EmailPreviewStyleSelector x:Key="styleSelector"/>
         <local1:SentEmailPreviewStyleSelector x:Key="sentEmailStyleSelector"/>
         <DataTemplate  x:Key="ReadEmailPreviewTemplate">
-            <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
+            
+                <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
                 <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
-                    <StackPanel Orientation="Horizontal">
-                        <Label FontSize="20"    Width="auto" Height="35">From:</Label>
-                        <Label FontSize="20"   Content="{Binding From}" Width="auto" Height="35"/>
-                        <Label VerticalAlignment="Center" FontSize="14" Width="auto" Height="auto">Title</Label>
-                        <Label VerticalAlignment="Center" FontSize="20" Content="{Binding Title}" Width="auto" Height="auto"/>
+                        <StackPanel Orientation="Horizontal" Background="Yellow">
+                            <Label FontSize="20"    Width="auto" Height="35">From:</Label>
+                            <Label FontSize="20"   Content="{Binding From}" Width="auto" Height="35"/>
+                            <Label VerticalAlignment="Center" FontSize="14" Width="auto" Height="auto">Title</Label>
+                            <Label VerticalAlignment="Center" FontSize="20" Content="{Binding Title}" Width="auto" Height="auto"/>
+                        </StackPanel>
+
+
+                        <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
                     </StackPanel>
-
-
-                    <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
-                </StackPanel>
                 </Border>
+            
         </DataTemplate>
         <DataTemplate x:Key="UnreadEmailPreviewTemplate">
-            <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
-                <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
-                    <StackPanel Orientation="Horizontal">
-                        <Label FontSize="20" FontWeight="Bold"   Width="auto" Height="35">From:</Label>
-                        <Label FontSize="20" FontWeight="Bold"  Content="{Binding From}" Width="auto" Height="35"/>
-                        <Label VerticalAlignment="Center" FontSize="14" FontWeight="Bold"   Width="auto" Height="auto">Title</Label>
-                        <Label VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Content="{Binding Title}" Width="auto" Height="auto"/>
+            
+                <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
+                    <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
+                        <StackPanel Orientation="Horizontal">
+                            <Label FontSize="20" FontWeight="Bold"   Width="auto" Height="35">From:</Label>
+                            <Label FontSize="20" FontWeight="Bold"  Content="{Binding From}" Width="auto" Height="35"/>
+                            <Label VerticalAlignment="Center" FontSize="14" FontWeight="Bold"   Width="auto" Height="auto">Title</Label>
+                            <Label VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Content="{Binding Title}" Width="auto" Height="auto"/>
+                        </StackPanel>
+
+
+                        <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
                     </StackPanel>
-
-
-                    <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
-                </StackPanel>
-            </Border>
+                </Border>
+           
         </DataTemplate>
 
         <DataTemplate x:Key="SentReadEmailPreviewTemplate">
             <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
-                <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
+                <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged" >
                     <StackPanel Orientation="Horizontal">
                         <Label FontSize="20"    Width="auto" Height="35">To:</Label>
                         <Label FontSize="20"   Content="{Binding To}" Width="auto" Height="35"/>
@@ -60,7 +64,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
         </DataTemplate>
         <DataTemplate x:Key="SentUnreadEmailPreviewTemplate">
             <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
-                <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
+                <StackPanel Orientation="Vertical" Width="auto"  MouseDown="emailsListView_SelectionChanged">
                     <StackPanel Orientation="Horizontal">
                         <Label FontSize="20" FontWeight="Bold"   Width="auto" Height="35">To:</Label>
                         <Label FontSize="20" FontWeight="Bold"  Content="{Binding To}" Width="auto" Height="35"/>
@@ -113,9 +117,9 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                         </Border>
                     </TabItem.Header>
                     <StackPanel Orientation="Vertical" >
-                        <ListView Width="auto" Height="auto" x:Name="emailsListView" ItemTemplateSelector="{StaticResource styleSelector}">
- 
-                            </ListView>
+                        <ListView Width="auto" Height="auto" x:Name="emailsListView" ItemTemplateSelector="{StaticResource styleSelector}" >
+                            
+                        </ListView>
                     </StackPanel>
                 </TabItem>
                 <TabItem>
