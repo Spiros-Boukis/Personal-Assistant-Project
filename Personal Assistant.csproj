@@ -10,9 +10,11 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\add_icon.png" />
+    <None Remove="Resources\Images\bullet.png" />
     <None Remove="Resources\Images\calandar-icon.png" />
     <None Remove="Resources\Images\calendar-flat.png" />
     <None Remove="Resources\Images\cancel_icon.png" />
+    <None Remove="Resources\Images\deadline_icon.png" />
     <None Remove="Resources\Images\delete_icon.png" />
     <None Remove="Resources\Images\edit_icon.png" />
     <None Remove="Resources\Images\important_icon.png" />
@@ -20,6 +22,7 @@
     <None Remove="Resources\Images\new_email_icon.png" />
     <None Remove="Resources\Images\save_icon.png" />
     <None Remove="Resources\Images\smart-home.png" />
+    <None Remove="Resources\Images\weather_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +31,9 @@
 
   <ItemGroup>
     <Resource Include="Resources\Images\add_icon.png" />
+    <Resource Include="Resources\Images\bullet.png" />
     <Resource Include="Resources\Images\cancel_icon.png" />
+    <Resource Include="Resources\Images\deadline_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +57,7 @@
     <Resource Include="Resources\Images\smart-home.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\weather_icon.png" />
   </ItemGroup>
 
 </Project>

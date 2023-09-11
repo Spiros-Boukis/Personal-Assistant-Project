@@ -67,6 +67,11 @@
                 </TabItem.Header>
                 
             </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                <Image Width="150" Height="150" Source="Resources/Images/weather_icon.png"  />
+                </TabItem.Header>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

@@ -13,8 +13,8 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
         <local1:EmailPreviewStyleSelector x:Key="styleSelector"/>
         <local1:SentEmailPreviewStyleSelector x:Key="sentEmailStyleSelector"/>
         <DataTemplate  x:Key="ReadEmailPreviewTemplate">
-            
-                <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
+
+            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="1000" >
                 <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
                         <StackPanel x:Name="innerPanel" Orientation="Horizontal">
                             <Label FontSize="20" x:Name="fromLabel"   Width="auto" Height="35">From:</Label>
@@ -30,13 +30,13 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
             
         </DataTemplate>
         <DataTemplate x:Key="UnreadEmailPreviewTemplate">
-            
-                <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
-                    <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
+
+            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="1000" >
+                    <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged" Height="auto">
                         <StackPanel Orientation="Horizontal">
-                            <Label FontSize="20" FontWeight="Bold"   Width="auto" Height="35">From:</Label>
-                            <Label FontSize="20" FontWeight="Bold"  Content="{Binding From}" Width="auto" Height="35"/>
-                            <Label VerticalAlignment="Center" FontSize="14" FontWeight="Bold"   Width="auto" Height="auto">Title</Label>
+                            <Label FontSize="20" FontWeight="Bold"   Width="auto" Height="auto">From:</Label>
+                            <Label FontSize="20" FontWeight="Bold"  Content="{Binding From}" Width="auto" Height="auto"/>
+                            <Label VerticalAlignment="Center" FontSize="20"  FontWeight="Bold"   Width="auto" Height="auto">Title</Label>
                             <Label VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Content="{Binding Title}" Width="auto" Height="auto"/>
                         </StackPanel>
 
@@ -48,11 +48,11 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
         </DataTemplate>
 
         <DataTemplate x:Key="SentReadEmailPreviewTemplate">
-            <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
+            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="1000" >
                 <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged" >
-                    <StackPanel Orientation="Horizontal">
-                        <Label FontSize="20"    Width="auto" Height="35">To:</Label>
-                        <Label FontSize="20"   Content="{Binding To}" Width="auto" Height="35"/>
+                    <StackPanel Orientation="Horizontal" Height="auto">
+                        <Label FontSize="20"    Width="auto" Height="auto">To:</Label>
+                        <Label FontSize="20"   Content="{Binding To}" Width="auto" Height="auto"/>
                         <Label VerticalAlignment="Center" FontSize="14" Width="auto" Height="auto">Title</Label>
                         <Label VerticalAlignment="Center" FontSize="20" Content="{Binding Title}" Width="auto" Height="auto"/>
                     </StackPanel>
@@ -64,8 +64,8 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
         </DataTemplate>
         <DataTemplate x:Key="SentUnreadEmailPreviewTemplate">
             <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
-                <StackPanel Orientation="Vertical" Width="auto"  MouseDown="emailsListView_SelectionChanged">
-                    <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" Width="auto"   MouseDown="emailsListView_SelectionChanged">
+                    <StackPanel Orientation="Horizontal" Height="auto">
                         <Label FontSize="20" FontWeight="Bold"   Width="auto" Height="35">To:</Label>
                         <Label FontSize="20" FontWeight="Bold"  Content="{Binding To}" Width="auto" Height="35"/>
                         <Label VerticalAlignment="Center" FontWeight="Bold" FontSize="14" Width="auto" Height="auto">Title</Label>
@@ -84,18 +84,11 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
           
         </Grid.ColumnDefinitions>
 
-        
-        <StackPanel Orientation="Vertical">
-            <Popup Name="myPopup" IsOpen="True">
-                <Border BorderThickness="1">
-                    <TextBlock Name="myPopupText" Background="LightBlue" Foreground="Blue" Padding="30">
-                Popup Text
-                    </TextBlock>
-                </Border>
-            </Popup>
+
+        <StackPanel Orientation="Vertical" KeyDown="StackPanel_KeyDown">
             <ToolBar MinWidth="850">
                 <ToolBar.Items>
-                    <Button Click="newEmailClick" ToolTip="Αποστολή Νέου Μηνύματος">
+                    <Button Click="newEmailClick" ToolTip="Αποστολή Νέου Μηνύματος [INS]">
                         <Image Height="50" Width="50" Source="/Resources/Images/new_email_icon.png"/>
                     </Button>
                     <Button>
@@ -103,39 +96,40 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
 
                     </Button>
                     <Button >
-                        <Image  HorizontalAlignment="Right" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
+                        <Image  HorizontalAlignment="Right" ToolTip="Διαγραφή μηνύματος [DEL]" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
 
                     </Button>
                 </ToolBar.Items>
             </ToolBar>
-
-            <TabControl  TabStripPlacement="Left">
-                <TabItem>
+            <Border Background="#eef5fd" BorderBrush="#9aa8b4" BorderThickness="3" CornerRadius="7">
+                <TabControl Background="#efefef"  TabStripPlacement="Left" Height="600" MaxHeight="600">
+                    <TabItem Background="#efefef">
                     <TabItem.Header>
                         <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
                             <Label Style="{StaticResource EmailFolderHeaderStyle}">Εισερχόμενα</Label>
                         </Border>
                     </TabItem.Header>
-                    <StackPanel Orientation="Vertical" >
-                        <ListView Width="auto" Height="auto" x:Name="emailsListView" ItemTemplateSelector="{StaticResource styleSelector}" >
+                        <StackPanel Orientation="Vertical" Background="#efefef">
+                        <ListView Width="auto" Height="600" MaxHeight="600" x:Name="emailsListView" ItemTemplateSelector="{StaticResource styleSelector}" >
                             
                         </ListView>
                     </StackPanel>
                 </TabItem>
-                <TabItem>
+                    <TabItem Background="#efefef">
                     <TabItem.Header>
                         <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
                             <Label Style="{StaticResource EmailFolderHeaderStyle}">Εξερχόμενα</Label>
                         </Border>
                     </TabItem.Header>
-                    <StackPanel Orientation="Vertical" >
-                        <ListView Width="auto" Height="auto" x:Name="sentemailsListView" ItemTemplateSelector="{StaticResource sentEmailStyleSelector}">
+                        <StackPanel Orientation="Vertical" Background="#efefef">
+                            <ListView Height="600" MaxHeight="600" Width="auto" x:Name="sentemailsListView" ItemTemplateSelector="{StaticResource sentEmailStyleSelector}">
 
                         </ListView>
                     </StackPanel>
                 </TabItem>
 
             </TabControl>
+            </Border>
         </StackPanel>
         
         

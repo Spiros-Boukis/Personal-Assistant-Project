@@ -45,7 +45,7 @@ namespace Personal_Assistant.Helpers
             {
                 Console.Write("");
             }
-            if (!Appointments.ContainsKey(date.ToShortDateString()))
+            if (!Appointments.ContainsKey(date.ToShortDateString()) || date<DateTime.Now)
             {
                 return false;
             }

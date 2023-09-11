@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Personal_Assistant.CustomControls"
              mc:Ignorable="d" 
-             Height="400" MaxHeight="400" MaxWidth="300" Width="300">
+             >
     <Grid>
+        <Viewbox Stretch="Uniform">
         <StackPanel Orientation="vertical">
             <StackPanel Orientation="Horizontal">
                 <Label>To:</Label>
@@ -18,12 +19,13 @@
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <Label>Email Body</Label>
-                <TextBox HorizontalAlignment="Left" x:Name="BodyText" Width="200" Height="200"></TextBox>
+                <TextBox AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" x:Name="BodyText" Width="200" Height="200"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Button Click="email_sendclick">Send</Button>
                 <Button>Cancel</Button>
             </StackPanel>
         </StackPanel>
+        </Viewbox>
     </Grid>
 </UserControl>

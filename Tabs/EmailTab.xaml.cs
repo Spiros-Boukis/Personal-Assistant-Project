@@ -122,5 +122,31 @@ namespace Personal_Assistant.Tabs
            test.ContentTemplate = FindResource("ReadEmailPreviewTemplate") as DataTemplate;
 
         }
+
+        private void StackPanel_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+              
+            }
+            else if (e.Key == Key.Insert)
+            {
+                Window window = new Window
+                {
+                    Title = "My User Control Dialog",
+                    Content = new ComposeEmailControl(this)
+                };
+
+                ComposeEmailControl temp = (ComposeEmailControl)window.Content;
+                var test = temp.TestVar;
+
+                window.ShowDialog();
+            }
+
+
+
+        }
+
+       
     }
 }

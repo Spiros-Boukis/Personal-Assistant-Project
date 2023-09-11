@@ -4,17 +4,18 @@
     <Style x:Key="EmailFolderHeaderStyle" TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="40"/>
         <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Background" Value="Azure"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="#efefef"/>
         
     </Style>
 
     <Style x:Key="EmailFolderHeaderBorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="AliceBlue"/>
+        <Setter Property="BorderBrush" Value="#efefef"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <Style x:Key="appointmentBorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="Azure"/>
+        <Setter Property="BorderBrush" Value="#efefef"/>
         <Setter Property="Padding" Value="3"/>
         <Setter Property="BorderThickness" Value="4"/>
         <Setter Property="CornerRadius" Value="20"/>
@@ -30,8 +31,8 @@
                     
 
                     <!-- This gradient stop is fully opaque. -->
-                    <GradientStop Color="Beige" Offset="2.0" />
-                    <GradientStop Color="Azure" Offset="0.0" />
+                    <GradientStop Color="#efefef" Offset="2.0" />
+                    <GradientStop Color="#efefef" Offset="0.0" />
                 </LinearGradientBrush>
 
             </Setter.Value>

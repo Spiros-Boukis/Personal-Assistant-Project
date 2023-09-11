@@ -4,6 +4,7 @@ using Personal_Assistant.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,15 +28,53 @@ namespace Personal_Assistant.Tabs
     {
         public Dictionary<string, List<AppointmentEntry>> Appointments;
 
-
+        List<List<string>> nameDaysLists;
 
         Style s;
+
+        public void InitNameDays()
+        {
+            nameDaysLists = new List<List<string>>(); 
+            List<string> list1 = new List<string>();
+            list1.Add("Γιώργος");
+            list1.Add("Γεωργία");
+            list1.Add("Βιολέτης");
+            list1.Add("Ζαχαρίας");
+           
+            List<string> list2 = new List<string>();
+            list2.Add("Μαρία");
+            list2.Add("Μάριος");
+            List<string> list3 = new List<string>();
+            list3.Add("Αλεξάνδρα/Αλέξανδρος");
+            list3.Add("Μιχάλης/Μιχαήλ");
+            list3.Add("Σταμάτης/Σταματίνα");
+            List<string> list4 = new List<string>();
+            list4.Add("Πέτρος");
+            list4.Add("Κυρίακος");
+            List<string> list5 = new List<string>();
+            list5.Add("Δημοσθένης");
+            list5.Add("Δήμητρα");
+
+            nameDaysLists.Add(list1);
+            nameDaysLists.Add(list2);
+            nameDaysLists.Add(list3);
+            nameDaysLists.Add(list4);
+            nameDaysLists.Add(list5);
+            // List<string> list6 = new List<string>();
+            //list1.Add("");
+            //List<string> list7 = new List<string>();
+            //List<string> list8 = new List<string>();
+            //List<string> list9 = new List<string>();
+
+        }
 
 
         public CalendarTab()
         {
             InitializeComponent();
-            
+
+            InitNameDays();
+
             newAppointmentControl.Visibility = Visibility.Collapsed;
             Appointments = new Dictionary<string, List<AppointmentEntry>>();
             var today = DateTime.Today.ToShortDateString();
@@ -75,7 +114,10 @@ namespace Personal_Assistant.Tabs
 
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            var lowerBound = 0;
+            var upperBound = 4;
+            var rNum = RandomNumberGenerator.GetInt32(lowerBound, upperBound);
+            namedayListView.ItemsSource= nameDaysLists.ElementAt(rNum);
             var _date = CalendarControl.SelectedDate.Value.ToShortDateString();
             currentDate.Content = _date;
             //CalendarControl.SelectedDates.Add(_date);

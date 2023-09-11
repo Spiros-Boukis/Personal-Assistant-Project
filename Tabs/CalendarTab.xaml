@@ -23,6 +23,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         <DataTemplate x:Key="NormalAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
                 <StackPanel Width="650" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
+                    <Label Width="40" Height="40" Margin="5"></Label>
                     <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
                    
 
@@ -45,7 +46,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
 
             <Border Style="{StaticResource appointmentBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-
+                    <Image Source="/Resources/Images/deadline_icon.png" Width="40" Height="40" Margin="5"></Image>
                     <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
                     <TextBlock FontSize="40" Text="{Binding Title}"></TextBlock>
                 </StackPanel>
@@ -54,27 +55,13 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
-            <Label HorizontalAlignment="Center" FontSize="60" FontWeight="Bold" Content="Calendar"></Label>
+            
             <StackPanel Orientation="Horizontal">
-                <Viewbox MaxHeight="500" MaxWidth="500">
-
-                    <Calendar  x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged">
-                        <Calendar.CalendarDayButtonStyle>
-                            <Style TargetType="{x:Type CalendarDayButton}">
-                                <Setter Property="helpers:DateHelper.Date" Value="{Binding}" />
-                                <Style.Triggers>
-                                    <Trigger Property="helpers:DateHelper.HasEntries" Value="True">
-                                        <Setter Property="Background" Value="LightGreen" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Calendar.CalendarDayButtonStyle>
-                    </Calendar>
-                </Viewbox>
+                
                 <Border BorderThickness="3" BorderBrush="#9aa8b4" CornerRadius="7">
                     <StackPanel x:Name="calendarStackPanel" Orientation="Vertical" KeyDown="calendarStackPanel_KeyDown">
 
-                        <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" x:Name="currentDate"></Label>
+                        <Label HorizontalAlignment="Center" Content="Ραντεβού Ημέρας"  FontSize="40" FontWeight="Bold"></Label>
                         <ToolBar MinWidth="850">
                             <ToolBar.Items>
                                 <Button Click="NewAppointment_Click" ToolTip="Δημιουργία Ραντεβού [INS]">
@@ -114,15 +101,55 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                                 </ComboBox>
                             </StackPanel>
                         </StackPanel>
-                        <Label HorizontalAlignment="Center" Content="Ραντεβού Ημέρας"  FontSize="40" FontWeight="Bold"></Label>
+                        
                         <ListView x:Name="AppointmentsListView" MaxHeight="220"  ItemTemplateSelector="{StaticResource appointmentSelector}">
 
                         </ListView>
                 
             </StackPanel>
                 </Border>
+                <Viewbox  MaxWidth="500">
+
+                    <Calendar  x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged">
+                        <Calendar.CalendarDayButtonStyle>
+                            <Style TargetType="{x:Type CalendarDayButton}">
+                                <Setter Property="helpers:DateHelper.Date" Value="{Binding}" />
+                                <Style.Triggers>
+                                    <Trigger Property="helpers:DateHelper.HasEntries" Value="True">
+                                        <Setter Property="Background" Value="LightGreen" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Calendar.CalendarDayButtonStyle>
+                    </Calendar>
+                </Viewbox>
             </StackPanel>
-        
+
+            <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" x:Name="currentDate"></Label>
+            <StackPanel HorizontalAlignment="Left">
+                <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" >Εορτάζοντες Ημέρας</Label>
+                <ListView x:Name="namedayListView" IsEnabled="False" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+
+                                <BulletDecorator HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0"
+      VerticalAlignment="Center">
+                                    <BulletDecorator.Bullet>
+                                        <Image Source="/Resources/Images/bullet.png" Height="30" Width="30"></Image>
+                                    </BulletDecorator.Bullet>
+                                    <TextBlock FontSize="36" FontWeight="Thin" Width="auto" TextWrapping="Wrap" 
+                HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                                       Text="{Binding}">
+
+                                    </TextBlock >
+                                </BulletDecorator>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
 
         </StackPanel>
     </Grid>
