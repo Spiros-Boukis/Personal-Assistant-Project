@@ -11,51 +11,130 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
 
     <UserControl.Resources>
         <local1:EmailPreviewStyleSelector x:Key="styleSelector"/>
-        <Style x:Key="UnreadEmailPreviewStyleTemplate" TargetType="local2:EmailPreviewControl">
-            <Setter Property=""></Setter>
-        </Style>
-        <Style x:Key="ReadEmailPreviewStyleTemplate" TargetType="local2:EmailPreviewControl">
+        <local1:SentEmailPreviewStyleSelector x:Key="sentEmailStyleSelector"/>
+        <DataTemplate  x:Key="ReadEmailPreviewTemplate">
+            <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
+                <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
+                    <StackPanel Orientation="Horizontal">
+                        <Label FontSize="20"    Width="auto" Height="35">From:</Label>
+                        <Label FontSize="20"   Content="{Binding From}" Width="auto" Height="35"/>
+                        <Label VerticalAlignment="Center" FontSize="14" Width="auto" Height="auto">Title</Label>
+                        <Label VerticalAlignment="Center" FontSize="20" Content="{Binding Title}" Width="auto" Height="auto"/>
+                    </StackPanel>
 
-        </Style>
-        <DataTemplate x:Key="EmailPreviewTemplate">
-            
+
+                    <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
+                </StackPanel>
+                </Border>
         </DataTemplate>
+        <DataTemplate x:Key="UnreadEmailPreviewTemplate">
+            <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
+                <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
+                    <StackPanel Orientation="Horizontal">
+                        <Label FontSize="20" FontWeight="Bold"   Width="auto" Height="35">From:</Label>
+                        <Label FontSize="20" FontWeight="Bold"  Content="{Binding From}" Width="auto" Height="35"/>
+                        <Label VerticalAlignment="Center" FontSize="14" FontWeight="Bold"   Width="auto" Height="auto">Title</Label>
+                        <Label VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Content="{Binding Title}" Width="auto" Height="auto"/>
+                    </StackPanel>
+
+
+                    <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SentReadEmailPreviewTemplate">
+            <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
+                <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
+                    <StackPanel Orientation="Horizontal">
+                        <Label FontSize="20"    Width="auto" Height="35">To:</Label>
+                        <Label FontSize="20"   Content="{Binding To}" Width="auto" Height="35"/>
+                        <Label VerticalAlignment="Center" FontSize="14" Width="auto" Height="auto">Title</Label>
+                        <Label VerticalAlignment="Center" FontSize="20" Content="{Binding Title}" Width="auto" Height="auto"/>
+                    </StackPanel>
+
+
+                    <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="SentUnreadEmailPreviewTemplate">
+            <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
+                <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
+                    <StackPanel Orientation="Horizontal">
+                        <Label FontSize="20" FontWeight="Bold"   Width="auto" Height="35">To:</Label>
+                        <Label FontSize="20" FontWeight="Bold"  Content="{Binding To}" Width="auto" Height="35"/>
+                        <Label VerticalAlignment="Center" FontWeight="Bold" FontSize="14" Width="auto" Height="auto">Title</Label>
+                        <Label VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Content="{Binding Title}" Width="auto" Height="auto"/>
+                    </StackPanel>
+
+
+                    <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        
     </UserControl.Resources>
     <Grid ShowGridLines="True" MinHeight="500">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition MinWidth="500"></ColumnDefinition>
+          
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Grid.Column="0" Width="auto">
-            <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
-            <Label Style="{StaticResource EmailFolderHeaderStyle}">Εισερχόμενα</Label>
-            </Border>
-            <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
-            <Label Style="{StaticResource EmailFolderHeaderStyle}">Εξερχόμενα</Label>
-            </Border>
-        </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Column="1">
-            <ListView Width="auto" Height="auto" x:Name="emailsListView" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
-                            <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
-                                <StackPanel Orientation="Horizontal">
-                                <Label FontSize="20" FontWeight="Bold"   Width="auto" Height="35">From:</Label>
-                                    <Label FontSize="20" FontWeight="Bold"  Content="{Binding From}" Width="auto" Height="35"/>
-                                    <Label VerticalAlignment="Center" FontSize="14" FontWeight="Bold"   Width="auto" Height="auto">Title</Label>
-                                    <Label VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Content="{Binding Title}" Width="auto" Height="auto"/>
-                            </StackPanel>
-                               
 
-                                <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
-                        </StackPanel>
+        
+        <StackPanel Orientation="Vertical">
+            <Popup Name="myPopup" IsOpen="True">
+                <Border BorderThickness="1">
+                    <TextBlock Name="myPopupText" Background="LightBlue" Foreground="Blue" Padding="30">
+                Popup Text
+                    </TextBlock>
+                </Border>
+            </Popup>
+            <ToolBar MinWidth="850">
+                <ToolBar.Items>
+                    <Button Click="newEmailClick" ToolTip="Αποστολή Νέου Μηνύματος">
+                        <Image Height="50" Width="50" Source="/Resources/Images/new_email_icon.png"/>
+                    </Button>
+                    <Button>
+                        <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
+
+                    </Button>
+                    <Button >
+                        <Image  HorizontalAlignment="Right" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
+
+                    </Button>
+                </ToolBar.Items>
+            </ToolBar>
+
+            <TabControl  TabStripPlacement="Left">
+                <TabItem>
+                    <TabItem.Header>
+                        <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
+                            <Label Style="{StaticResource EmailFolderHeaderStyle}">Εισερχόμενα</Label>
                         </Border>
-                    </DataTemplate>
-                    
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel Orientation="Vertical" >
+                        <ListView Width="auto" Height="auto" x:Name="emailsListView" ItemTemplateSelector="{StaticResource styleSelector}">
+ 
+                            </ListView>
+                    </StackPanel>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
+                            <Label Style="{StaticResource EmailFolderHeaderStyle}">Εξερχόμενα</Label>
+                        </Border>
+                    </TabItem.Header>
+                    <StackPanel Orientation="Vertical" >
+                        <ListView Width="auto" Height="auto" x:Name="sentemailsListView" ItemTemplateSelector="{StaticResource sentEmailStyleSelector}">
 
-    </Grid>
+                        </ListView>
+                    </StackPanel>
+                </TabItem>
+
+            </TabControl>
+        </StackPanel>
+        
+        
+        
+        </Grid>
 </UserControl>

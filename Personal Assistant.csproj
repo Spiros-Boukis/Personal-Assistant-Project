@@ -17,6 +17,7 @@
     <None Remove="Resources\Images\edit_icon.png" />
     <None Remove="Resources\Images\important_icon.png" />
     <None Remove="Resources\Images\mail-icon_.png" />
+    <None Remove="Resources\Images\new_email_icon.png" />
     <None Remove="Resources\Images\save_icon.png" />
     <None Remove="Resources\Images\smart-home.png" />
   </ItemGroup>
@@ -42,6 +43,7 @@
     <Resource Include="Resources\Images\mail-icon_.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\new_email_icon.png" />
     <Resource Include="Resources\Images\save_icon.png" />
     <Resource Include="Resources\Images\smart-home.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

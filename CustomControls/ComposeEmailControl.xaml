@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Personal_Assistant.CustomControls.ComposeEmailControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Personal_Assistant.CustomControls"
+             mc:Ignorable="d" 
+             Height="400" MaxHeight="400" MaxWidth="300" Width="300">
+    <Grid>
+        <StackPanel Orientation="vertical">
+            <StackPanel Orientation="Horizontal">
+                <Label>To:</Label>
+                <TextBox x:Name="ToText" Width="200"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label>Title:</Label>
+                <TextBox x:Name="TitleText" Width="200"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label>Email Body</Label>
+                <TextBox HorizontalAlignment="Left" x:Name="BodyText" Width="200" Height="200"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Click="email_sendclick">Send</Button>
+                <Button>Cancel</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

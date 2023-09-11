@@ -9,9 +9,9 @@ using System.Windows.Controls;
 
 namespace Personal_Assistant.ControlTemplateSelectors
 {
-    public class EmailPreviewStyleSelector : StyleSelector
+    public class EmailPreviewStyleSelector : DataTemplateSelector
     {
-        public override Style SelectStyle(object item, DependencyObject container)
+        public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             FrameworkElement element = container as FrameworkElement;
 
@@ -19,17 +19,48 @@ namespace Personal_Assistant.ControlTemplateSelectors
             {
                 EmailEntry parameteritem = item as EmailEntry;
 
+
+
+
                 if(parameteritem.IsRead)
                 {
-                    return element.FindResource("ReadEmailPreviewStyleTemplate") as Style;
+                    return element.FindResource("ReadEmailPreviewTemplate") as DataTemplate;
                 }
                 else
                 {
-                    return element.FindResource("UnreadEmailPreviewStyleTemplate") as Style;
+                    return element.FindResource("UnreadEmailPreviewTemplate") as DataTemplate;
                 }
                 
             }
-            return element.FindResource("ReadEmailPreviewStyleTemplate") as Style;
+            return element.FindResource("ReadEmailPreviewTemplate") as DataTemplate;
+        }
+    }
+
+
+    public class SentEmailPreviewStyleSelector : DataTemplateSelector
+    {
+        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        {
+            FrameworkElement element = container as FrameworkElement;
+
+            if (element != null && item != null && item is EmailEntry)
+            {
+                EmailEntry parameteritem = item as EmailEntry;
+
+
+
+
+                if (parameteritem.IsRead)
+                {
+                    return element.FindResource("SentReadEmailPreviewTemplate") as DataTemplate;
+                }
+                else
+                {
+                    return element.FindResource("SentUnreadEmailPreviewTemplate") as DataTemplate;
+                }
+
+            }
+            return element.FindResource("SentReadEmailPreviewTemplate") as DataTemplate;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Personal_Assistant.Model;
+﻿using Personal_Assistant.CustomControls;
+using Personal_Assistant.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace Personal_Assistant.Tabs
 {
@@ -23,6 +25,7 @@ namespace Personal_Assistant.Tabs
     {
 
         public List<EmailEntry> Emails;
+        public List<EmailEntry> SentEmails;
         public EmailTab()
         {
             InitializeComponent();
@@ -36,12 +39,30 @@ namespace Personal_Assistant.Tabs
             emailsListView.ItemsSource = Emails;
             emailsListView.Items.Refresh();
 
+            SentEmails = new List<EmailEntry>();
+            SentEmails.Add(new EmailEntry("myemail@hotmail.com", "qwer@hotmail.com", "Hey there", "Hi friend how are you?", true));
+            SentEmails.Add(new EmailEntry("myemail@hotmail.com", "scammer@hotmail.com", "Important announchemtne", "Not Today!!!", true));
+            
+
+            sentemailsListView.ItemsSource = SentEmails;
+            sentemailsListView.Items.Refresh();
+
         }
 
         private void emailsListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
-            StackPanel test =(StackPanel) sender;
+            StackPanel test = (StackPanel)sender;
+
+            var index = emailsListView.SelectedIndex;
+
+            Emails.ElementAt(index).IsRead = true;
+
+            //emailsListView.Items.Refresh();
+
+            
             TextBox text = (TextBox)test.FindName("mailBody");
+
+
             if (text.Visibility == Visibility.Visible)
             {
                 text.Visibility = Visibility.Collapsed;
@@ -50,8 +71,25 @@ namespace Personal_Assistant.Tabs
             {
                 text.Visibility = Visibility.Visible;
             }
-        
+
             
+
+           
+
+        }
+
+        private void newEmailClick(object sender, RoutedEventArgs e)
+        {
+            Window window = new Window
+            {
+                Title = "My User Control Dialog",
+                Content = new ComposeEmailControl(this)
+            };
+
+            ComposeEmailControl temp = (ComposeEmailControl)window.Content;
+            var test = temp.TestVar;
+            
+            window.ShowDialog();
         }
     }
 }

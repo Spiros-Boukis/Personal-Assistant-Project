@@ -32,27 +32,28 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
           </Border>
         </DataTemplate>
         <DataTemplate x:Key="ImportantAppointmentTemplate">
-            
-            <StackPanel Orientation="Horizontal">
-                <TextBox FontSize="30" Background="Azure" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Border Style="{StaticResource appointmentBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox FontSize="30" Background="Azure" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center">
                         18:00
-                </TextBox>
-                <Image Source="/Resources/Images/important_icon.png" Width="40" Height="40" Margin="5"></Image>
-                <TextBlock FontWeight="Bold" FontSize="40" Text="{Binding Title}"></TextBlock>
-                
-            </StackPanel>
-           
+                    </TextBox>
+                    <Image Source="/Resources/Images/important_icon.png" Width="40" Height="40" Margin="5"></Image>
+                    <TextBlock FontWeight="Bold" FontSize="40" Text="{Binding Title}"></TextBlock>
+
+                </StackPanel>
+            </Border>
         </DataTemplate>
         <DataTemplate x:Key="DeadlineAppointmentTemplate">
-          
-            <StackPanel Orientation="Horizontal">
 
-                <TextBox FontSize="30" Background="Azure" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    18:00
-                </TextBox>
-                <TextBlock FontSize="40" Text="{Binding Title}"></TextBlock>
-            </StackPanel>
-           
+            <Border Style="{StaticResource appointmentBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBox FontSize="30" Background="Azure" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        18:00
+                    </TextBox>
+                    <TextBlock FontSize="40" Text="{Binding Title}"></TextBlock>
+                </StackPanel>
+            </Border>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
