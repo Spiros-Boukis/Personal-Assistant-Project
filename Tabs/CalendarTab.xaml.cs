@@ -1,4 +1,5 @@
 ﻿using Personal_Assistant.CustomControls;
+using Personal_Assistant.Helpers;
 using Personal_Assistant.Model;
 using System;
 using System.Collections.Generic;
@@ -68,6 +69,8 @@ namespace Personal_Assistant.Tabs
             CalendarControl.SelectedDate = DateTime.Today;
             timePicker.Value = DateTime.Now;
 
+            DateHelper.Appointments = this.Appointments;
+
         }
 
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
@@ -111,6 +114,13 @@ namespace Personal_Assistant.Tabs
                     var temp = Appointments[test];
                     AppointmentsListView.ItemsSource = temp;
                     AppointmentsListView.Items.Refresh();
+                    if (Appointments[test].Count==0) 
+                    {
+                        Appointments.Remove(test);
+                        var tempDate = CalendarControl.SelectedDate.Value;
+                        CalendarControl.DisplayDate = tempDate.AddMonths(1);
+                        CalendarControl.DisplayDate = tempDate;
+                    }
                 }
                 else
                 { }
@@ -160,13 +170,15 @@ namespace Personal_Assistant.Tabs
             {
                 Appointments.Add(_date, new List<AppointmentEntry>());
                 Appointments[_date].Add(entry);
-
-
-
-
+                var tempDate = CalendarControl.SelectedDate.Value;
+                CalendarControl.SelectedDate = DateTime.Now.AddMonths(1).ToUniversalTime();
+                CalendarControl.SelectedDate = tempDate;
                 //aTrigger dataTrigger = new DataTrigger() { Binding = new Binding("Date"), Value = _formattedDate };
                 //aTrigger.Setters.Add(new Setter(CalendarDayButton.BackgroundProperty, Brushes.LightGreen));
                 // s.Triggers.Add(dataTrigger);
+
+                CalendarControl.DisplayDate = tempDate.AddMonths(1);
+                CalendarControl.DisplayDate = tempDate;
 
             }
 
@@ -191,6 +203,50 @@ namespace Personal_Assistant.Tabs
             //CalendarControl.SelectedDates.Add(_date);
             //var test = _date.DayOfYear.ToString() + _date.Year.ToString();
             //return test;
+        }
+
+        private void calendarStackPanel_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                var _date = CalendarControl.SelectedDate.Value.ToShortDateString();
+
+                var test = _date.ToString();
+                var prompt = MessageBox.Show("Θέλετε να διαγράψετε αυτό το ραντεβού?", "Διαγραφή", MessageBoxButton.YesNo);
+                if (prompt == MessageBoxResult.Yes)
+                {
+                    AppointmentEntry item = (AppointmentEntry)AppointmentsListView.SelectedItem;
+
+                    Appointments[test].Remove(item);
+                    var temp = Appointments[test];
+                    AppointmentsListView.ItemsSource = temp;
+                    AppointmentsListView.Items.Refresh();
+                    if (Appointments[test].Count == 0)
+                    {
+                        Appointments.Remove(test);
+                        var tempDate = CalendarControl.SelectedDate.Value;
+                        CalendarControl.DisplayDate = tempDate.AddMonths(1);
+                        CalendarControl.DisplayDate = tempDate;
+                    }
+                }
+                else
+                { }
+            }
+            else if(e.Key == Key.Insert) 
+            {
+                if (newAppointmentControl.Visibility.Equals(Visibility.Collapsed))
+                {
+                    newAppointmentControl.Visibility = Visibility.Visible;
+                }
+
+                else if (newAppointmentControl.Visibility.Equals(Visibility.Visible))
+                {
+                    newAppointmentControl.Visibility = Visibility.Collapsed;
+                }
+            }
+
+
+
         }
     }
 }

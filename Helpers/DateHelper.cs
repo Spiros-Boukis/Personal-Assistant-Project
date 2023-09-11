@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Personal_Assistant.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,9 @@ namespace Personal_Assistant.Helpers
 {
     public class DateHelper
     {
+
+        public static Dictionary<string, List<AppointmentEntry>> Appointments;
+
         public static DateTime GetDate(DependencyObject obj)
         {
             return (DateTime)obj.GetValue(DateProperty);
@@ -37,13 +41,17 @@ namespace Personal_Assistant.Helpers
         private static bool CheckHasEntries(DateTime date)
         {
             var _formattedDate = date.Month.ToString() + "/" + date.Day + "/" + date.Year;
-             if(Appoi.ContainsKey[_formattedDate])
+            if(_formattedDate=="11/08/2023")
+            {
+                Console.Write("");
+            }
+            if (!Appointments.ContainsKey(date.ToShortDateString()))
             {
                 return false;
             }
             else
             {
-                return false;
+                return true;
             }
 
         }
