@@ -31,17 +31,17 @@ namespace Personal_Assistant.Tabs
             InitializeComponent();
 
             Emails = new List<EmailEntry>();
-            Emails.Add(new EmailEntry("qwer@hotmail.com", "myemail@hotmail.com", "Hey there", "Hi friend how are you?",false));
-            Emails.Add(new EmailEntry("scammer@hotmail.com", "myemail@hotmail.com", "Important announchemtne", "blablablabla", false));
-            Emails.Add(new EmailEntry("abla@hotmail.com", "myemail@hotmail.com", "Hey there", "Hi friend how are you?", true));
-            Emails.Add(new EmailEntry("qwer@hotmail.com", "myemail@hotmail.com", "Hey there", "Hi friend how are you?",true));
+            Emails.Add(new EmailEntry("qwer@hotmail.com", "myemail@hotmail.com", "Hey there", "Hi friend how are you?",false,new DateTime(2023,8,1,11,22,13)));
+            Emails.Add(new EmailEntry("scammer@hotmail.com", "myemail@hotmail.com", "Important announchemtne", "blablablabla", false, new DateTime(2023, 8, 1, 11, 22, 13)));
+            Emails.Add(new EmailEntry("abla@hotmail.com", "myemail@hotmail.com", "Hey there", "Hi friend how are you?", true, new DateTime(2023, 8, 1, 11, 22, 13)));
+            Emails.Add(new EmailEntry("qwer@hotmail.com", "myemail@hotmail.com", "Hey there", "Hi friend how are you?",true, new DateTime(2023, 8, 1, 11, 22, 13)));
 
             emailsListView.ItemsSource = Emails;
             emailsListView.Items.Refresh();
 
             SentEmails = new List<EmailEntry>();
-            SentEmails.Add(new EmailEntry("myemail@hotmail.com", "qwer@hotmail.com", "Hey there", "Hi friend how are you?", true));
-            SentEmails.Add(new EmailEntry("myemail@hotmail.com", "scammer@hotmail.com", "Important announchemtne", "Not Today!!!", true));
+            SentEmails.Add(new EmailEntry("myemail@hotmail.com", "qwer@hotmail.com", "Hey there", "Hi friend how are you?", true, new DateTime(2023, 8, 1, 11, 22, 13)));
+            SentEmails.Add(new EmailEntry("myemail@hotmail.com", "scammer@hotmail.com", "Important announchemtne", "Not Today!!!", true,new DateTime(2023,8,1,11,22,13)));
             
 
             sentemailsListView.ItemsSource = SentEmails;
@@ -56,7 +56,7 @@ namespace Personal_Assistant.Tabs
             
             // var index = emailsListView.SelectedIndex;
             //Emails.ElementAt(index).IsRead = true;
-            TextBox text = (TextBox)test.FindName("mailBody");
+            StackPanel text = (StackPanel)test.FindName("mailBody");
             //emailsListView.Items.Refresh();
             
             StackPanel inner = (StackPanel)children;

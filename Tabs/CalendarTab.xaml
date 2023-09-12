@@ -25,12 +25,12 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                 <StackPanel Width="650" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
                     <Label Width="40" Height="40" Margin="5"></Label>
                     <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
-                   
 
 
-                <TextBlock FontSize="40" Text="{Binding Path=Title}"></TextBlock>
-            </StackPanel>
-          </Border>
+
+                    <TextBlock FontSize="40" Text="{Binding Path=Title}"></TextBlock>
+                </StackPanel>
+            </Border>
         </DataTemplate>
         <DataTemplate x:Key="ImportantAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
@@ -55,9 +55,9 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
-            
+
             <StackPanel Orientation="Horizontal">
-                
+
                 <Border BorderThickness="3" BorderBrush="#9aa8b4" CornerRadius="7">
                     <StackPanel x:Name="calendarStackPanel" Orientation="Vertical" KeyDown="calendarStackPanel_KeyDown">
 
@@ -91,7 +91,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                             <Border BorderBrush="#9aa8b4" BorderThickness="2">
                                 <xctk:TimePicker x:Name="timePicker" AllowTextInput="False" FontSize="25" Width="100"></xctk:TimePicker>
                             </Border>
-                            
+
                             <StackPanel Orientation="Vertical">
                                 <Label FontSize="30">Προτεραιότητα</Label>
                                 <ComboBox x:Name="priorityComboBox" FontSize="25">
@@ -101,12 +101,12 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                                 </ComboBox>
                             </StackPanel>
                         </StackPanel>
-                        
+
                         <ListView x:Name="AppointmentsListView" MaxHeight="220"  ItemTemplateSelector="{StaticResource appointmentSelector}">
 
                         </ListView>
-                
-            </StackPanel>
+
+                    </StackPanel>
                 </Border>
                 <Viewbox  MaxWidth="500">
 
@@ -124,39 +124,70 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                     </Calendar>
                 </Viewbox>
             </StackPanel>
-
-            
-            
             <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" x:Name="currentDate"></Label>
-            <StackPanel  HorizontalAlignment="Left">
-                <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" >Εορτάζοντες Ημέρας</Label>
-                <ListView x:Name="namedayListView" IsEnabled="False" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
 
-                                <BulletDecorator HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0"
-      VerticalAlignment="Center">
-                                    <BulletDecorator.Bullet>
-                                        <Image Source="/Resources/Images/bullet.png" Height="30" Width="30"></Image>
-                                    </BulletDecorator.Bullet>
-                                    <TextBlock FontSize="36" FontWeight="Thin" Width="auto" TextWrapping="Wrap" 
-                HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                                       Text="{Binding}">
+            <StackPanel Orientation="Horizontal">
 
-                                    </TextBlock >
-                                </BulletDecorator>
+                <StackPanel x:Name="daysWeatherPanel" RenderTransformOrigin="0.5,0.5" Width="890">
+                    <StackPanel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="-0.316"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="-0.994"/>
+                        </TransformGroup>
+                    </StackPanel.RenderTransform>
+                    <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" >Πρόγνωση Καιρού Ημέρας</Label>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+                        <Image  Height="128" Width="310" Source="/Resources/Images/Weather_Icons/weather1.png"/>
+                        <StackPanel VerticalAlignment="Center" Orientation="Vertical" >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image HorizontalAlignment="Center"  Height="50" Width="50" Source="/Resources/Images/SmartHome/temperature_icon.png"/>
+                                <TextBlock  HorizontalAlignment="Center" FontWeight="Bold"  FontSize="33">25.29 C</TextBlock>
                             </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            
+                            <StackPanel  Orientation="Horizontal" Width="auto">
+                                <Image Width="50" Height="50" Source="/Resources/Images/Weather_Icons/humidity_icon.png"/>
+                                <Label FontWeight="Bold"  FontSize="33" Content="32%"></Label>
+                                <Image Margin="15,0,0,0" Width="50" Height="50" Source="/Resources/Images/Weather_Icons/wind_icon.png"/>
+                                <Label FontWeight="Bold"  FontSize="33" Content="2.98mps"></Label>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+
+                </StackPanel>
+
+
+                <StackPanel HorizontalAlignment="Center">
+                    <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" >Εορτάζοντες</Label>
+                    <ListView x:Name="namedayListView" IsEnabled="False" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+
+                                    <BulletDecorator HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0"
+VerticalAlignment="Center">
+                                        <BulletDecorator.Bullet>
+                                            <Image Source="/Resources/Images/bullet.png" Height="30" Width="30"></Image>
+                                        </BulletDecorator.Bullet>
+                                        <TextBlock FontSize="36" FontWeight="Thin" Width="auto" TextWrapping="Wrap" 
+          
+             VerticalAlignment="Center"
+                                 Text="{Binding}">
+
+                                        </TextBlock >
+                                    </BulletDecorator>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+
+
             </StackPanel>
-            <StackPanel x:Name="daysWeatherPanel">
-                <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" >Εορτάζοντες Ημέρας</Label>
-                   
-                                
-            </StackPanel>
+
+
 
         </StackPanel>
     </Grid>

@@ -16,12 +16,14 @@ namespace Personal_Assistant.Model
 
         public bool IsRead { get; set; }
 
+        public DateTime Date { get; set; }
+
         public EmailEntry()
         {
 
         }
 
-        public EmailEntry(string from, string to, string title,string body, bool isRead)
+        public EmailEntry(string from, string to, string title,string body, bool isRead,DateTime _date)
         {
             From = from;
             To = to;
@@ -29,6 +31,7 @@ namespace Personal_Assistant.Model
             Body = body;
             Identifier = Guid.NewGuid().ToString();
             IsRead = isRead;
+            Date = _date;
         }
     }
 }

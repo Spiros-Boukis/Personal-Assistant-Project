@@ -45,13 +45,13 @@ namespace Personal_Assistant.Helpers
             {
                 Console.Write("");
             }
-            if (!Appointments.ContainsKey(date.ToShortDateString()) || date<DateTime.Now)
+            if (Appointments.ContainsKey(date.ToShortDateString()) && date>=DateTime.Now)
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
 
         }

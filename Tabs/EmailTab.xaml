@@ -13,25 +13,30 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
         <local1:EmailPreviewStyleSelector x:Key="styleSelector"/>
         <local1:SentEmailPreviewStyleSelector x:Key="sentEmailStyleSelector"/>
         <DataTemplate  x:Key="ReadEmailPreviewTemplate">
-
-            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="1000" >
-                <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
+            
+                    <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="700" >
+                    <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
                         <StackPanel x:Name="innerPanel" Orientation="Horizontal">
                             <Label FontSize="20" x:Name="fromLabel"   Width="auto" Height="35">From:</Label>
-                        <Label FontSize="20" x:Name="fromValue"  Content="{Binding From}" Width="auto" Height="35"/>
-                        <Label x:Name="titleLabel" VerticalAlignment="Center" FontSize="14" Width="auto" Height="auto">Title</Label>
-                        <Label x:Name="titleValue" VerticalAlignment="Center" FontSize="20" Content="{Binding Title}" Width="auto" Height="auto"/>
+                            <Label FontSize="20" x:Name="fromValue"  Content="{Binding From}" Width="auto" Height="35"/>
+                            <Label x:Name="titleLabel" VerticalAlignment="Center" FontSize="14" Width="auto" Height="auto">Title</Label>
+                            <Label x:Name="titleValue" VerticalAlignment="Center" FontSize="20" Content="{Binding Title}" Width="auto" Height="auto"/>
+
                         </StackPanel>
 
-
-                        <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
+                    <Label FontWeight="Light" x:Name="emailDate" FontSize="22" Content="{Binding Date}"/>
+                    <StackPanel x:Name="mailBody" Visibility="Collapsed">
+                    <TextBox  IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
+                        <Button HorizontalAlignment="Left" Content="Απάντηση" Width="100" Height="30" FontSize="20"></Button>
                     </StackPanel>
+                </StackPanel>
                 </Border>
-            
+                
+                
         </DataTemplate>
         <DataTemplate x:Key="UnreadEmailPreviewTemplate">
-
-            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="1000" >
+           
+                    <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="700" >
                     <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged" Height="auto">
                         <StackPanel Orientation="Horizontal">
                             <Label FontSize="20" FontWeight="Bold"   Width="auto" Height="auto">From:</Label>
@@ -39,16 +44,18 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                             <Label VerticalAlignment="Center" FontSize="20"  FontWeight="Bold"   Width="auto" Height="auto">Title</Label>
                             <Label VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Content="{Binding Title}" Width="auto" Height="auto"/>
                         </StackPanel>
-
-
-                        <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
+                    <Label FontWeight="Light" x:Name="emailDate" FontSize="22" Content="{Binding Date}"/>
+                    <StackPanel x:Name="mailBody" Visibility="Collapsed">
+                        <TextBox  IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
+                        <Button HorizontalAlignment="Left" Content="Απάντηση" Width="100" Height="30" FontSize="20"></Button>
                     </StackPanel>
-                </Border>
-           
+                </StackPanel>
+                
+            </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="SentReadEmailPreviewTemplate">
-            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="1000" >
+            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="700" >
                 <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged" >
                     <StackPanel Orientation="Horizontal" Height="auto">
                         <Label FontSize="20"    Width="auto" Height="auto">To:</Label>
@@ -56,14 +63,16 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                         <Label VerticalAlignment="Center" FontSize="14" Width="auto" Height="auto">Title</Label>
                         <Label VerticalAlignment="Center" FontSize="20" Content="{Binding Title}" Width="auto" Height="auto"/>
                     </StackPanel>
-
-
-                    <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
+                    <Label FontWeight="Light" x:Name="emailDate" FontSize="22" Content="{Binding Date}"/>
+                    <StackPanel x:Name="mailBody" Visibility="Collapsed">
+                        <TextBox   IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
+                        <Button HorizontalAlignment="Left" Content="Απάντηση" Width="100" Height="30" FontSize="20"></Button>
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="SentUnreadEmailPreviewTemplate">
-            <Border BorderBrush="Black" BorderThickness="2px" Width="1000" >
+            <Border BorderBrush="Black" BorderThickness="2px" Width="700" >
                 <StackPanel Orientation="Vertical" Width="auto"   MouseDown="emailsListView_SelectionChanged">
                     <StackPanel Orientation="Horizontal" Height="auto">
                         <Label FontSize="20" FontWeight="Bold"   Width="auto" Height="35">To:</Label>
@@ -71,9 +80,11 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                         <Label VerticalAlignment="Center" FontWeight="Bold" FontSize="14" Width="auto" Height="auto">Title</Label>
                         <Label VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Content="{Binding Title}" Width="auto" Height="auto"/>
                     </StackPanel>
-
-
-                    <TextBox x:Name="mailBody" IsReadOnly="True" Visibility="Collapsed" FontSize="13" MinWidth="500" Height="70"  Text="{Binding Body}"></TextBox>
+                    <Label FontWeight="Light" x:Name="emailDate" FontSize="22" Content="{Binding Date}"/>
+                    <StackPanel x:Name="mailBody" Visibility="Collapsed">
+                        <TextBox  IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
+                        <Button HorizontalAlignment="Left" Content="Απάντηση" Width="100" Height="30" FontSize="20"></Button>
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </DataTemplate>

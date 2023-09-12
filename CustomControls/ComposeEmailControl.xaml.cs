@@ -36,7 +36,7 @@ namespace Personal_Assistant.CustomControls
             var titleMail = TitleText.Text;
             var bodyMail = BodyText.Text;
 
-            container.SentEmails.Add(new Model.EmailEntry("mymail@hotmail.com", toMail,titleMail, bodyMail, true));
+            container.SentEmails.Add(new Model.EmailEntry("mymail@hotmail.com", toMail,titleMail, bodyMail, true,DateTime.Now));
             MessageBox.Show("Το μήνυμα ηλεκτρονικού ταχυδρομείου στάλθηκε με επιτυχία!!!");
 
             container.sentemailsListView.Items.Refresh();

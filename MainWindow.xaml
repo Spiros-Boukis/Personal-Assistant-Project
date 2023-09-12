@@ -65,7 +65,7 @@
                 <TabItem.Header>
                     <Image Width="150" Height="150" Source="Resources/Images/smart-home.png"  />
                 </TabItem.Header>
-                
+                <local4:SmartHomeTab></local4:SmartHomeTab>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
