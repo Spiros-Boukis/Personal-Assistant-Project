@@ -125,8 +125,10 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                 </Viewbox>
             </StackPanel>
 
+            
+            
             <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" x:Name="currentDate"></Label>
-            <StackPanel HorizontalAlignment="Left">
+            <StackPanel  HorizontalAlignment="Left">
                 <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" >Εορτάζοντες Ημέρας</Label>
                 <ListView x:Name="namedayListView" IsEnabled="False" >
                     <ListView.ItemTemplate>
@@ -149,6 +151,11 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+            </StackPanel>
+            <StackPanel x:Name="daysWeatherPanel">
+                <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" >Εορτάζοντες Ημέρας</Label>
+                   
+                                
             </StackPanel>
 
         </StackPanel>
