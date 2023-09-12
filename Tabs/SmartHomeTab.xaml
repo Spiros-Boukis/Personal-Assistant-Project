@@ -8,14 +8,14 @@
              xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
              xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             Height="auto" Width="auto">
     <UserControl.Resources>
         <local1:SmartHomeItemDataTemplateSelector x:Key="smartHomeItemSelector"/>
         <DataTemplate  x:Key="lightBulbTemplate">
 
-            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="700" >
+            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="300" >
                 <StackPanel Orientation="Vertical" Width="auto">
-                    <Image Width="80" Height="80" Source="/Resources/Images/SmartHome/bulb_on.png"></Image>
+                    <Image HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/bulb_on.png"></Image>
                 </StackPanel>
             </Border>
 
@@ -24,19 +24,33 @@
 
         <DataTemplate  x:Key="temperatureTemplate">
 
-            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="700" >
+            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="300" >
                 <StackPanel Orientation="Vertical" Width="auto">
-                    <Image Width="80" Height="80" Source="/Resources/Images/SmartHome/bulb_on.png"></Image>
+                    <Image HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/temperature_icon.png"></Image>
                 </StackPanel>
             </Border>
 
 
         </DataTemplate>
     </UserControl.Resources>
-    
+
     <Grid>
-        <ListView x:Name="smartHomeListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
-            
-        </ListView>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" x:Name="livingRoomPanel" Orientation="Vertical" >
+            <Label  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Living Room</Label>
+            <ListView x:Name="livingRoomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+
+            </ListView>
+        </StackPanel>
+        <StackPanel Grid.Row="1" x:Name="BedroomPanel" Orientation="Vertical">
+            <Label  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Bedroom</Label>
+            <ListView x:Name="BedroomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+
+            </ListView>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

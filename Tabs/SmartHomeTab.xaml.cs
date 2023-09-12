@@ -22,6 +22,7 @@ namespace Personal_Assistant.Tabs
     public partial class SmartHomeTab : UserControl
     {
         List<SmartHomeItem> items;
+        List<SmartHomeItem> items2;
 
         public SmartHomeTab()
         {
@@ -32,7 +33,14 @@ namespace Personal_Assistant.Tabs
             items.Add(new SmartHomeItem(1));
             items.Add(new SmartHomeItem(2));
 
-            smartHomeListView.ItemsSource = items;
+            items2 = new List<SmartHomeItem>();
+            items2.Add(new SmartHomeItem(1));
+            items2.Add(new SmartHomeItem(2));
+            items2.Add(new SmartHomeItem(1));
+
+            livingRoomListView.ItemsSource = items;
+
+            BedroomListView.ItemsSource = items2;
 
         }
     }
