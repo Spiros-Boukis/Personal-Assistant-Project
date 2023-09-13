@@ -10,27 +10,61 @@
              mc:Ignorable="d" 
              Height="auto" Width="auto">
     <UserControl.Resources>
+
+        <Style x:Key="statusLabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="helpers:DateHelper.Date" Value="{Binding}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Status}" Value="Online">
+                    <Setter Property="Background" Value="LightGreen" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}" Value="Offline">
+                    <Setter Property="Background" Value="Red" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <local1:SmartHomeItemDataTemplateSelector x:Key="smartHomeItemSelector"/>
         <DataTemplate  x:Key="lightBulbTemplate">
+            <Border>
+                <StackPanel Orientation="Horizontal">
+                    
+               
+                <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="300" >
+                    <StackPanel Orientation="Vertical">
+                        <Label HorizontalAlignment="Center" FontWeight="Heavy" FontSize="20" Content="{Binding Description}"></Label>
+                        <StackPanel Orientation="Horizontal" Width="auto">
+                                <Image MouseUp="image_MouseDown" x:Name="image" HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/bulb_on.png"></Image>
+                            </StackPanel>
+                    </StackPanel>
 
-            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="300" >
-                <StackPanel Orientation="Vertical" Width="auto">
-                    <Image HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/bulb_on.png"></Image>
+                </Border>
+                    <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                        <Label FontSize="25" FontWeight="DemiBold" Content="Κατάσταση"></Label>
+                        <Label FontSize="25" Content="{Binding Status}" Style="{StaticResource statusLabelStyle}">
+                           
+                        </Label>
+                    </StackPanel>
                 </StackPanel>
             </Border>
-
-
+            
         </DataTemplate>
 
         <DataTemplate  x:Key="temperatureTemplate">
-
-            <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="300" >
-                <StackPanel Orientation="Vertical" Width="auto">
-                    <Image HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/temperature_icon.png"></Image>
+            <Border>
+                <StackPanel Orientation="Horizontal">
+                    <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="300" >
+                <StackPanel Orientation="Vertical"  Width="auto">
+                            <Label HorizontalAlignment="Center" FontWeight="Heavy" FontSize="20" Content="{Binding Description}"></Label>
+                            <Image HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/temperature_icon.png"></Image>
                 </StackPanel>
             </Border>
+                    <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                        <Label FontSize="25" FontWeight="DemiBold" Content="Κατάσταση"></Label>
+                        <Label FontSize="25" Content="{Binding Status}" Style="{StaticResource statusLabelStyle}">
 
-
+                        </Label>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
         </DataTemplate>
     </UserControl.Resources>
 
@@ -39,18 +73,34 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" x:Name="livingRoomPanel" Orientation="Vertical" >
-            <Label  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Living Room</Label>
-            <ListView x:Name="livingRoomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+       
+        <StackPanel Orientation="Vertical">
+            <Label HorizontalAlignment="Center" FontSize="50">Διαχείριση Έξυπνων Συσκευών</Label>
+            <Border Grid.Row="0" CornerRadius="10" BorderThickness="6" BorderBrush="#9aa8b4" Margin="0,0,0,10">
+            <StackPanel  x:Name="livingRoomPanel" Orientation="Vertical" >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label MouseDown="livingRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Living Room</Label>
+                </StackPanel>
 
-            </ListView>
-        </StackPanel>
-        <StackPanel Grid.Row="1" x:Name="BedroomPanel" Orientation="Vertical">
-            <Label  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Bedroom</Label>
-            <ListView x:Name="BedroomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+                    <ListView HorizontalContentAlignment="Center"  x:Name="livingRoomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
 
-            </ListView>
+                </ListView>
+            </StackPanel>
+            </Border>
+            <Border Grid.Row="1" CornerRadius="10" BorderThickness="6" BorderBrush="#9aa8b4">
+            <StackPanel  x:Name="BedroomPanel" Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label MouseDown="bedRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Bedroom</Label>
+                </StackPanel>
+
+                <ListView HorizontalContentAlignment="Center" x:Name="BedroomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+
+                </ListView>
+            </StackPanel>
+            </Border>
+    
         </StackPanel>
+        
         
     </Grid>
 </UserControl>
