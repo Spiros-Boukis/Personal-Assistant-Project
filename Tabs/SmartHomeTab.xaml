@@ -54,7 +54,13 @@
                     <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="300" >
                 <StackPanel Orientation="Vertical"  Width="auto">
                             <Label HorizontalAlignment="Center" FontWeight="Heavy" FontSize="20" Content="{Binding Description}"></Label>
-                            <Image HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/temperature_icon.png"></Image>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/temperature_icon.png"></Image>
+                                <Label VerticalAlignment="Center" FontSize="25" FontWeight="ExtraBold" Content="{Binding Temperature}"></Label>
+                                <Label VerticalAlignment="Center" FontSize="25" Content="°C"></Label>
+                            </StackPanel>
+                                
+                            
                 </StackPanel>
             </Border>
                     <StackPanel VerticalAlignment="Center" Orientation="Vertical">
