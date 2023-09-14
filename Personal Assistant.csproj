@@ -14,6 +14,7 @@
     <None Remove="Resources\Images\calandar-icon.png" />
     <None Remove="Resources\Images\calendar-flat.png" />
     <None Remove="Resources\Images\cancel_icon.png" />
+    <None Remove="Resources\Images\contacts_icon.png" />
     <None Remove="Resources\Images\deadline_icon.png" />
     <None Remove="Resources\Images\delete_icon.png" />
     <None Remove="Resources\Images\edit_icon.png" />
@@ -43,6 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\contacts_icon.png" />
     <Resource Include="Resources\Images\SmartHome\bulb_off.png" />
     <Resource Include="Resources\Images\SmartHome\bulb_on.png" />
     <Resource Include="Resources\Images\SmartHome\temperature_icon.png" />
@@ -52,6 +54,7 @@
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.1" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1938.49" />
   </ItemGroup>
 
   <ItemGroup>

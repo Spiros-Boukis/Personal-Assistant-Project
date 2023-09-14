@@ -69,8 +69,9 @@
             </TabItem>
             <TabItem>
                 <TabItem.Header>
-                <Image Width="150" Height="150" Source="Resources/Images/weather_icon.png"  />
+                <Image Width="150" Height="150" Source="Resources/Images/contacts_icon.png"/>
                 </TabItem.Header>
+                <local4:Contacts/>
             </TabItem>
         </TabControl>
     </Grid>

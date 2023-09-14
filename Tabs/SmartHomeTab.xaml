@@ -26,13 +26,13 @@
         <DataTemplate  x:Key="lightBulbTemplate">
             <Border>
                 <StackPanel Orientation="Horizontal">
-                    
-               
-                <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="300" >
+                    <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="300" >
                     <StackPanel Orientation="Vertical">
                         <Label HorizontalAlignment="Center" FontWeight="Heavy" FontSize="20" Content="{Binding Description}"></Label>
-                        <StackPanel Orientation="Horizontal" Width="auto">
-                                <Image MouseUp="image_MouseDown" x:Name="image" HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/bulb_on.png"></Image>
+                        <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center">
+                                <Image MouseUp="image_MouseDown" x:Name="image" HorizontalAlignment="Center" Width="80" Height="80" Source="{Binding ImagePath}">
+                                    
+                                </Image>
                             </StackPanel>
                     </StackPanel>
 
@@ -49,14 +49,14 @@
         </DataTemplate>
 
         <DataTemplate  x:Key="temperatureTemplate">
-            <Border>
+            <Border x:Name="temperatureItemContainer">
                 <StackPanel Orientation="Horizontal">
                     <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="300" >
                 <StackPanel Orientation="Vertical"  Width="auto">
                             <Label HorizontalAlignment="Center" FontWeight="Heavy" FontSize="20" Content="{Binding Description}"></Label>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/temperature_icon.png"></Image>
-                                <Label VerticalAlignment="Center" FontSize="25" FontWeight="ExtraBold" Content="{Binding Temperature}"></Label>
+                                <Label VerticalAlignment="Center" FontSize="25" FontWeight="ExtraBold" Content="{Binding Temperature, Mode=TwoWay}"></Label>
                                 <Label VerticalAlignment="Center" FontSize="25" Content="°C"></Label>
                             </StackPanel>
                                 
@@ -65,7 +65,7 @@
             </Border>
                     <StackPanel VerticalAlignment="Center" Orientation="Vertical">
                         <Label FontSize="25" FontWeight="DemiBold" Content="Κατάσταση"></Label>
-                        <Label FontSize="25" Content="{Binding Status}" Style="{StaticResource statusLabelStyle}">
+                        <Label FontSize="25" Content="{Binding Status}"  Style="{StaticResource statusLabelStyle}">
 
                         </Label>
                     </StackPanel>

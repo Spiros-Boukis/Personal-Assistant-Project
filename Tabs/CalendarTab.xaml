@@ -47,8 +47,8 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
             <Border Style="{StaticResource appointmentBorderStyle}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/deadline_icon.png" Width="40" Height="40" Margin="5"></Image>
-                    <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
-                    <TextBlock FontSize="40" Text="{Binding Title}"></TextBlock>
+                    <xctk:TimePicker Background="#eef5fd" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                    <TextBlock FontWeight="Bold" FontSize="40" Text="{Binding Title}"></TextBlock>
                 </StackPanel>
             </Border>
         </DataTemplate>
@@ -102,7 +102,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                             </StackPanel>
                         </StackPanel>
 
-                        <ListView x:Name="AppointmentsListView" MaxHeight="220"  ItemTemplateSelector="{StaticResource appointmentSelector}">
+                        <ListView x:Name="AppointmentsListView" MaxHeight="300"  ItemTemplateSelector="{StaticResource appointmentSelector}">
 
                         </ListView>
 
@@ -127,36 +127,38 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
             <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" x:Name="currentDate"></Label>
 
             <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="#eef5fd" BorderThickness="5" CornerRadius="12">
+                    <StackPanel x:Name="daysWeatherPanel" RenderTransformOrigin="0.5,0.5" Width="890">
+                        <StackPanel.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleY="-0.316"/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="-0.994"/>
+                            </TransformGroup>
+                        </StackPanel.RenderTransform>
+                        <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" >Πρόγνωση Καιρού Ημέρας</Label>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+                            <Image  Height="128" Width="310" Source="/Resources/Images/Weather_Icons/weather1.png"/>
+                            <StackPanel VerticalAlignment="Center" Orientation="Vertical" >
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Image HorizontalAlignment="Center"  Height="50" Width="50" Source="/Resources/Images/SmartHome/temperature_icon.png"/>
+                                    <TextBlock  HorizontalAlignment="Center" FontWeight="Bold"  FontSize="33">25.29 C</TextBlock>
+                                </StackPanel>
 
-                <StackPanel x:Name="daysWeatherPanel" RenderTransformOrigin="0.5,0.5" Width="890">
-                    <StackPanel.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform AngleY="-0.316"/>
-                            <RotateTransform/>
-                            <TranslateTransform Y="-0.994"/>
-                        </TransformGroup>
-                    </StackPanel.RenderTransform>
-                    <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" >Πρόγνωση Καιρού Ημέρας</Label>
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
-                        <Image  Height="128" Width="310" Source="/Resources/Images/Weather_Icons/weather1.png"/>
-                        <StackPanel VerticalAlignment="Center" Orientation="Vertical" >
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image HorizontalAlignment="Center"  Height="50" Width="50" Source="/Resources/Images/SmartHome/temperature_icon.png"/>
-                                <TextBlock  HorizontalAlignment="Center" FontWeight="Bold"  FontSize="33">25.29 C</TextBlock>
-                            </StackPanel>
-                            
-                            <StackPanel  Orientation="Horizontal" Width="auto">
-                                <Image Width="50" Height="50" Source="/Resources/Images/Weather_Icons/humidity_icon.png"/>
-                                <Label FontWeight="Bold"  FontSize="33" Content="32%"></Label>
-                                <Image Margin="15,0,0,0" Width="50" Height="50" Source="/Resources/Images/Weather_Icons/wind_icon.png"/>
-                                <Label FontWeight="Bold"  FontSize="33" Content="2.98mps"></Label>
+                                <StackPanel  Orientation="Horizontal" Width="auto">
+                                    <Image Width="50" Height="50" Source="/Resources/Images/Weather_Icons/humidity_icon.png"/>
+                                    <Label FontWeight="Bold"  FontSize="33" Content="32%"></Label>
+                                    <Image Margin="15,0,0,0" Width="50" Height="50" Source="/Resources/Images/Weather_Icons/wind_icon.png"/>
+                                    <Label FontWeight="Bold"  FontSize="33" Content="2.98mps"></Label>
+                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
+
+
                     </StackPanel>
-
-
-                </StackPanel>
+                </Border>
+                
 
 
                 <StackPanel HorizontalAlignment="Center">

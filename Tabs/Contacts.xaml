@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Personal_Assistant.Tabs.Contacts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Personal_Assistant.Tabs"
+             mc:Ignorable="d" 
+             Width="auto" Height="auto">
+    <Grid>
+        <StackPanel Orientation="Vertical"  HorizontalAlignment="Left" Width="400">
+            <Label FontSize="42" FontWeight="Bold">Επαφές</Label>
+            <ListView x:Name="contactsListView" ItemTemplate="{StaticResource ResourceKey=contactListTemplate}" ></ListView>
+        </StackPanel>
+        
+    </Grid>
+</UserControl>
