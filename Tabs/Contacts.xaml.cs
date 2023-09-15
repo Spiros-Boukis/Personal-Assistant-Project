@@ -36,9 +36,9 @@ namespace Personal_Assistant.Tabs
 
              contacts = new List<Contact>();
             var con1 = new Contact("Μαρία", "6906849572");
-            con1.Messages.Add(new ContactMessage(0, "hi", null));
+            con1.Messages.Add(new ContactMessage(0, "hi", con1));
             con1.Messages.Add(new ContactMessage(1, "hi", null));
-            con1.Messages.Add(new ContactMessage(0, "how are you?", null));
+            con1.Messages.Add(new ContactMessage(0, "how are you?", con1));
             con1.Messages.Add(new ContactMessage(1, "fine", null));
             contacts.Add(con1);
             contacts.Add(new Contact("Φίλιππος", "6944687190"));
@@ -48,6 +48,7 @@ namespace Personal_Assistant.Tabs
             newContactItem = new Contact();
             newContactControl.DataContext = newContactItem;
             newContactControl.Visibility = Visibility.Collapsed;
+            messagesControl.DataContext = this;
             
         }
 
@@ -161,11 +162,22 @@ namespace Personal_Assistant.Tabs
 
         }
 
+
+        public void SendMessage(string message)
+        {
+            Contact contact = (Contact)contactsListView.SelectedItem;
+            contact.Messages.Add(new ContactMessage(1, message, null));
+            ListView list = (ListView)messagesControl.FindName("messagesListView");
+            messagesControl.scrollViewer.ScrollToBottom();
+            list.Items.Refresh();
+        }
+
         private void contactsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Contact contact = (Contact)contactsListView.SelectedItem;
             ListView list = (ListView) messagesControl.FindName("messagesListView");
             list.ItemsSource = contact.Messages;
+            list.Items.Refresh();
         }
     }
 }

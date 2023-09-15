@@ -73,6 +73,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
             <StackPanel>
                 <Label FontSize="42" FontWeight="Bold">Μηνύματα</Label>
                 <local2:ContactMessagesControl x:Name="messagesControl"/>
+               
             </StackPanel>
         </StackPanel>
        

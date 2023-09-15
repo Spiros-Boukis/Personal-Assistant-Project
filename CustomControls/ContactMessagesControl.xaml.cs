@@ -1,4 +1,5 @@
 ﻿using Personal_Assistant.Model;
+using Personal_Assistant.Tabs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,33 @@ namespace Personal_Assistant.CustomControls
             InitializeComponent();
             ContactMessages = new List<ContactMessage>();
             
+        }
+
+        private void send_Click(object sender, RoutedEventArgs e)
+        {
+            Contacts context = this.DataContext as Contacts;
+            context.SendMessage(msgBody.Text);
+            messagesListView.SelectedIndex = messagesListView.Items.Count - 1;
+            messagesListView.ScrollIntoView(messagesListView.SelectedItem);
+
+
+            scrollViewer.ScrollToEnd();
+            msgBody.Text = string.Empty;
+        }
+
+        private void msgBody_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter) 
+            {
+                Contacts context = this.DataContext as Contacts;
+                context.SendMessage(msgBody.Text);
+                messagesListView.SelectedIndex = messagesListView.Items.Count - 1;
+                messagesListView.ScrollIntoView(messagesListView.SelectedItem);
+
+
+                scrollViewer.ScrollToEnd();
+                msgBody.Text = string.Empty;
+            }
         }
     }
 }

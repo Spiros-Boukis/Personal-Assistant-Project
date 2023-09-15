@@ -11,34 +11,41 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
     <UserControl.Resources>
         <local1:MessageTemplateSelector x:Key="selector"/>
         <DataTemplate x:Key="incomingTemplate">
-            <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Images/add_icon.png" Width="50" Height="50"/>
-                    <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label FontSize="15" FontWeight="ExtraLight" Content="{Binding Date}"></Label>
-                            <TextBlock x:Name="messageBody" FontSize="30" MaxWidth="400" Width="400" TextWrapping="Wrap" Text="{Binding Message}"></TextBlock>
-                        </StackPanel>
-                    </Border>
-                   
+            <Border>
+                <StackPanel  Orientation="Vertical">
+                    <Label FontWeight="ExtraBold" HorizontalAlignment="Left" FontSize="25"  DataContext="{Binding Sender}" Content="{Binding Name}"  />
+                    <StackPanel  Orientation="Horizontal">
+
+                        <Border BorderBrush="Azure" Background="Azure" BorderThickness="3" CornerRadius="10">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                <Label FontSize="15" FontWeight="ExtraLight" Content="{Binding Date}"></Label>
+                                <TextBlock  x:Name="messageBody" FontSize="30" MaxWidth="400" Width="400" TextWrapping="Wrap" Text="{Binding Message}"></TextBlock>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+
+
                 </StackPanel>
-                
-                
-            </StackPanel>
+            </Border>
+            
             
         </DataTemplate>
 
         <DataTemplate x:Key="outgoingTemplate">
+            
+            
             <StackPanel Orientation="Vertical">
+                <Label FontWeight="ExtraBold"  FontSize="25" Content="Εσείς"  HorizontalAlignment="Right" />
                 <StackPanel Orientation="Horizontal">
-                    
-                    <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10">
+
+                    <Border BorderBrush="#42629a" BorderThickness="2" CornerRadius="10" Background="#42629a">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label FontSize="15" FontWeight="ExtraLight" Content="{Binding Date}"></Label>
-                            <TextBlock MaxWidth="400" Width="400" TextWrapping="Wrap" x:Name="messageBody" FontSize="30" Text="{Binding Message}"></TextBlock>
+                            <Label Foreground="White" FontSize="15" FontWeight="ExtraLight" Content="{Binding Date}"></Label>
+                            <TextBlock Foreground="White" MaxWidth="400" Width="400" TextWrapping="Wrap" x:Name="messageBody" FontSize="30" Text="{Binding Message}"></TextBlock>
                         </StackPanel>
                     </Border>
-                    <Image Source="/Resources/Images/add_icon.png" Width="50" Height="50"/>
+                    
                 </StackPanel>
 
 
@@ -49,11 +56,14 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
-            <ListView x:Name="messagesListView" ItemTemplateSelector="{StaticResource selector}"></ListView>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <ScrollViewer    x:Name="scrollViewer" CanContentScroll="True">
+                <ListView MaxHeight="500" HorizontalAlignment="Left" Width="700"  x:Name="messagesListView" ItemTemplateSelector="{StaticResource selector}"></ListView>
+            </ScrollViewer>
+            
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left">
                 
-                <TextBox FontSize="25" Width="300" ></TextBox>
-                <Button>Αποστολή</Button>
+                <TextBox FontSize="25" KeyDown="msgBody_KeyDown" x:Name="msgBody" Width="300"></TextBox>
+                <Button Click="send_Click">Αποστολή</Button>
             </StackPanel>
         </StackPanel>
         

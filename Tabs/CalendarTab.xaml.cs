@@ -229,6 +229,10 @@ namespace Personal_Assistant.Tabs
 
             newAppointmentControl.Visibility = Visibility.Collapsed;
 
+
+            AppointmentsListView.SelectedIndex = AppointmentsListView.Items.Count - 1;
+            AppointmentsListView.ScrollIntoView(AppointmentsListView.SelectedItem);
+
         }
         private void cancelNewAppointment(object sender, RoutedEventArgs e)
         {
