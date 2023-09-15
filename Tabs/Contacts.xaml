@@ -8,6 +8,22 @@
 xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
              mc:Ignorable="d" 
              Width="auto" Height="auto">
+    <UserControl.Resources>
+        <DataTemplate x:Key="contactListTemplate">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <TextBox x:Name="nameText" IsReadOnlyCaretVisible="False" IsReadOnly="True" Width="200"  FontSize="30" FontWeight="Bold" Text="{Binding Name, Mode=TwoWay}"/>
+                    <TextBox x:Name="phoneText" IsReadOnlyCaretVisible="False" IsReadOnly="True" Width="200" FontWeight="UltraLight" FontSize="26" Text="{Binding PhoneNumber, Mode=TwoWay}"/>
+                </StackPanel>
+                <Button Visibility="Hidden"  Margin="30,0,0,0" Width="50" Height="50" Click="saveEditContact">
+                    <Image  Height="50" Width="50" Source="/Resources/Images/save_icon.png"/>
+                </Button>
+
+            </StackPanel>
+
+
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Vertical"  HorizontalAlignment="Left" Width="600">
@@ -17,8 +33,8 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                         <Button Click="NewContact_Click" ToolTip="Δημιουργία Επαφής [INS]">
                             <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
                         </Button>
-                        <Button ToolTip="Επεξεργασία">
-                            <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
+                        <Button ToolTip="Επεξεργασία" Click="contactDoubleClicked" >
+                            <Image  Source="/Resources/Images/edit_icon.png" Width="40" Height="40" ></Image>
 
                         </Button>
                         <Button Click="DeleteContact_Click" ToolTip="Διαγραφή επιλεγμένης επαφής [DEL]">
@@ -51,12 +67,12 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-                <ListView HorizontalAlignment="Left" x:Name="contactsListView" Width="500" ItemTemplate="{StaticResource ResourceKey=contactListTemplate}" ></ListView>
+                <ListView HorizontalAlignment="Left" SelectionChanged="contactsListView_SelectionChanged" x:Name="contactsListView" Width="500" ItemTemplate="{StaticResource ResourceKey=contactListTemplate}" ></ListView>
             </StackPanel>
 
             <StackPanel>
                 <Label FontSize="42" FontWeight="Bold">Μηνύματα</Label>
-                <local2:ContactMessagesControl/>
+                <local2:ContactMessagesControl x:Name="messagesControl"/>
             </StackPanel>
         </StackPanel>
        

@@ -26,11 +26,7 @@ namespace Personal_Assistant.CustomControls
         {
             InitializeComponent();
             ContactMessages = new List<ContactMessage>();
-            ContactMessages.Add(new ContactMessage(0, "Hello there",null));
-            ContactMessages.Add(new ContactMessage(0, "?????", null));
-            ContactMessages.Add(new ContactMessage(1, "hey yo sup", null));
-            ContactMessages.Add(new ContactMessage(1, "i was at work", null));
-            messagesListView.ItemsSource = ContactMessages;
+            
         }
     }
 }

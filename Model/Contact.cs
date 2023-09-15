@@ -10,6 +10,8 @@ namespace Personal_Assistant.Model
 {
     public class Contact : INotifyPropertyChanged
     {
+
+        public List<ContactMessage> Messages { get; set; }  
         private string name, phonenumber;
         public string Name { get { return name; } set
             {
@@ -23,12 +25,14 @@ namespace Personal_Assistant.Model
 
         public Contact()
         {
+            Messages = new List<ContactMessage>();
             name = "'place name here'";
             phonenumber = "1234567890";
         }
 
         public Contact(string _name, string number)
         {
+            Messages = new List<ContactMessage>();
             name = _name;
             phonenumber = number;   
         }

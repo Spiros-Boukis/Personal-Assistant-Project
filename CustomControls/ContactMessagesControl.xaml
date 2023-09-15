@@ -52,7 +52,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
             <ListView x:Name="messagesListView" ItemTemplateSelector="{StaticResource selector}"></ListView>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 
-                <TextBox FontSize="25" Width="300"></TextBox>
+                <TextBox FontSize="25" Width="300" ></TextBox>
                 <Button>Αποστολή</Button>
             </StackPanel>
         </StackPanel>

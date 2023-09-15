@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using Xceed.Wpf.AvalonDock.Controls;
 
 namespace Personal_Assistant.Tabs
 {
@@ -34,8 +35,12 @@ namespace Personal_Assistant.Tabs
             InitializeComponent();
 
              contacts = new List<Contact>();
-
-            contacts.Add(new Contact("Μαρία","6906849572"));
+            var con1 = new Contact("Μαρία", "6906849572");
+            con1.Messages.Add(new ContactMessage(0, "hi", null));
+            con1.Messages.Add(new ContactMessage(1, "hi", null));
+            con1.Messages.Add(new ContactMessage(0, "how are you?", null));
+            con1.Messages.Add(new ContactMessage(1, "fine", null));
+            contacts.Add(con1);
             contacts.Add(new Contact("Φίλιππος", "6944687190"));
             contacts.Add(new Contact("Γιώργος", "6911196811"));
 
@@ -43,6 +48,7 @@ namespace Personal_Assistant.Tabs
             newContactItem = new Contact();
             newContactControl.DataContext = newContactItem;
             newContactControl.Visibility = Visibility.Collapsed;
+            
         }
 
         private void NewContact_Click(object sender, RoutedEventArgs e)
@@ -97,6 +103,69 @@ namespace Personal_Assistant.Tabs
         private void cancelNewContact(object sender, RoutedEventArgs e)
         {
             newContactControl.Visibility = Visibility.Collapsed;
+        }
+
+        private void contactsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void contactDoubleClicked(object sender, RoutedEventArgs e)
+        {
+            var test = contactsListView.FindVisualChildren<ListViewItem>();
+            ListViewItem listViewItem = sender as ListViewItem;
+            foreach(ListViewItem _item in test)
+            {
+                if(_item.IsSelected) 
+                {
+                    Contact cont = contactsListView.SelectedItem as Contact;
+                    var textboxes = _item.FindVisualChildren<TextBox>();
+                    var count = textboxes.Count();
+                    foreach(TextBox box in textboxes)
+                    {
+                        box.IsReadOnly = false;
+                    }
+
+                    var SaveButton = _item.FindVisualChildren<Button>();
+                    SaveButton.ElementAt(0).Visibility = Visibility.Visible;
+
+                }
+            }    
+            
+
+        }
+
+
+        private void saveEditContact(object sender, RoutedEventArgs e)
+        {
+            var test = contactsListView.FindVisualChildren<ListViewItem>();
+            ListViewItem listViewItem = sender as ListViewItem;
+            foreach (ListViewItem _item in test)
+            {
+                if (_item.IsSelected)
+                {
+                    Contact cont = contactsListView.SelectedItem as Contact;
+                    var textboxes = _item.FindVisualChildren<TextBox>();
+                    var count = textboxes.Count();
+                    foreach (TextBox box in textboxes)
+                    {
+                        box.IsReadOnly = true;
+                    }
+
+                    var SaveButton = _item.FindVisualChildren<Button>();
+                    SaveButton.ElementAt(0).Visibility = Visibility.Hidden;
+
+                }
+            }
+            
+
+        }
+
+        private void contactsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Contact contact = (Contact)contactsListView.SelectedItem;
+            ListView list = (ListView) messagesControl.FindName("messagesListView");
+            list.ItemsSource = contact.Messages;
         }
     }
 }
