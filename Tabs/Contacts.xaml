@@ -4,13 +4,62 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Personal_Assistant.Tabs"
+             xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
+xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
              mc:Ignorable="d" 
              Width="auto" Height="auto">
     <Grid>
-        <StackPanel Orientation="Vertical"  HorizontalAlignment="Left" Width="400">
-            <Label FontSize="42" FontWeight="Bold">Επαφές</Label>
-            <ListView x:Name="contactsListView" ItemTemplate="{StaticResource ResourceKey=contactListTemplate}" ></ListView>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical"  HorizontalAlignment="Left" Width="600">
+                <Label FontSize="42" FontWeight="Bold">Επαφές</Label>
+                <ToolBar MinWidth="850">
+                    <ToolBar.Items>
+                        <Button Click="NewContact_Click" ToolTip="Δημιουργία Επαφής [INS]">
+                            <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
+                        </Button>
+                        <Button ToolTip="Επεξεργασία">
+                            <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
+
+                        </Button>
+                        <Button Click="DeleteContact_Click" ToolTip="Διαγραφή επιλεγμένης επαφής [DEL]">
+                            <Image  HorizontalAlignment="Right" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
+
+                        </Button>
+                    </ToolBar.Items>
+                </ToolBar>
+                <StackPanel  HorizontalAlignment="Left" Height="auto" x:Name="newContactControl" Orientation="Horizontal" Width="500" >
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <Button Click="saveNewContact" Width="40" Height="40" VerticalAlignment="Center">
+                            <Image Source="/Resources/Images/save_icon.png" Width="40" Height="40"/>
+
+                        </Button>
+                        <Button Click="cancelNewContact" Width="40" Height="40"  VerticalAlignment="Center">
+                            <Image Source="/Resources/Images/cancel_icon.png" Width="40" Height="40"/>
+
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical">
+                            <Label FontSize="20" FontWeight="ExtraLight" FontStyle="Italic">Όνομα</Label>
+                            <TextBox x:Name="newContactName" Text="{Binding Name, Mode=TwoWay}" Width="300" FontSize="25" ></TextBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <Label FontSize="20" FontWeight="ExtraLight" FontStyle="Italic">Τηλέφωνο</Label>
+                            <TextBox x:Name="newContactNumber"  Width="300" FontSize="25" Text="{Binding PhoneNumber, Mode=TwoWay}"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <ListView HorizontalAlignment="Left" x:Name="contactsListView" Width="500" ItemTemplate="{StaticResource ResourceKey=contactListTemplate}" ></ListView>
+            </StackPanel>
+
+            <StackPanel>
+                <Label FontSize="42" FontWeight="Bold">Μηνύματα</Label>
+                <local2:ContactMessagesControl/>
+            </StackPanel>
         </StackPanel>
+       
         
     </Grid>
 </UserControl>

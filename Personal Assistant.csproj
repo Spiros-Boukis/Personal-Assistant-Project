@@ -103,4 +103,8 @@
     <Resource Include="Resources\Images\Weather_Icons\wind_icon.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+
 </Project>
