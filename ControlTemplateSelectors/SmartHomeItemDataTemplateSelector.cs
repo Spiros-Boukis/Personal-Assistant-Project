@@ -18,21 +18,22 @@ namespace Personal_Assistant.ControlTemplateSelectors
             if (element != null && item != null && item is SmartHomeItem)
             {
                 SmartHomeItem parameteritem = item as SmartHomeItem;
+                var type = parameteritem.GetType();
 
 
 
 
-                if (parameteritem.Type==1)
+                if (type == typeof(LightBulbItem))
                 {
                     return element.FindResource("lightBulbTemplate") as DataTemplate;
                 }
-                else if (parameteritem.Type==2) 
+                else if (parameteritem.GetType() == typeof(TemperatureItem)) 
                 {
                     return element.FindResource("temperatureTemplate") as DataTemplate;
                 }
 
             }
-            return element.FindResource("ReadEmailPreviewTemplate") as DataTemplate;
+            return element.FindResource("") as DataTemplate;
         }
 
     }
