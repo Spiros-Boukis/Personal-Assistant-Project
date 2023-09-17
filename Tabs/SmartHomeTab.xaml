@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Personal_Assistant.Tabs"
              xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
              xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
              mc:Ignorable="d" 
              Height="1000" Width="700">
@@ -30,13 +31,23 @@
                     <StackPanel Orientation="Vertical">
                         <Label HorizontalAlignment="Center" FontWeight="Heavy" FontSize="20" Content="{Binding Description}"></Label>
                         <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center">
-                                <Image MouseUp="lightBulbClicked" x:Name="image" HorizontalAlignment="Center" Width="80" Height="80" Source="{Binding ImagePath}">
+                                <Image MouseUp="lightBulbClicked" x:Name="image" HorizontalAlignment="Center" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}">
                                     
                                 </Image>
                                 <StackPanel Orientation="Horizontal">
                                     <DockPanel>
-                                        <Label DockPanel.Dock="Top" FontSize="20">Timer</Label>
-                                        <Button FontSize="15" Click="SetBulbTimer_Click">Set Timer</Button>
+                                        <Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center">Timer</Label>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button FontSize="15" Click="SetBulbTimer_Click">Set Timer</Button>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox  FontSize="25" IsEnabled="true" Width="35" Text="{Binding TimerMinutes , Mode=TwoWay}"></TextBox>
+                                                <Label FontSize="25" Content=":"/>
+                                                <TextBox   FontSize="25" IsEnabled="true" Width="35" Text="{Binding TimerSeconds , Mode=TwoWay}"></TextBox>
+
+
+                                            </StackPanel>
+                                        </StackPanel>
+                                        
                                     </DockPanel>
 
 
@@ -48,7 +59,7 @@
                 </Border>
                     <StackPanel VerticalAlignment="Center" Orientation="Vertical">
                         <Label FontSize="25" FontWeight="DemiBold" Content="Κατάσταση"></Label>
-                        <Label FontSize="25" Content="{Binding Status}" Style="{StaticResource statusLabelStyle}">
+                        <Label FontSize="25" Content="{Binding Status , Mode=TwoWay}" Style="{StaticResource statusLabelStyle}">
                            
                         </Label>
                     </StackPanel>
@@ -108,9 +119,13 @@
                     <Label MouseDown="livingRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Living Room</Label>
                 </StackPanel>
 
-                    <ListView HorizontalContentAlignment="Center"  x:Name="livingRoomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
-
-                </ListView>
+                    <ListView HorizontalContentAlignment="Center"  IsSynchronizedWithCurrentItem="True"  x:Name="livingRoomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+                        <ListView.Resources>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <EventSetter Event="GotKeyboardFocus" Handler="ListViewItem_GotKeyboardFocus"/>
+                            </Style>
+                        </ListView.Resources>
+                    </ListView>
             </StackPanel>
             </Border>
             <Border Grid.Row="1" CornerRadius="10" BorderThickness="6" BorderBrush="#9aa8b4">

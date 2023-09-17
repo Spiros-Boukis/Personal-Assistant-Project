@@ -128,11 +128,7 @@ namespace Personal_Assistant.Tabs
                         newTemp = item.Temperature - random;
                     }
                     item.Temperature = newTemp;
-                    item.Temperature = Math.Round(item.Temperature, 2);
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        livingRoomListView.Items.Refresh();
-                    });                   
+                    item.Temperature = Math.Round(item.Temperature, 2);                                      
                 }
 
                 foreach (TemperatureItem item in items2.Where(x => x.GetType() == typeof(TemperatureItem) && x.Status == "Online"))
@@ -154,7 +150,7 @@ namespace Personal_Assistant.Tabs
                     item.Temperature = Math.Round(item.Temperature, 2);
                     this.Dispatcher.Invoke(() =>
                     {
-                        BedroomListView.Items.Refresh();
+                        
                     });
                 }
             }
@@ -163,6 +159,8 @@ namespace Personal_Assistant.Tabs
 
         private void lightBulbClicked(object sender, MouseButtonEventArgs e)
         {
+            var selectedItem = livingRoomListView.SelectedItem as LightBulbItem;
+
             Image _image = (Image)sender;
 
             var test = _image.Source.ToString();
@@ -183,7 +181,7 @@ namespace Personal_Assistant.Tabs
                             {
                                 item.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
                             }
-                            livingRoomListView.Items.Refresh();
+                            
                         
                     }
                 }
@@ -204,7 +202,7 @@ namespace Personal_Assistant.Tabs
                             {
                                 item.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
                             }
-                            BedroomListView.Items.Refresh();
+                         
                         
                     }
                 }
@@ -245,12 +243,16 @@ namespace Personal_Assistant.Tabs
 
             if(Schedules.Count()>0)
             {
-                foreach(var  schedule in Schedules.Where(x => x.isEnabled == true))
+                foreach(var  item in items.Where(x => x.timerEnabled == true))
                 {
-                    if (DateTime.Now > schedule.TargetTime)
+                     LightBulbItem bulbItem = items.Where(x => x.Id == item.Id).FirstOrDefault() as LightBulbItem;
+                    bulbItem.TimerSeconds--;
+                   
+                    if(DateTime.Now >  item.TimerTargetTime)
                     {
-                        schedule.isEnabled = false;
-                        var item = items.Where(x => x.Id == schedule.ItemId).FirstOrDefault();
+                        item.timerEnabled = false;
+                    }    
+                       /* var item = items.Where(x => x.Id == schedule.ItemId).FirstOrDefault();
 
                         if (item.ImagePath == "/Resources/Images/SmartHome/bulb_on.png")
                         {
@@ -268,19 +270,9 @@ namespace Personal_Assistant.Tabs
                         }
 
                  
-                    }
+                    */
 
                 }
-
-
-                
-                    
-
-
-                    
-                
-
-
             }
            
         }
@@ -298,12 +290,13 @@ namespace Personal_Assistant.Tabs
                 if (temp.Contains(_button))
                 {
                     LightBulbItem selected = livingRoomListView.SelectedItem as LightBulbItem;
-                    foreach (var item in items.Where(x => x.Id == selected.Id))
+                    foreach (var item in items.Where(x => x.Id == selected.Id && x.GetType() == typeof(LightBulbItem)))
                     {
-                        timedItemID = selected.Id;
-                        _tempDate = DateTime.Now.AddSeconds(10);
+
+                        selected.timerEnabled = true;
+                        selected.TimerTargetTime = DateTime.Now.AddMinutes(selected.TimerMinutes).AddSeconds(selected.TimerSeconds);
                         Schedules.Add(new TimerSchedule(_tempDate, timedItemID));
-                        livingRoomListView.Items.Refresh();
+                        
                     }
                 }
 
@@ -317,6 +310,21 @@ namespace Personal_Assistant.Tabs
         {
 
 
+        }
+
+        private void image_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            Image _image = sender as Image;
+            var source = _image.Source.ToString();
+            _image.Source = new BitmapImage(new Uri(source));
+        }
+
+        private void ListViewItem_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            ListViewItem item = (ListViewItem)sender;
+            item.IsSelected = true;
+           
+            livingRoomListView.SelectedItem = item;   
         }
     }
 }

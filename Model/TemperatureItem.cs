@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using System.Xml.Linq;
 
 namespace Personal_Assistant.Model
 {
-    public class TemperatureItem : SmartHomeItem
+    public class TemperatureItem : SmartHomeItem, INotifyPropertyChanged
     {
-
-        public double Temperature { get; set; }
+        private double temperature;
+        public double Temperature { get { return temperature; } set {
+                temperature = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Temperature"));
+            } }
         public TemperatureItem(string name, string status)
         {
-
+            timerEnabled = false;
             Id = Guid.NewGuid();
 
             Description = name;
@@ -38,5 +43,7 @@ namespace Personal_Assistant.Model
             ImagePath = new BitmapImage(new Uri("/Resources/Images/SmartHome/bulb_on.png" +
                                 "", UriKind.Relative)).ToString();
         }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }
