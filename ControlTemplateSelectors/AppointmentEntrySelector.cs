@@ -21,11 +21,20 @@ namespace Personal_Assistant.ControlTemplateSelectors
 
                 if (parameteritem.Type == 0)
                     return element.FindResource("NormalAppointmentTemplate") as DataTemplate;
-                else if (parameteritem.Type ==  1)
+                else if (parameteritem.Type == 1)
                     return element.FindResource("ImportantAppointmentTemplate") as DataTemplate;
                 else if (parameteritem.Type == 2)
                     return
                         element.FindResource("DeadlineAppointmentTemplate") as DataTemplate;
+                else if (parameteritem.Type == 3)
+                    return
+                        element.FindResource("SportsAppointmentTemplate") as DataTemplate;
+                else if (parameteritem.Type == 4)
+                    return
+                        element.FindResource("BasketballAppointmentTemplate") as DataTemplate;
+                else if (parameteritem.Type == 5)
+                    return
+                        element.FindResource("TennisAppointmentTemplate") as DataTemplate;
             }
 
             return null;

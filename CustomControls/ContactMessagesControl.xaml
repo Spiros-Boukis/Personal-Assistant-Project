@@ -12,7 +12,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
         <local1:MessageTemplateSelector x:Key="selector"/>
         <DataTemplate x:Key="incomingTemplate">
             <Border>
-                <StackPanel  Orientation="Vertical">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Vertical">
                     <Label FontWeight="ExtraBold" HorizontalAlignment="Left" FontSize="25"  DataContext="{Binding Sender}" Content="{Binding Name}"  />
                     <StackPanel  Orientation="Horizontal">
 

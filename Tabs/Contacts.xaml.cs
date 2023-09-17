@@ -3,7 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +19,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using Xceed.Wpf.AvalonDock.Controls;
+using static System.Net.Mime.MediaTypeNames;
+using Image = System.Windows.Controls.Image;
 
 namespace Personal_Assistant.Tabs
 {
@@ -140,6 +145,9 @@ namespace Personal_Assistant.Tabs
         private void saveEditContact(object sender, RoutedEventArgs e)
         {
             var test = contactsListView.FindVisualChildren<ListViewItem>();
+
+
+
             ListViewItem listViewItem = sender as ListViewItem;
             foreach (ListViewItem _item in test)
             {
@@ -170,6 +178,50 @@ namespace Personal_Assistant.Tabs
             ListView list = (ListView)messagesControl.FindName("messagesListView");
             messagesControl.scrollViewer.ScrollToBottom();
             list.Items.Refresh();
+            
+            var t = new Thread(DoWork);
+            t.Start(contact);
+            
+
+        }
+
+        public void DoWork(object _contact)
+        {
+            Contact contact = _contact as Contact;
+            ListViewItem itemToChange = null;
+           
+                
+            this.Dispatcher.Invoke(() =>
+            {                
+                    var test = contactsListView.FindVisualChildren<ListViewItem>();
+                    foreach (ListViewItem _item in test)
+                    {
+                        if (_item.IsSelected)
+                        {
+                            itemToChange = _item;
+                        }
+                    }
+            });
+            var time = RandomNumberGenerator.GetInt32(5000, 10000);
+                Thread.Sleep(time);
+
+            this.Dispatcher.Invoke(() =>
+            {
+                //contact = _contact as Contact;
+                contact.Messages.Add(new ContactMessage(0, "Generated Response", contact));
+                ListView list = (ListView)messagesControl.FindName("messagesListView");
+                messagesControl.scrollViewer.ScrollToBottom();
+                list.Items.Refresh();
+
+                list.SelectedIndex = list.Items.Count - 1;
+                list.ScrollIntoView(list.SelectedItem);
+                var test1 = contactsListView.FindVisualChildren<ListViewItem>();
+               
+               
+                    var SaveButton = itemToChange.FindVisualChildren<Image>();
+                    SaveButton.ElementAt(0).Visibility = Visibility.Visible;
+                
+            });
         }
 
         private void contactsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -177,6 +229,28 @@ namespace Personal_Assistant.Tabs
             Contact contact = (Contact)contactsListView.SelectedItem;
             ListView list = (ListView) messagesControl.FindName("messagesListView");
             list.ItemsSource = contact.Messages;
+            list.SelectedIndex = list.Items.Count - 1;
+            list.ScrollIntoView(list.SelectedItem);
+
+            
+
+            
+            var test = contactsListView.FindVisualChildren<ListViewItem>();
+            foreach (ListViewItem _item in test)
+            {
+                if (_item.IsSelected)
+                {
+                    Contact cont = contactsListView.SelectedItem as Contact;
+                    var textboxes = _item.FindVisualChildren<TextBox>();
+                    var count = textboxes.Count();
+                    var SaveButton = _item.FindVisualChildren<Image>();
+                    SaveButton.ElementAt(0).Visibility = Visibility.Hidden;
+
+                }
+            }
+
+            list.SelectedIndex = list.Items.Count - 1;
+            list.ScrollIntoView(list.SelectedItem);
             list.Items.Refresh();
         }
     }

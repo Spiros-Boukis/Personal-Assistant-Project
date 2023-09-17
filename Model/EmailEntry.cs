@@ -20,7 +20,7 @@ namespace Personal_Assistant.Model
 
         public EmailEntry()
         {
-
+            Identifier = Guid.NewGuid().ToString();
         }
 
         public EmailEntry(string from, string to, string title,string body, bool isRead,DateTime _date)

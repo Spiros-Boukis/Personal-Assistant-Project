@@ -147,6 +147,43 @@ namespace Personal_Assistant.Tabs
 
         }
 
-       
+      
+
+        private void emailReply_Click(object sender, RoutedEventArgs e)
+        {
+            var content = new ComposeEmailControl(this);
+            Window window = new Window
+            {
+                Title = "My User Control Dialog",
+                Content = content
+            };
+
+            ComposeEmailControl temp = (ComposeEmailControl)window.Content;
+            var test = temp.TestVar;
+
+            
+
+            
+
+
+
+            EmailEntry emailEntry = emailsListView.SelectedItem as EmailEntry;
+            var newEntry = new EmailEntry();
+            newEntry.To = emailEntry.From;
+            newEntry.Body = "---Original Message:---\r From:" + emailEntry.From + " Title:" + emailEntry.Title+"\r";
+            newEntry.Body += emailEntry.Date+"\r";
+            newEntry.Body += emailEntry.Body+"\r-----------------------------\r";
+
+            newEntry.Title = "RE:"+emailEntry.Title;
+
+            content.BodyText.Text = newEntry.Body;
+            content.TitleText.Text = newEntry.Title;
+            content.ToText.Text = emailEntry.From;
+
+            window.ShowDialog();
+
+            
+
+        }
     }
 }

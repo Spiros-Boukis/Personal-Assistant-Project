@@ -11,13 +11,16 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
     <UserControl.Resources>
         <DataTemplate x:Key="contactListTemplate">
             <StackPanel Orientation="Horizontal">
+                <Image Visibility="Hidden" x:Name="newMessageIcon" Height="50" Width="50" Source="/Resources/Images/email.png"/>
                 <StackPanel Orientation="Vertical">
+                    
                     <TextBox x:Name="nameText" IsReadOnlyCaretVisible="False" IsReadOnly="True" Width="200"  FontSize="30" FontWeight="Bold" Text="{Binding Name, Mode=TwoWay}"/>
                     <TextBox x:Name="phoneText" IsReadOnlyCaretVisible="False" IsReadOnly="True" Width="200" FontWeight="UltraLight" FontSize="26" Text="{Binding PhoneNumber, Mode=TwoWay}"/>
                 </StackPanel>
                 <Button Visibility="Hidden"  Margin="30,0,0,0" Width="50" Height="50" Click="saveEditContact">
                     <Image  Height="50" Width="50" Source="/Resources/Images/save_icon.png"/>
                 </Button>
+                
 
             </StackPanel>
 
@@ -67,7 +70,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-                <ListView HorizontalAlignment="Left" SelectionChanged="contactsListView_SelectionChanged" x:Name="contactsListView" Width="500" ItemTemplate="{StaticResource ResourceKey=contactListTemplate}" ></ListView>
+                <ListView MaxHeight="400" HorizontalAlignment="Left" SelectionChanged="contactsListView_SelectionChanged" x:Name="contactsListView" Width="500" ItemTemplate="{StaticResource ResourceKey=contactListTemplate}" ></ListView>
             </StackPanel>
 
             <StackPanel>

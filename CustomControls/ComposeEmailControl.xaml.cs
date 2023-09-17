@@ -38,8 +38,11 @@ namespace Personal_Assistant.CustomControls
 
             container.SentEmails.Add(new Model.EmailEntry("mymail@hotmail.com", toMail,titleMail, bodyMail, true,DateTime.Now));
             MessageBox.Show("Το μήνυμα ηλεκτρονικού ταχυδρομείου στάλθηκε με επιτυχία!!!");
-
+            
             container.sentemailsListView.Items.Refresh();
+
+            Window _parent = (Window)this.Parent;
+            _parent.Close();
             
         }
     }

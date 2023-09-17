@@ -66,14 +66,73 @@ namespace Personal_Assistant.Tabs
             //List<string> list8 = new List<string>();
             //List<string> list9 = new List<string>();
 
+            sportsControl.container = this;
+
         }
 
+
+        public void AddedSportsFixtureAppointment(string text,string time,int sport)
+        {
+            var entry = new AppointmentEntry();
+            entry.Title = text;
+            entry.Description = "";
+            var item = priorityComboBox.SelectedItem as FrameworkElement;
+            
+            if(sport==0)
+            entry.Type = 3;
+            if (sport == 1)
+                entry.Type = 4;
+            if (sport == 2)
+                entry.Type = 5;
+
+            DateTime? _time = DateTime.Now;
+            entry.Time = _time;
+
+            var selectedDate = CalendarControl.SelectedDate.Value;
+            var _formattedDate = selectedDate.Month.ToString() + "/" + selectedDate.Day + "/" + selectedDate.Year;
+            var _date = CalendarControl.SelectedDate.Value.ToShortDateString();
+
+            if (Appointments.ContainsKey(_date))
+            {
+                Appointments[_date].Add(entry);
+            }
+            else
+            {
+                Appointments.Add(_date, new List<AppointmentEntry>());
+                Appointments[_date].Add(entry);
+                var tempDate = CalendarControl.SelectedDate.Value;
+                CalendarControl.SelectedDate = DateTime.Now.AddMonths(1).ToUniversalTime();
+                CalendarControl.SelectedDate = tempDate;
+                //aTrigger dataTrigger = new DataTrigger() { Binding = new Binding("Date"), Value = _formattedDate };
+                //aTrigger.Setters.Add(new Setter(CalendarDayButton.BackgroundProperty, Brushes.LightGreen));
+                // s.Triggers.Add(dataTrigger);
+
+                CalendarControl.DisplayDate = tempDate.AddMonths(1);
+                CalendarControl.DisplayDate = tempDate;
+
+            }
+
+            AppointmentsListView.ItemsSource = Appointments[FormattedDate()];
+            AppointmentsListView.Items.Refresh();
+
+            //newAppointmentControl.Visibility = Visibility.Collapsed;
+
+
+            AppointmentsListView.SelectedIndex = AppointmentsListView.Items.Count - 1;
+            AppointmentsListView.ScrollIntoView(AppointmentsListView.SelectedItem);
+        }
 
         public CalendarTab()
         {
             InitializeComponent();
 
             InitNameDays();
+
+            string test = "<!DOCTYPE html>\r\n\r\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <meta charset=\"utf-8\" />\r\n    <title></title>\r\n</head>\r\n<body>\r\n    <script src=\"https://static.elfsight.com/platform/platform.js\" data-use-service-core defer></script>\r\n    <div class=\"elfsight-app-71ea00cc-4376-4a02-8ea0-7b38c86a7465\"></div>\r\n</body>\r\n</html>";
+            var temp12 = "file:///C:/Users/User/source/repos/Personal Assistant/Resources/Weather.html";
+           
+
+
 
             newAppointmentControl.Visibility = Visibility.Collapsed;
             Appointments = new Dictionary<string, List<AppointmentEntry>>();

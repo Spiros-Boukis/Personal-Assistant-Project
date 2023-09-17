@@ -27,7 +27,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                     <Label FontWeight="Light" x:Name="emailDate" FontSize="22" Content="{Binding Date}"/>
                     <StackPanel x:Name="mailBody" Visibility="Collapsed">
                     <TextBox  IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
-                        <Button HorizontalAlignment="Left" Content="Απάντηση" Width="100" Height="30" FontSize="20"></Button>
+                        <Button HorizontalAlignment="Left" Click="emailReply_Click" Content="Απάντηση" Width="100" Height="30" FontSize="20"></Button>
                     </StackPanel>
                 </StackPanel>
                 </Border>
@@ -47,7 +47,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                     <Label FontWeight="Light" x:Name="emailDate" FontSize="22" Content="{Binding Date}"/>
                     <StackPanel x:Name="mailBody" Visibility="Collapsed">
                         <TextBox  IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
-                        <Button HorizontalAlignment="Left" Content="Απάντηση" Width="100" Height="30" FontSize="20"></Button>
+                        <Button Click="emailReply_Click" HorizontalAlignment="Left" Content="Απάντηση" Width="100" Height="30" FontSize="20"></Button>
                     </StackPanel>
                 </StackPanel>
                 
@@ -66,7 +66,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                     <Label FontWeight="Light" x:Name="emailDate" FontSize="22" Content="{Binding Date}"/>
                     <StackPanel x:Name="mailBody" Visibility="Collapsed">
                         <TextBox   IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
-                        <Button HorizontalAlignment="Left" Content="Απάντηση" Width="100" Height="30" FontSize="20"></Button>
+                        
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -83,7 +83,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                     <Label FontWeight="Light" x:Name="emailDate" FontSize="22" Content="{Binding Date}"/>
                     <StackPanel x:Name="mailBody" Visibility="Collapsed">
                         <TextBox  IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
-                        <Button HorizontalAlignment="Left" Content="Απάντηση" Width="100" Height="30" FontSize="20"></Button>
+                        
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -97,7 +97,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
 
 
         <StackPanel Orientation="Vertical" KeyDown="StackPanel_KeyDown">
-            <ToolBar MinWidth="850">
+            <ToolBar MinWidth="850" >
                 <ToolBar.Items>
                     <Button Click="newEmailClick" ToolTip="Αποστολή Νέου Μηνύματος [INS]">
                         <Image Height="50" Width="50" Source="/Resources/Images/new_email_icon.png"/>
@@ -113,7 +113,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                 </ToolBar.Items>
             </ToolBar>
             <Border Background="#eef5fd" BorderBrush="#9aa8b4" BorderThickness="3" CornerRadius="7">
-                <TabControl Background="#efefef"  TabStripPlacement="Left" Height="600" MaxHeight="600">
+                <TabControl Background="#efefef"  TabStripPlacement="Left" >
                     <TabItem Background="#efefef">
                     <TabItem.Header>
                         <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
@@ -121,7 +121,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                         </Border>
                     </TabItem.Header>
                         <StackPanel Orientation="Vertical" Background="#efefef">
-                        <ListView Width="auto" Height="600" MaxHeight="600" x:Name="emailsListView" ItemTemplateSelector="{StaticResource styleSelector}" >
+                        <ListView Width="auto" Height="800" MaxHeight="800" x:Name="emailsListView" ItemTemplateSelector="{StaticResource styleSelector}" >
                             
                         </ListView>
                     </StackPanel>
@@ -133,7 +133,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
                         </Border>
                     </TabItem.Header>
                         <StackPanel Orientation="Vertical" Background="#efefef">
-                            <ListView Height="600" MaxHeight="600" Width="auto" x:Name="sentemailsListView" ItemTemplateSelector="{StaticResource sentEmailStyleSelector}">
+                            <ListView Height="800" MaxHeight="800" Width="auto" x:Name="sentemailsListView" ItemTemplateSelector="{StaticResource sentEmailStyleSelector}">
 
                         </ListView>
                     </StackPanel>

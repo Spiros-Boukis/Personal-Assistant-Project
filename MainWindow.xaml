@@ -7,6 +7,7 @@
         xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
         xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         mc:Ignorable="d"
+         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         Title="MainWindow" Height="auto" Width="auto">
     <Window.Resources>
 
@@ -71,7 +72,20 @@
                 <TabItem.Header>
                 <Image Width="150" Height="150" Source="Resources/Images/contacts_icon.png"/>
                 </TabItem.Header>
-                <local4:Contacts/>
+                <local4:Contacts HorizontalContentAlignment="Left"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Image Width="150" Height="150" Source="Resources/Images/contacts_icon.png"/>
+                </TabItem.Header>
+                
+                    
+                    <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <wv2:WebView2 Name="webView" Width="1200" Height="1000" 
+      Source="https://www.google.gr"/>
+                    </DockPanel>
+                
+
             </TabItem>
         </TabControl>
     </Grid>

@@ -5,27 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Personal_Assistant.CustomControls"
              mc:Ignorable="d" 
-             >
+             Height="auto" Width="auto">
     <Grid>
-        <Viewbox Stretch="Uniform">
-        <StackPanel Orientation="vertical">
+        
+        <StackPanel Orientation="vertical" HorizontalAlignment="Left">
             <StackPanel Orientation="Horizontal">
-                <Label>To:</Label>
-                <TextBox x:Name="ToText" Width="200"></TextBox>
+                <Label FontSize="40">To:</Label>
+                <TextBox FontSize="40" x:Name="ToText" Width="600"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label>Title:</Label>
-                <TextBox x:Name="TitleText" Width="200"></TextBox>
+                <Label FontSize="40">Title:</Label>
+                <TextBox FontSize="40" x:Name="TitleText" Width="600"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <Label>Email Body</Label>
-                <TextBox AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" x:Name="BodyText" Width="200" Height="200"></TextBox>
+                <Label FontSize="40">Email Body</Label>
+                <TextBox Height="700" FontSize="40" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" x:Name="BodyText" Width="700" ></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Click="email_sendclick">Send</Button>
-                <Button>Cancel</Button>
+                <Button FontSize="40" Click="email_sendclick">Send</Button>
+                <Button FontSize="40">Cancel</Button>
             </StackPanel>
         </StackPanel>
-        </Viewbox>
+        
     </Grid>
 </UserControl>

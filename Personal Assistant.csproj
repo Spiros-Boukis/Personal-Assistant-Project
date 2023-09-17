@@ -18,14 +18,19 @@
     <None Remove="Resources\Images\deadline_icon.png" />
     <None Remove="Resources\Images\delete_icon.png" />
     <None Remove="Resources\Images\edit_icon.png" />
+    <None Remove="Resources\Images\email.png" />
     <None Remove="Resources\Images\important_icon.png" />
     <None Remove="Resources\Images\mail-icon_.png" />
     <None Remove="Resources\Images\new_email_icon.png" />
+    <None Remove="Resources\Images\notification.png" />
     <None Remove="Resources\Images\save_icon.png" />
     <None Remove="Resources\Images\smart-home.png" />
     <None Remove="Resources\Images\SmartHome\bulb_off.png" />
     <None Remove="Resources\Images\SmartHome\bulb_on.png" />
     <None Remove="Resources\Images\SmartHome\temperature_icon.png" />
+    <None Remove="Resources\Images\Sports\basketball.png" />
+    <None Remove="Resources\Images\Sports\tennis.png" />
+    <None Remove="Resources\Images\sport_icon.png" />
     <None Remove="Resources\Images\weather_icon.png" />
     <None Remove="Resources\Images\Weather_Icons\humidity_icon.png" />
     <None Remove="Resources\Images\Weather_Icons\weather1.png" />
@@ -41,13 +46,19 @@
     <None Remove="Resources\Images\Weather_Icons\weather8.png" />
     <None Remove="Resources\Images\Weather_Icons\weather9.png" />
     <None Remove="Resources\Images\Weather_Icons\wind_icon.png" />
+    <None Remove="Resources\Weather.html" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\Images\contacts_icon.png" />
+    <Resource Include="Resources\Images\email.png" />
+    <Resource Include="Resources\Images\notification.png" />
     <Resource Include="Resources\Images\SmartHome\bulb_off.png" />
     <Resource Include="Resources\Images\SmartHome\bulb_on.png" />
     <Resource Include="Resources\Images\SmartHome\temperature_icon.png" />
+    <Resource Include="Resources\Images\Sports\basketball.png" />
+    <Resource Include="Resources\Images\Sports\football.png" />
+    <Resource Include="Resources\Images\Sports\tennis.png" />
     <Resource Include="Resources\Images\Weather_Icons\humidity_icon.png" />
     <Resource Include="Resources\Images\Weather_Icons\weather3.png" />
   </ItemGroup>
@@ -101,6 +112,7 @@
     <Resource Include="Resources\Images\Weather_Icons\weather8.png" />
     <Resource Include="Resources\Images\Weather_Icons\weather9.png" />
     <Resource Include="Resources\Images\Weather_Icons\wind_icon.png" />
+    <Resource Include="Resources\Weather.html" />
   </ItemGroup>
 
   <ItemGroup>
