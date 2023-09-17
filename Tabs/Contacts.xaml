@@ -28,7 +28,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal">
             <StackPanel Orientation="Vertical"  HorizontalAlignment="Left" Width="600">
                 <Label FontSize="42" FontWeight="Bold">Επαφές</Label>
                 <ToolBar MinWidth="850">

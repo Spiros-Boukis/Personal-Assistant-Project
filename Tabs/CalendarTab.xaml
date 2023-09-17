@@ -23,7 +23,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         <local1:AppointmentEntrySelector x:Key="appointmentSelector"/>
         <DataTemplate x:Key="NormalAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
-                <StackPanel Width="650" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
+                <StackPanel Width="auto" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
                     <Label Width="40" Height="40" Margin="5"></Label>
                     <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
 
@@ -35,7 +35,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         </DataTemplate>
         <DataTemplate x:Key="SportsAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
-                <StackPanel Width="650" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
+                <StackPanel Width="auto" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
                     <Image Source="/Resources/Images/Sports/football.png" Width="40" Height="40" Margin="5"></Image>
                     
                     <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
@@ -48,7 +48,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         </DataTemplate>
         <DataTemplate x:Key="BasketballAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
-                <StackPanel Width="650" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
+                <StackPanel Width="auto" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
                     <Image Source="/Resources/Images/Sports/basketball.png" Width="40" Height="40" Margin="5"></Image>
 
                     <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
@@ -61,7 +61,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         </DataTemplate>
         <DataTemplate x:Key="TennisAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
-                <StackPanel Width="650" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
+                <StackPanel Width="auto" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
                     <Image Source="/Resources/Images/Sports/tennis.png" Width="40" Height="40" Margin="5"></Image>
 
                     <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
@@ -74,7 +74,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         </DataTemplate>
         <DataTemplate x:Key="ImportantAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Width="auto" Orientation="Horizontal">
                     <Image Source="/Resources/Images/important_icon.png" Width="40" Height="40" Margin="5"></Image>
                     <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
                     <TextBlock FontWeight="Bold" FontSize="40" Text="{Binding Title}"></TextBlock>
@@ -85,7 +85,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         <DataTemplate x:Key="DeadlineAppointmentTemplate">
 
             <Border Style="{StaticResource appointmentBorderStyle}">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Width="auto" Orientation="Horizontal">
                     <Image Source="/Resources/Images/deadline_icon.png" Width="40" Height="40" Margin="5"></Image>
                     <xctk:TimePicker Background="#eef5fd" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
                     <TextBlock FontWeight="Bold" FontSize="40" Text="{Binding Title}"></TextBlock>
@@ -107,7 +107,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                                 <Button Click="NewAppointment_Click" ToolTip="Δημιουργία Ραντεβού [INS]">
                                     <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
                                 </Button>
-                                <Button ToolTip="Επεξεργασία">
+                                <Button ToolTip="Επεξεργασία" Click="Edit_Click">
                                     <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
 
                                 </Button>

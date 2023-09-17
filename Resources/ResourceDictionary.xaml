@@ -19,28 +19,12 @@
     </Style>
 
     <Style x:Key="appointmentBorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="#efefef"/>
-        <Setter Property="Padding" Value="3"/>
-        <Setter Property="BorderThickness" Value="4"/>
-        <Setter Property="CornerRadius" Value="20"/>
+
         
     </Style>
 
     <Style x:Key="appointmentPanelStyle" TargetType="{x:Type StackPanel}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0,0">
 
-                    <!-- This gradient stop is partially transparent. -->
-                    
-
-                    <!-- This gradient stop is fully opaque. -->
-                    <GradientStop Color="#efefef" Offset="2.0" />
-                    <GradientStop Color="#efefef" Offset="0.0" />
-                </LinearGradientBrush>
-
-            </Setter.Value>
-        </Setter>
         
 
     </Style>

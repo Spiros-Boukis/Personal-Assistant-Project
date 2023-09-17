@@ -14,6 +14,8 @@ namespace Personal_Assistant.Model
         
         public LightBulbItem(string name,string status)
         {
+            TimerSeconds = 0;
+            TimerMinutes = 1;
             timerEnabled = false;
             Id = Guid.NewGuid();
             Description = name;

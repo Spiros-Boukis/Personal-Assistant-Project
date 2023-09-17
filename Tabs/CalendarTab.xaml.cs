@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Wpf.AvalonDock.Controls;
 
 namespace Personal_Assistant.Tabs
 {
@@ -192,6 +193,9 @@ namespace Personal_Assistant.Tabs
             Console.WriteLine(test);
         }
 
+
+
+
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
 
@@ -353,5 +357,39 @@ namespace Personal_Assistant.Tabs
 
 
         }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (AppointmentsListView.SelectedItem == null)
+            {
+                MessageBox.Show("Πρέπει να διαλέξεις εγγραφή");
+            }
+            else
+            {
+                var _date = CalendarControl.SelectedDate.Value.ToShortDateString();
+
+                var test = _date.ToString();
+                var prompt = MessageBox.Show("Θέλετε να διαγράψετε αυτό το ραντεβού?", "Διαγραφή", MessageBoxButton.YesNo);
+                if (prompt == MessageBoxResult.Yes)
+                {
+                    AppointmentEntry item = (AppointmentEntry)AppointmentsListView.SelectedItem;
+
+                    Appointments[test].Remove(item);
+                    var temp = Appointments[test];
+                    AppointmentsListView.ItemsSource = temp;
+                    AppointmentsListView.Items.Refresh();
+                    if (Appointments[test].Count == 0)
+                    {
+                        Appointments.Remove(test);
+                        var tempDate = CalendarControl.SelectedDate.Value;
+                        CalendarControl.DisplayDate = tempDate.AddMonths(1);
+                        CalendarControl.DisplayDate = tempDate;
+                    }
+                }
+                else
+                { }
+            }
+            }
     }
 }

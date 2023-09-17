@@ -9,7 +9,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
              mc:Ignorable="d" 
-             Height="1000" Width="700">
+             Height="auto" Width="auto">
     <UserControl.Resources>
 
         <Style x:Key="statusLabelStyle" TargetType="{x:Type Label}">
@@ -26,8 +26,8 @@
         <local1:SmartHomeItemDataTemplateSelector x:Key="smartHomeItemSelector"/>
         <DataTemplate  x:Key="lightBulbTemplate">
             <Border>
-                <StackPanel Orientation="Horizontal">
-                    <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="300" >
+                <StackPanel Orientation="Horizontal" IsEnabled="{Binding ItemStatus}">
+                    <Border CornerRadius="4" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,10" Width="300" >
                     <StackPanel Orientation="Vertical">
                         <Label HorizontalAlignment="Center" FontWeight="Heavy" FontSize="20" Content="{Binding Description}"></Label>
                         <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center">
@@ -39,6 +39,7 @@
                                         <Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center">Timer</Label>
                                         <StackPanel Orientation="Horizontal">
                                             <Button FontSize="15" Click="SetBulbTimer_Click">Set Timer</Button>
+                                            <Button IsEnabled="{Binding TimerEnabled, Mode=TwoWay}" FontSize="15" Click="Button_Click">Stop Timer</Button>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBox  FontSize="25" IsEnabled="true" Width="35" Text="{Binding TimerMinutes , Mode=TwoWay}"></TextBox>
                                                 <Label FontSize="25" Content=":"/>
@@ -46,6 +47,7 @@
 
 
                                             </StackPanel>
+                                            
                                         </StackPanel>
                                         
                                     </DockPanel>
@@ -71,7 +73,7 @@
         <DataTemplate  x:Key="temperatureTemplate">
             <Border x:Name="temperatureItemContainer">
                 <StackPanel Orientation="Horizontal">
-                    <Border BorderBrush="#9aa8b4" BorderThickness="5px" CornerRadius="7" Width="300" >
+                    <Border CornerRadius="4" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,10" Width="300" >
                 <StackPanel Orientation="Vertical"  Width="auto">
                             <Label HorizontalAlignment="Center" FontWeight="Heavy" FontSize="20" Content="{Binding Description}"></Label>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -106,41 +108,50 @@
     </UserControl.Resources>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="False" HorizontalAlignment="Left">
+            <Label HorizontalContentAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Top" FontSize="50">Διαχείριση Έξυπνων Συσκευών</Label>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+
+                <StackPanel  x:Name="livingRoomPanel" Orientation="Vertical" >
+
+                    <Border  CornerRadius="4" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Label MouseDown="livingRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Living Room</Label>
+                            </StackPanel>
+
+                            <ListView  HorizontalContentAlignment="Center"  IsSynchronizedWithCurrentItem="True"  x:Name="livingRoomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+                                <ListView.Resources>
+                                    <Style TargetType="{x:Type ListViewItem}">
+                                        <EventSetter Event="GotKeyboardFocus" Handler="ListViewItem_GotKeyboardFocus"/>
+                                    </Style>
+                                </ListView.Resources>
+                            </ListView>
+                        </StackPanel>
+
+                    </Border>
+                </StackPanel>
+
+                <StackPanel x:Name="BedroomPanel" Orientation="Vertical">
+                    <Border CornerRadius="4" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,10">
+
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Label MouseDown="bedRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Bedroom</Label>
+                        </StackPanel>
+
+                        <ListView HorizontalContentAlignment="Center" x:Name="BedroomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+
+                        </ListView>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            </StackPanel>
+        </DockPanel>     
        
-        <StackPanel Orientation="Vertical">
-            <Label HorizontalAlignment="Center" FontSize="50">Διαχείριση Έξυπνων Συσκευών</Label>
-            <Border Grid.Row="0" CornerRadius="10" BorderThickness="6" BorderBrush="#9aa8b4" Margin="0,0,0,10">
-            <StackPanel  x:Name="livingRoomPanel" Orientation="Vertical" >
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Label MouseDown="livingRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Living Room</Label>
-                </StackPanel>
-
-                    <ListView HorizontalContentAlignment="Center"  IsSynchronizedWithCurrentItem="True"  x:Name="livingRoomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
-                        <ListView.Resources>
-                            <Style TargetType="{x:Type ListViewItem}">
-                                <EventSetter Event="GotKeyboardFocus" Handler="ListViewItem_GotKeyboardFocus"/>
-                            </Style>
-                        </ListView.Resources>
-                    </ListView>
-            </StackPanel>
-            </Border>
-            <Border Grid.Row="1" CornerRadius="10" BorderThickness="6" BorderBrush="#9aa8b4">
-            <StackPanel  x:Name="BedroomPanel" Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Label MouseDown="bedRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Bedroom</Label>
-                </StackPanel>
-
-                <ListView HorizontalContentAlignment="Center" x:Name="BedroomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
-
-                </ListView>
-            </StackPanel>
-            </Border>
-    
-        </StackPanel>
+        
         
         
     </Grid>

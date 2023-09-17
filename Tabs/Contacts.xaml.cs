@@ -47,7 +47,12 @@ namespace Personal_Assistant.Tabs
             con1.Messages.Add(new ContactMessage(1, "fine", null));
             contacts.Add(con1);
             contacts.Add(new Contact("Φίλιππος", "6944687190"));
-            contacts.Add(new Contact("Γιώργος", "6911196811"));
+            contacts.Add(new Contact("Γιώργος", "6987296811"));
+            contacts.Add(new Contact("Παντελής", "6941068190"));
+            contacts.Add(new Contact("Ειρήνη", "6911192198"));
+            contacts.Add(new Contact("Taxi", "694888190"));
+            contacts.Add(new Contact("Panos", "6998796811"));
+            contacts.Add(new Contact("Dad", "694415900"));
 
             contactsListView.ItemsSource = contacts;
             newContactItem = new Contact();
@@ -227,31 +232,34 @@ namespace Personal_Assistant.Tabs
         private void contactsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Contact contact = (Contact)contactsListView.SelectedItem;
-            ListView list = (ListView) messagesControl.FindName("messagesListView");
-            list.ItemsSource = contact.Messages;
-            list.SelectedIndex = list.Items.Count - 1;
-            list.ScrollIntoView(list.SelectedItem);
-
-            
-
-            
-            var test = contactsListView.FindVisualChildren<ListViewItem>();
-            foreach (ListViewItem _item in test)
+            if (contact != null)
             {
-                if (_item.IsSelected)
+                ListView list = (ListView)messagesControl.FindName("messagesListView");
+                list.ItemsSource = contact.Messages;
+                list.SelectedIndex = list.Items.Count - 1;
+                list.ScrollIntoView(list.SelectedItem);
+
+
+
+
+                var test = contactsListView.FindVisualChildren<ListViewItem>();
+                foreach (ListViewItem _item in test)
                 {
-                    Contact cont = contactsListView.SelectedItem as Contact;
-                    var textboxes = _item.FindVisualChildren<TextBox>();
-                    var count = textboxes.Count();
-                    var SaveButton = _item.FindVisualChildren<Image>();
-                    SaveButton.ElementAt(0).Visibility = Visibility.Hidden;
+                    if (_item.IsSelected)
+                    {
+                        Contact cont = contactsListView.SelectedItem as Contact;
+                        var textboxes = _item.FindVisualChildren<TextBox>();
+                        var count = textboxes.Count();
+                        var SaveButton = _item.FindVisualChildren<Image>();
+                        SaveButton.ElementAt(0).Visibility = Visibility.Hidden;
 
+                    }
                 }
-            }
 
-            list.SelectedIndex = list.Items.Count - 1;
-            list.ScrollIntoView(list.SelectedItem);
-            list.Items.Refresh();
+                list.SelectedIndex = list.Items.Count - 1;
+                list.ScrollIntoView(list.SelectedItem);
+                list.Items.Refresh();
+            }
         }
     }
 }

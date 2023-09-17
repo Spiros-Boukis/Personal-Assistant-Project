@@ -19,6 +19,7 @@
     <None Remove="Resources\Images\delete_icon.png" />
     <None Remove="Resources\Images\edit_icon.png" />
     <None Remove="Resources\Images\email.png" />
+    <None Remove="Resources\Images\google.png" />
     <None Remove="Resources\Images\important_icon.png" />
     <None Remove="Resources\Images\mail-icon_.png" />
     <None Remove="Resources\Images\new_email_icon.png" />
@@ -52,6 +53,7 @@
   <ItemGroup>
     <Resource Include="Resources\Images\contacts_icon.png" />
     <Resource Include="Resources\Images\email.png" />
+    <Resource Include="Resources\Images\google.png" />
     <Resource Include="Resources\Images\notification.png" />
     <Resource Include="Resources\Images\SmartHome\bulb_off.png" />
     <Resource Include="Resources\Images\SmartHome\bulb_on.png" />

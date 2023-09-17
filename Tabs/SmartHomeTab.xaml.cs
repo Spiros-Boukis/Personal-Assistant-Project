@@ -67,7 +67,8 @@ namespace Personal_Assistant.Tabs
 
             DispatcherTimer timer = new DispatcherTimer();
             TimeSpan Time = TimeSpan.FromSeconds(15);
-            timer = new DispatcherTimer();
+            timer = new DispatcherTimer(DispatcherPriority.Render);
+            
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Tick += _bulbTimerTick;
             timer.Start();
@@ -251,8 +252,7 @@ namespace Personal_Assistant.Tabs
                     if(DateTime.Now >  item.TimerTargetTime)
                     {
                         item.timerEnabled = false;
-                    }    
-                       /* var item = items.Where(x => x.Id == schedule.ItemId).FirstOrDefault();
+                        item.TimerSeconds = 0;
 
                         if (item.ImagePath == "/Resources/Images/SmartHome/bulb_on.png")
                         {
@@ -268,6 +268,8 @@ namespace Personal_Assistant.Tabs
 
                             item.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
                         }
+                    }    
+                       /*
 
                  
                     */
@@ -293,7 +295,7 @@ namespace Personal_Assistant.Tabs
                     foreach (var item in items.Where(x => x.Id == selected.Id && x.GetType() == typeof(LightBulbItem)))
                     {
 
-                        selected.timerEnabled = true;
+                        selected.TimerEnabled = true;
                         selected.TimerTargetTime = DateTime.Now.AddMinutes(selected.TimerMinutes).AddSeconds(selected.TimerSeconds);
                         Schedules.Add(new TimerSchedule(_tempDate, timedItemID));
                         
@@ -321,10 +323,16 @@ namespace Personal_Assistant.Tabs
 
         private void ListViewItem_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            ListViewItem item = (ListViewItem)sender;
-            item.IsSelected = true;
-           
-            livingRoomListView.SelectedItem = item;   
+         //   ListViewItem item = (ListViewItem)sender;
+            
+         //  var index = livingRoomListView.Items.IndexOf(item);
+
+         //   livingRoomListView.SelectedItem = item;   
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -57,7 +57,7 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
     <Grid>
         <StackPanel Orientation="Vertical">
             <ScrollViewer    x:Name="scrollViewer" CanContentScroll="True">
-                <ListView MaxHeight="500" HorizontalAlignment="Left" Width="700"  x:Name="messagesListView" ItemTemplateSelector="{StaticResource selector}"></ListView>
+                <ListView MaxHeight="500" Height="500" HorizontalAlignment="Left" Width="700"  x:Name="messagesListView" ItemTemplateSelector="{StaticResource selector}"></ListView>
             </ScrollViewer>
             
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left">
