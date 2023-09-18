@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                            xmlns:local="clr-namespace:Personal_Assistant" xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
 xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
+xmlns:ui="http://schemas.modernwpf.com/2019"
+
 xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
              xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
@@ -12,6 +14,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
              Height="auto" Width="auto">
 
     <UserControl.Resources>
+       
 
         <Style x:Key="cdbKey" TargetType="CalendarDayButton">
             <Style.Triggers>
@@ -23,9 +26,9 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         <local1:AppointmentEntrySelector x:Key="appointmentSelector"/>
         <DataTemplate x:Key="NormalAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
-                <StackPanel Width="auto" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
+                <StackPanel Width="auto"  Orientation="Horizontal">
                     <Label Width="40" Height="40" Margin="5"></Label>
-                    <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                    <xctk:TimePicker FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
 
 
 
@@ -38,7 +41,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                 <StackPanel Width="auto" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
                     <Image Source="/Resources/Images/Sports/football.png" Width="40" Height="40" Margin="5"></Image>
                     
-                    <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                    <xctk:TimePicker  FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
 
 
 
@@ -51,7 +54,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                 <StackPanel Width="auto" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
                     <Image Source="/Resources/Images/Sports/basketball.png" Width="40" Height="40" Margin="5"></Image>
 
-                    <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                    <xctk:TimePicker FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
 
 
 
@@ -64,7 +67,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                 <StackPanel Width="auto" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
                     <Image Source="/Resources/Images/Sports/tennis.png" Width="40" Height="40" Margin="5"></Image>
 
-                    <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                    <xctk:TimePicker  FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
 
 
 
@@ -76,7 +79,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
             <Border Style="{StaticResource appointmentBorderStyle}">
                 <StackPanel Width="auto" Orientation="Horizontal">
                     <Image Source="/Resources/Images/important_icon.png" Width="40" Height="40" Margin="5"></Image>
-                    <xctk:TimePicker Background="Azure" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                    <xctk:TimePicker  FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
                     <TextBlock FontWeight="Bold" FontSize="40" Text="{Binding Title}"></TextBlock>
 
                 </StackPanel>
@@ -98,7 +101,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
 
             <StackPanel Orientation="Horizontal">
 
-                <Border BorderThickness="3" BorderBrush="#9aa8b4" CornerRadius="7">
+                <Border BorderThickness="3"  CornerRadius="7">
                     <StackPanel x:Name="calendarStackPanel" Orientation="Vertical" KeyDown="calendarStackPanel_KeyDown">
 
                         <Label HorizontalAlignment="Center" Content="Ραντεβού Ημέρας"  FontSize="40" FontWeight="Bold"></Label>
@@ -128,12 +131,12 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
 
                             </Button>
                             <TextBox x:Name="newEntryText" MinWidth="500" FontSize="40" Text=". . . ."></TextBox>
-                            <Border BorderBrush="#9aa8b4" BorderThickness="2">
+                            <Border  BorderThickness="2">
                                 <xctk:TimePicker x:Name="timePicker" AllowTextInput="False" FontSize="25" Width="100"></xctk:TimePicker>
                             </Border>
 
                             <StackPanel Orientation="Vertical">
-                                <Label FontSize="30">Προτεραιότητα</Label>
+                                <TextBlock FontSize="30">Προτεραιότητα</TextBlock>
                                 <ComboBox x:Name="priorityComboBox" FontSize="25">
                                     <ComboBoxItem FontSize="25" IsSelected="True" x:Name="normal">Normal</ComboBoxItem>
                                     <ComboBoxItem x:Name="important">Σημαντικό</ComboBoxItem >
@@ -168,7 +171,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
             <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" x:Name="currentDate"></Label>
 
             <StackPanel Orientation="Horizontal">
-                <Border BorderBrush="#eef5fd" BorderThickness="5" CornerRadius="12">
+                <Border  BorderThickness="5" CornerRadius="12">
                     <StackPanel x:Name="daysWeatherPanel" Orientation="Horizontal"  Width="auto">
                         
                           <StackPanel>

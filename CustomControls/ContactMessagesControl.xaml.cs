@@ -34,8 +34,8 @@ namespace Personal_Assistant.CustomControls
         {
             Contacts context = this.DataContext as Contacts;
             context.SendMessage(msgBody.Text);
-            messagesListView.SelectedIndex = messagesListView.Items.Count - 1;
-            messagesListView.ScrollIntoView(messagesListView.SelectedItem);
+            //messagesListView.SelectedIndex = messagesListView.Items.Count - 1;
+            //messagesListView.ScrollIntoView(messagesListView.SelectedItem);
 
 
             scrollViewer.ScrollToEnd();
@@ -48,8 +48,8 @@ namespace Personal_Assistant.CustomControls
             {
                 Contacts context = this.DataContext as Contacts;
                 context.SendMessage(msgBody.Text);
-                messagesListView.SelectedIndex = messagesListView.Items.Count - 1;
-                messagesListView.ScrollIntoView(messagesListView.SelectedItem);
+                //messagesListView.SelectedIndex = messagesListView.Items.Count - 1;
+                //messagesListView.ScrollIntoView(messagesListView.SelectedItem);
 
 
                 scrollViewer.ScrollToEnd();

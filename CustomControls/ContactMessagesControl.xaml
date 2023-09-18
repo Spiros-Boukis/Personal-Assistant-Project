@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Personal_Assistant.CustomControls"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
                           xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
 xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
              mc:Ignorable="d" 
@@ -56,8 +57,8 @@ xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
-            <ScrollViewer    x:Name="scrollViewer" CanContentScroll="True">
-                <ListView MaxHeight="500" Height="500" HorizontalAlignment="Left" Width="700"  x:Name="messagesListView" ItemTemplateSelector="{StaticResource selector}"></ListView>
+            <ScrollViewer    x:Name="scrollViewer" CanContentScroll="True" MaxHeight="500">
+                <ItemsControl MaxHeight="500" Height="500" HorizontalAlignment="Left" Width="700"  x:Name="messagesListView" ItemTemplateSelector="{StaticResource selector}"></ItemsControl>
             </ScrollViewer>
             
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left">

@@ -2,10 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="EmailFolderHeaderStyle" TargetType="{x:Type Label}">
-        <Setter Property="FontSize" Value="40"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="Background" Value="#efefef"/>
+       
         
     </Style>
 
@@ -14,8 +11,7 @@
 
 
     <Style x:Key="EmailFolderHeaderBorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="#efefef"/>
-        <Setter Property="BorderThickness" Value="2"/>
+        
     </Style>
 
     <Style x:Key="appointmentBorderStyle" TargetType="{x:Type Border}">
@@ -29,7 +25,6 @@
 
     </Style>
 
-    
-    
-    
+
+
 </ResourceDictionary>

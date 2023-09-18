@@ -180,7 +180,7 @@ namespace Personal_Assistant.Tabs
         {
             Contact contact = (Contact)contactsListView.SelectedItem;
             contact.Messages.Add(new ContactMessage(1, message, null));
-            ListView list = (ListView)messagesControl.FindName("messagesListView");
+            ItemsControl list = (ItemsControl)messagesControl.FindName("messagesListView");
             messagesControl.scrollViewer.ScrollToBottom();
             list.Items.Refresh();
             
@@ -214,12 +214,12 @@ namespace Personal_Assistant.Tabs
             {
                 //contact = _contact as Contact;
                 contact.Messages.Add(new ContactMessage(0, "Generated Response", contact));
-                ListView list = (ListView)messagesControl.FindName("messagesListView");
+                ItemsControl list = (ItemsControl)messagesControl.FindName("messagesListView");
                 messagesControl.scrollViewer.ScrollToBottom();
                 list.Items.Refresh();
 
-                list.SelectedIndex = list.Items.Count - 1;
-                list.ScrollIntoView(list.SelectedItem);
+                //list.SelectedIndex = list.Items.Count - 1;
+                //list.ScrollIntoView(list.SelectedItem);
                 var test1 = contactsListView.FindVisualChildren<ListViewItem>();
                
                
@@ -234,10 +234,10 @@ namespace Personal_Assistant.Tabs
             Contact contact = (Contact)contactsListView.SelectedItem;
             if (contact != null)
             {
-                ListView list = (ListView)messagesControl.FindName("messagesListView");
+                ItemsControl list = (ItemsControl)messagesControl.FindName("messagesListView");
                 list.ItemsSource = contact.Messages;
-                list.SelectedIndex = list.Items.Count - 1;
-                list.ScrollIntoView(list.SelectedItem);
+                //list.SelectedIndex = list.Items.Count - 1;
+                //list.ScrollIntoView(list.SelectedItem);
 
 
 
@@ -256,8 +256,8 @@ namespace Personal_Assistant.Tabs
                     }
                 }
 
-                list.SelectedIndex = list.Items.Count - 1;
-                list.ScrollIntoView(list.SelectedItem);
+                //list.SelectedIndex = list.Items.Count - 1;
+                //list.ScrollIntoView(list.SelectedItem);
                 list.Items.Refresh();
             }
         }

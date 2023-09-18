@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Personal_Assistant" xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
         xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
+xmlns:ui="http://schemas.modernwpf.com/2019"
+    ui:WindowHelper.UseModernWindowStyle="True"
         xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         mc:Ignorable="d"
          xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
@@ -46,7 +48,8 @@
 
 
     <Grid>
-        <TabControl  TabStripPlacement="Left">
+        
+        <TabControl TabStripPlacement="Left">
             <TabItem>
                 <TabItem.Header>
                     <Image Width="150" Height="150" Source="Resources/Images/calendar-flat.png"/>

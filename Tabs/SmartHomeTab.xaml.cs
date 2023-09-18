@@ -1,4 +1,6 @@
-﻿using Personal_Assistant.Model;
+﻿using ModernWpf.Controls;
+using Personal_Assistant.Helpers;
+using Personal_Assistant.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +31,7 @@ namespace Personal_Assistant.Tabs
     /// Interaction logic for SmartHomeTab.xaml
     /// </summary>
     ///
-    
+
     public class TimerSchedule
     {
         public DateTime TargetTime { get; set; }
@@ -68,14 +70,14 @@ namespace Personal_Assistant.Tabs
             DispatcherTimer timer = new DispatcherTimer();
             TimeSpan Time = TimeSpan.FromSeconds(15);
             timer = new DispatcherTimer(DispatcherPriority.Render);
-            
+
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Tick += _bulbTimerTick;
             timer.Start();
 
 
             items = new List<SmartHomeItem>();
-            items.Add(new LightBulbItem("Κεντρικό Φως","Online"));
+            items.Add(new LightBulbItem("Κεντρικό Φως", "Online"));
             items.Add(new LightBulbItem("Λαμπατέρ Σαλονιού", "Online"));
             items.Add(new TemperatureItem("Θερμοκρασία Χώρου", "Online"));
 
@@ -88,32 +90,32 @@ namespace Personal_Assistant.Tabs
 
             Binding b = new Binding();
             b.Source = items;
-            
-            
-            b.Mode= BindingMode.OneWay;
-            livingRoomListView.SetBinding(ListView.ItemsSourceProperty, b);
+
+
+            b.Mode = BindingMode.OneWay;
+            livingRoomListView.SetBinding(System.Windows.Controls.ListView.ItemsSourceProperty, b);
 
             livingRoomListView.ItemsSource = items;
 
             BedroomListView.ItemsSource = items2;
             var t = new Thread(SimulateTemperatureChanges);
             t.Start();
-            
 
 
-            
-            
-            
-       
+
+
+
+
+
         }
 
-       private void SimulateTemperatureChanges()
+        private void SimulateTemperatureChanges()
         {
-            while(true)
+            while (true)
             {
                 Thread.Sleep(5000);
 
-                foreach (TemperatureItem item in items.Where(x => x.GetType()==typeof(TemperatureItem) && x.Status=="Online"))
+                foreach (TemperatureItem item in items.Where(x => x.GetType() == typeof(TemperatureItem) && x.Status == "Online"))
                 {
                     double newTemp = 0; ;
                     var random = (double)RandomNumberGenerator.GetInt32(0, 100);
@@ -129,7 +131,7 @@ namespace Personal_Assistant.Tabs
                         newTemp = item.Temperature - random;
                     }
                     item.Temperature = newTemp;
-                    item.Temperature = Math.Round(item.Temperature, 2);                                      
+                    item.Temperature = Math.Round(item.Temperature, 2);
                 }
 
                 foreach (TemperatureItem item in items2.Where(x => x.GetType() == typeof(TemperatureItem) && x.Status == "Online"))
@@ -151,7 +153,7 @@ namespace Personal_Assistant.Tabs
                     item.Temperature = Math.Round(item.Temperature, 2);
                     this.Dispatcher.Invoke(() =>
                     {
-                        
+
                     });
                 }
             }
@@ -160,53 +162,27 @@ namespace Personal_Assistant.Tabs
 
         private void lightBulbClicked(object sender, MouseButtonEventArgs e)
         {
-            var selectedItem = livingRoomListView.SelectedItem as LightBulbItem;
+
+
+
+            LightBulbItem _selected = null;
 
             Image _image = (Image)sender;
 
-            var test = _image.Source.ToString();
 
-            var temp = livingRoomListView.FindVisualChildren<Image>();
-            if (temp.Count() > 0)
-                if (temp.Contains(_image))
-                {
-                    LightBulbItem selected = livingRoomListView.SelectedItem as LightBulbItem;
-                    foreach(var item in items.Where(x => x.Id== selected.Id && x.Status=="Online"))
-                    {   
-                        if (item.ImagePath == "/Resources/Images/SmartHome/bulb_on.png")
-                            {
-                                item.ImagePath = "/Resources/Images/SmartHome/bulb_off.png";
-                                
-                            }
-                         else if (item.ImagePath == "/Resources/Images/SmartHome/bulb_off.png")
-                            {
-                                item.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
-                            }
-                            
+            LightBulbItem _item = ViewsHelpers.FindSelectedItemsControlItemContentByChild<Image, LightBulbItem>(livingRoomListView, _image);
                         
-                    }
-                }
-            var temp1= BedroomListView.FindVisualChildren<Image>();
-            if (temp1.Count() > 0)
-                if (temp1.Contains(_image))
-                {
-                    LightBulbItem selected = BedroomListView.SelectedItem as LightBulbItem;
-                    foreach(var item in items2.Where(x => x.Id == selected.Id && x.Status == "Online"))
-                        {
-                       
-                            if (item.ImagePath == "/Resources/Images/SmartHome/bulb_on.png")
+                   if (_item.ImagePath == "/Resources/Images/SmartHome/bulb_on.png")
                             {
-                                item.ImagePath = "/Resources/Images/SmartHome/bulb_off.png";
+                                _item.ImagePath = "/Resources/Images/SmartHome/bulb_off.png";
 
                             }
-                            else if (item.ImagePath == "/Resources/Images/SmartHome/bulb_off.png")
+                            else if (_item.ImagePath == "/Resources/Images/SmartHome/bulb_off.png")
                             {
-                                item.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
+                                _item.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
                             }
-                         
-                        
-                    }
-                }
+                                     
+          
         }
 
         private void livingRoomList_MouseDown(object sender, MouseButtonEventArgs e)
@@ -242,70 +218,38 @@ namespace Personal_Assistant.Tabs
         {
             DispatcherTimer timer = sender as DispatcherTimer;
 
-            if(Schedules.Count()>0)
+            if (Schedules.Count() > 0)
             {
-                foreach(var  item in items.Where(x => x.timerEnabled == true))
+                foreach (var item in items.Where(x => x.timerEnabled == true))
                 {
-                     LightBulbItem bulbItem = items.Where(x => x.Id == item.Id).FirstOrDefault() as LightBulbItem;
+                    LightBulbItem bulbItem = items.Where(x => x.Id == item.Id).FirstOrDefault() as LightBulbItem;
                     bulbItem.TimerSeconds--;
-                   
-                    if(DateTime.Now >  item.TimerTargetTime)
+
+                    if (DateTime.Now > item.TimerTargetTime)
                     {
                         item.timerEnabled = false;
                         item.TimerSeconds = 0;
 
                         if (item.ImagePath == "/Resources/Images/SmartHome/bulb_on.png")
-                        {
-
                             item.ImagePath = "/Resources/Images/SmartHome/bulb_off.png";
-
-
-
-
-                        }
                         else if (item.ImagePath == "/Resources/Images/SmartHome/bulb_off.png")
-                        {
-
                             item.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
-                        }
-                    }    
-                       /*
-
-                 
-                    */
-
-                }
-            }
-           
-        }
-
-
-
-        private void SetBulbTimer_Click(object sender, RoutedEventArgs e)
-        {
-            
-            
-            
-            Button _button = sender as Button;
-            var temp = livingRoomListView.FindVisualChildren<Button>();
-            if (temp.Count() > 0)
-                if (temp.Contains(_button))
-                {
-                    LightBulbItem selected = livingRoomListView.SelectedItem as LightBulbItem;
-                    foreach (var item in items.Where(x => x.Id == selected.Id && x.GetType() == typeof(LightBulbItem)))
-                    {
-
-                        selected.TimerEnabled = true;
-                        selected.TimerTargetTime = DateTime.Now.AddMinutes(selected.TimerMinutes).AddSeconds(selected.TimerSeconds);
-                        Schedules.Add(new TimerSchedule(_tempDate, timedItemID));
-                        
                     }
                 }
+            }
+        }
 
-            
+        
 
+        private void SetBulbTimer_Click(object sender, RoutedEventArgs e)
+        { 
+            Button _button = sender as Button;
+
+            LightBulbItem _selected = ViewsHelpers.FindSelectedItemsControlItemContentByChild<Button, LightBulbItem>(livingRoomListView, _button);
            
-            
+                _selected.TimerEnabled = true;
+                _selected.TimerTargetTime = DateTime.Now.AddMinutes(_selected.TimerMinutes).AddSeconds(_selected.TimerSeconds);
+                Schedules.Add(new TimerSchedule(_tempDate, timedItemID));        
         }
 
         private void SetTimer_Click(object sender, RoutedEventArgs e)

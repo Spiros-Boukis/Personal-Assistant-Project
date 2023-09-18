@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Personal_Assistant.Tabs"
              xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
              xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
+xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
              mc:Ignorable="d" 
@@ -24,7 +25,26 @@
             </Style.Triggers>
         </Style>
         <local1:SmartHomeItemDataTemplateSelector x:Key="smartHomeItemSelector"/>
-        <DataTemplate  x:Key="lightBulbTemplate">
+        <DataTemplate x:Key="lightBulbTemplate">
+            <DockPanel LastChildFill="False" Width="300">
+                <TextBlock HorizontalAlignment="Center" DockPanel.Dock="Top" FontWeight="Heavy" FontSize="20" Text="{Binding Description}"></TextBlock>
+                <Image DockPanel.Dock="Left" MouseUp="lightBulbClicked" x:Name="image" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}"/>
+                <DockPanel LastChildFill="False" DockPanel.Dock="Right">
+                    <Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center">Timer</Label>
+                    <StackPanel Orientation="Vertical">
+                        <ui:ToggleSwitch/>
+                        <Button FontSize="15" Click="SetBulbTimer_Click">Set Timer</Button>
+                        <Button IsEnabled="{Binding TimerEnabled, Mode=TwoWay}" FontSize="15" Click="Button_Click">Stop Timer</Button>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox  FontSize="25" IsEnabled="true" Width="35" Text="{Binding TimerMinutes , Mode=TwoWay}"></TextBox>
+                            <Label FontSize="25" Content=":"/>
+                            <TextBox   FontSize="25" IsEnabled="true" Width="35" Text="{Binding TimerSeconds , Mode=TwoWay}"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+            </DockPanel>
+        </DataTemplate>
+        <DataTemplate  x:Key="lightBulb">
             <Border>
                 <StackPanel Orientation="Horizontal" IsEnabled="{Binding ItemStatus}">
                     <Border CornerRadius="4" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,10" Width="300" >
@@ -37,7 +57,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <DockPanel>
                                         <Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center">Timer</Label>
-                                        <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Vertical">
                                             <Button FontSize="15" Click="SetBulbTimer_Click">Set Timer</Button>
                                             <Button IsEnabled="{Binding TimerEnabled, Mode=TwoWay}" FontSize="15" Click="Button_Click">Stop Timer</Button>
                                             <StackPanel Orientation="Horizontal">
@@ -109,6 +129,7 @@
 
     <Grid>
         <DockPanel LastChildFill="False" HorizontalAlignment="Left">
+
             <Label HorizontalContentAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Top" FontSize="50">Διαχείριση Έξυπνων Συσκευών</Label>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
@@ -120,14 +141,10 @@
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Label MouseDown="livingRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Living Room</Label>
                             </StackPanel>
+                            <ItemsControl HorizontalContentAlignment="Center" x:Name="livingRoomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+                                
+                            </ItemsControl>
 
-                            <ListView  HorizontalContentAlignment="Center"  IsSynchronizedWithCurrentItem="True"  x:Name="livingRoomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
-                                <ListView.Resources>
-                                    <Style TargetType="{x:Type ListViewItem}">
-                                        <EventSetter Event="GotKeyboardFocus" Handler="ListViewItem_GotKeyboardFocus"/>
-                                    </Style>
-                                </ListView.Resources>
-                            </ListView>
                         </StackPanel>
 
                     </Border>
@@ -137,13 +154,13 @@
                     <Border CornerRadius="4" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,10">
 
                     <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Label MouseDown="bedRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Bedroom</Label>
+                        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock MouseDown="bedRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalAlignment="Center">Bedroom</TextBlock>
                         </StackPanel>
 
-                        <ListView HorizontalContentAlignment="Center" x:Name="BedroomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+                        <ItemsControl HorizontalContentAlignment="Center" x:Name="BedroomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
 
-                        </ListView>
+                        </ItemsControl>
                     </StackPanel>
                 </Border>
             </StackPanel>

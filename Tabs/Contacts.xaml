@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:Personal_Assistant.Tabs"
              xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
 xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
+xmlns:ui="http://schemas.modernwpf.com/2019"
+
              mc:Ignorable="d" 
              Width="auto" Height="auto">
     <UserControl.Resources>
