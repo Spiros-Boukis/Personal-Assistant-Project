@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Personal_Assistant" xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
         xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
+         ui:WindowHelper.UseModernWindowStyle="True"
+        
+        xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
 xmlns:ui="http://schemas.modernwpf.com/2019"
-    ui:WindowHelper.UseModernWindowStyle="True"
+
         xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         mc:Ignorable="d"
          xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
@@ -15,7 +18,7 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
 
         <Style x:Key="cdbKey" TargetType="CalendarDayButton">
             <Style.Triggers>
-               
+
 
             </Style.Triggers>
         </Style>
@@ -24,14 +27,14 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         <DataTemplate x:Key="NormalAppointmentTemplate">
             <StackPanel Orientation="Horizontal">
 
-                
+
                 <TextBlock FontSize="40" Text="{Binding Path=Title}"></TextBlock>
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="ImportantAppointmentTemplate">
             <StackPanel Orientation="Horizontal">
 
-                
+
                 <TextBlock FontSize="40" Text="{Binding Title}"></TextBlock>
                 <Image Source="Resources/Images/important_icon.png" Width="40" Height="40"></Image>
             </StackPanel>
@@ -39,7 +42,7 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         <DataTemplate x:Key="DeadlineAppointmentTemplate">
             <StackPanel Orientation="Horizontal">
 
-                
+
                 <TextBlock FontSize="40" Text="{Binding Title}"></TextBlock>
             </StackPanel>
         </DataTemplate>
@@ -48,48 +51,61 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
 
 
     <Grid>
-        
-        <TabControl TabStripPlacement="Left">
-            <TabItem>
-                <TabItem.Header>
-                    <Image Width="150" Height="150" Source="Resources/Images/calendar-flat.png"/>
-                </TabItem.Header>
-                <local4:CalendarTab Width="auto" Height="auto"></local4:CalendarTab>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <Image Width="150" Height="150" Source="Resources/Images/mail-icon_.png"  />
-                </TabItem.Header>
+        <DockPanel LastChildFill="False">
+            <Popup DockPanel.Dock="Top"  Name="myPopup" IsOpen="True">
+                <Border BorderThickness="1">
+                    <TextBlock Name="myPopupText" Background="LightBlue" Foreground="Blue" Padding="30">
+                Popup Text
+                    </TextBlock>
+                </Border>
+            </Popup>
+            <TabControl TabStripPlacement="Left">
+                <TabItem>
+                    <TabItem.Header>
+                        <Image Width="150" Height="150" Source="Resources/Images/calendar-flat.png"/>
+                    </TabItem.Header>
+                    <local4:CalendarTab Width="auto" Height="auto"></local4:CalendarTab>
 
-                <local4:EmailTab Width="auto" Height="auto"></local4:EmailTab>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <Image Width="150" Height="150" Source="Resources/Images/mail-icon_.png"  />
+                    </TabItem.Header>
+
+                    <local4:EmailTab Width="auto" Height="auto"></local4:EmailTab>
 
 
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <Image Width="150" Height="150" Source="Resources/Images/smart-home.png"  />
-                </TabItem.Header>
-                <local4:SmartHomeTab></local4:SmartHomeTab>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                <Image Width="150" Height="150" Source="Resources/Images/contacts_icon.png"/>
-                </TabItem.Header>
-                <local4:Contacts HorizontalContentAlignment="Left"/>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <Image Width="150" Height="150" Source="Resources/Images/google.png"/>
-                </TabItem.Header>
-                
-                    
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <Image Width="150" Height="150" Source="Resources/Images/smart-home.png"  />
+                    </TabItem.Header>
+                    <local4:SmartHomeTab></local4:SmartHomeTab>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <Image Width="150" Height="150" Source="Resources/Images/contacts_icon.png"/>
+                    </TabItem.Header>
+                    <local4:Contacts HorizontalContentAlignment="Left"/>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <Image Width="150" Height="150" Source="Resources/Images/google.png"/>
+                    </TabItem.Header>
+
+
                     <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top">
                         <wv2:WebView2 Name="webView" Width="1200" Height="1000" 
       Source="https://www.google.gr"/>
-                    </DockPanel>
-                
 
-            </TabItem>
-        </TabControl>
+
+                    </DockPanel>
+
+
+                </TabItem>
+            </TabControl>
+            
+        </DockPanel>
     </Grid>
+
 </Window>

@@ -18,6 +18,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
+using Notification.Wpf;
+using System.Media;
 
 namespace Personal_Assistant
 {
@@ -26,15 +28,19 @@ namespace Personal_Assistant
     /// </summary>
     public partial class MainWindow : Window
     {
-      
-        public MainWindow()
+        INotificationManager NotificationManager;
+        public MainWindow(INotificationManager notificationManager)
         {
             InitializeComponent();
-            
+
+            NotificationManager = notificationManager;
+
+           
 
         }
 
-        
+
+
 
     }
 }

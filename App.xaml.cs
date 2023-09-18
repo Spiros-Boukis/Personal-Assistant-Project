@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Notification.Wpf;
+using System;
 using System.Windows;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Windows;
+using Enterwell.Clients.Wpf.Notifications;
 
 namespace Personal_Assistant
 {
@@ -13,5 +18,32 @@ namespace Personal_Assistant
     /// </summary>
     public partial class App : Application
     {
+        private ServiceProvider serviceProvider;
+
+        
+
+        public App()
+        {
+            ServiceCollection services = new ServiceCollection();
+            ConfigureServices(services);
+            serviceProvider = services.BuildServiceProvider();
+        }
+
+        private void ConfigureServices(ServiceCollection services)
+        {
+
+
+            services.AddTransient(typeof(MainWindow));
+            services.AddTransient<INotificationManager, NotificationManager>();
+            services.AddTransient<INotificationMessageManager, NotificationMessageManager>();
+            var i = 0;
+        }
+
+        private void OnStartup(object sender, StartupEventArgs e)
+        {
+            var mainWindow = serviceProvider.GetService<MainWindow>();
+            mainWindow.Show();
+        }
     }
+
 }

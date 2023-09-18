@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                            xmlns:local="clr-namespace:Personal_Assistant" xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
 xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
+                     xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
 xmlns:ui="http://schemas.modernwpf.com/2019"
 
 xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"

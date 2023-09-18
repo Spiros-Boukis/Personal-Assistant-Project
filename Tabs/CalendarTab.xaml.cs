@@ -1,4 +1,5 @@
-﻿using Personal_Assistant.CustomControls;
+﻿using Notification.Wpf;
+using Personal_Assistant.CustomControls;
 using Personal_Assistant.Helpers;
 using Personal_Assistant.Model;
 using System;
@@ -28,6 +29,9 @@ namespace Personal_Assistant.Tabs
     public partial class CalendarTab : UserControl
     {
         public Dictionary<string, List<AppointmentEntry>> Appointments;
+
+  
+
 
         List<List<string>> nameDaysLists;
 
@@ -126,9 +130,10 @@ namespace Personal_Assistant.Tabs
         public CalendarTab()
         {
             InitializeComponent();
-
+       
             InitNameDays();
-
+ 
+            //SystemSounds.Beep.Play();
             string test = "<!DOCTYPE html>\r\n\r\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <meta charset=\"utf-8\" />\r\n    <title></title>\r\n</head>\r\n<body>\r\n    <script src=\"https://static.elfsight.com/platform/platform.js\" data-use-service-core defer></script>\r\n    <div class=\"elfsight-app-71ea00cc-4376-4a02-8ea0-7b38c86a7465\"></div>\r\n</body>\r\n</html>";
             var temp12 = "file:///C:/Users/User/source/repos/Personal Assistant/Resources/Weather.html";
            
