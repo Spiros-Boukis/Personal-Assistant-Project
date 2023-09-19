@@ -15,13 +15,20 @@ namespace Personal_Assistant.Model
 {
     public class SmartHomeItem : INotifyPropertyChanged
     {
+        public DateTime ScheduleTime { get; set; }
+        public DateTime ScheduleTargetTime { get; set; }
 
-        private int timerMinutes, timerSeconds;
-        public bool timerEnabled;
-        public bool TimerEnabled
+        private bool bulbSwitchIsEnabled;
+        public bool BulbSwitchIsEnabled { get { return !ScheduleEnabled; } set { bulbSwitchIsEnabled = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BulbSwitchIsEnabled"));
+            } }
+
+        public bool scheduleEnabled;
+        public bool ScheduleEnabled
         {
-            get { return timerEnabled; }
-            set { timerEnabled = value;
+            get { return scheduleEnabled; }
+            set { scheduleEnabled = value;
+                BulbSwitchIsEnabled = !value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TimerEnabled"));
                 }
         }
@@ -42,38 +49,14 @@ namespace Personal_Assistant.Model
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ItemStatus"));
             }
 }
-        public DateTime TimerTargetTime { get; set; } 
-        public int TimerMinutes { get { return timerMinutes; } set 
-            {
-                timerMinutes = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TimerMinutes"));
-            } }
 
-        public int TimerSeconds
-        {
-            get { return timerSeconds; }
-            set
-            {
-                if (timerSeconds == 0)
-                {
+        private DateTime timerTargetTime;
+        public DateTime TimerTargetTime { get { return timerTargetTime; } set { timerTargetTime = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TimerTargetTime"));
+            } } 
+      
 
-                    if (timerMinutes == 0)
-                    {
-                        timerSeconds = 0;
-                    }
-                    else
-                    {
-                        TimerMinutes--;
-                        timerSeconds = 59;
-                    }
-
-                }
-                else if (value > 0)
-                    timerSeconds = value;
-                   
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TimerSeconds"));
-            }
-        }
+   
 
 
         public Guid Id { get; set; }    
@@ -89,16 +72,19 @@ namespace Personal_Assistant.Model
 
         public SmartHomeItem()
         {
-       
+            TimerTargetTime = DateTime.Now;
+            ScheduleEnabled = false;
+
         }
 
         public SmartHomeItem(string _description,string _status)
         {
+            ScheduleEnabled = false;
+            TimerTargetTime = DateTime.Now;
             Id = Guid.NewGuid();
             Description = _description;
             Status = _status;
-            TimerSeconds = 0;
-            TimerMinutes = 1;
+            
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

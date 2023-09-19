@@ -162,33 +162,6 @@ namespace Personal_Assistant.Tabs
                 }
             }
         }
-
-
-        private void lightBulbClicked(object sender, MouseButtonEventArgs e)
-        {
-
-
-
-            LightBulbItem _selected = null;
-
-            Image _image = (Image)sender;
-
-
-            LightBulbItem _item = ViewsHelpers.FindSelectedItemsControlItemContentByChild<Image, LightBulbItem>(livingRoomListView, _image);
-                        
-                   if (_item.ImagePath == "/Resources/Images/SmartHome/bulb_on.png")
-                            {
-                                _item.ImagePath = "/Resources/Images/SmartHome/bulb_off.png";
-
-                            }
-                            else if (_item.ImagePath == "/Resources/Images/SmartHome/bulb_off.png")
-                            {
-                                _item.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
-                            }
-                                     
-          
-        }
-
         private void livingRoomList_MouseDown(object sender, MouseButtonEventArgs e)
         {
             
@@ -203,7 +176,6 @@ namespace Personal_Assistant.Tabs
            
             
         }
-
         private void bedRoomList_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
@@ -217,27 +189,29 @@ namespace Personal_Assistant.Tabs
             }
         }
 
-
         public void _bulbTimerTick(object sender, EventArgs e)
         {
             DispatcherTimer timer = sender as DispatcherTimer;
 
-            if (Schedules.Count() > 0)
-            {
-                foreach (var item in items.Where(x => x.timerEnabled == true))
+               foreach (LightBulbItem item in items.Where(x => x.scheduleEnabled == true))
                 {
                     LightBulbItem bulbItem = items.Where(x => x.Id == item.Id).FirstOrDefault() as LightBulbItem;
-                    bulbItem.TimerSeconds--;
 
-                    if (DateTime.Now > item.TimerTargetTime)
+                    if (DateTime.Now > item.ScheduleTargetTime)
                     {
-                        item.timerEnabled = false;
-                        item.TimerSeconds = 0;
+                        item.ScheduleEnabled = false;
+                        
+                        if(item.IsOn)
+                        item.IsOn = false;
+                        else
+                        item.IsOn = true;
+
+                    
 
                        
                     }
                 }
-            }
+            
         }
 
         
@@ -248,8 +222,9 @@ namespace Personal_Assistant.Tabs
 
             LightBulbItem _selected = ViewsHelpers.FindSelectedItemsControlItemContentByChild<Button, LightBulbItem>(livingRoomListView, _button);
            
-                _selected.TimerEnabled = true;
-                _selected.TimerTargetTime = DateTime.Now.AddMinutes(_selected.TimerMinutes).AddSeconds(_selected.TimerSeconds);
+                _selected.ScheduleEnabled = true;
+
+  
                 Schedules.Add(new TimerSchedule(_tempDate, timedItemID));        
         }
 
@@ -299,6 +274,22 @@ namespace Personal_Assistant.Tabs
            //     selected.ImagePath = "/Resources/Images/SmartHome/bulb_off.png";
            // else if (selected.ImagePath == "/Resources/Images/SmartHome/bulb_off.png")
             //    selected.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
+        }
+
+        private void ScheduleToggleClicked(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch Sender = sender as ToggleSwitch;
+            var state = Sender.IsOn;
+
+
+            LightBulbItem item = Helpers.ViewsHelpers.FindSelectedItemsControlItemContentByChild<ToggleSwitch, LightBulbItem>(livingRoomListView, Sender);
+
+            if (state)  //if we are enabling the schedule
+            {
+                item.ScheduleTargetTime = item.TimerTargetTime;
+                item.ScheduleEnabled = true;
+
+            }
         }
     }
 }

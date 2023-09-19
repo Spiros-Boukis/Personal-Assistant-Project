@@ -14,8 +14,14 @@
                     <TabItem.Header>
                         <Image Source="/Resources/Images/Sports/football.png" Width="70" Height="70"></Image>
                     </TabItem.Header>
-                    <ListView x:Name="footballFixturesListView" Width="500" Height="500" MaxHeight="500">
-                        <ListView.ItemTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <ListView x:Name="footballFixturesListView" Width="1000" MaxWidth="1000" Padding="10" MaxHeight="500">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" Height="100"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
@@ -24,9 +30,9 @@
 
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
-                                            <TextBlock FontSize="25" Text="{Binding Team1}"></TextBlock>
-                                            <TextBlock FontSize="25">v.</TextBlock>
-                                            <TextBlock FontSize="25" Text="{Binding Team2}"></TextBlock>
+                                                <TextBlock FontSize="25" Text="{Binding Team1}"></TextBlock>
+                                                <TextBlock FontSize="25">v.</TextBlock>
+                                                <TextBlock FontSize="25" Text="{Binding Team2}"></TextBlock>
                                             </StackPanel>
                                             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                                 <TextBlock FontSize="22" FontWeight="ExtraLight" Text="{Binding Place}"></TextBlock>
@@ -38,8 +44,13 @@
                                         </Button>
                                     </StackPanel>
                                 </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        
+                        
+                        
+                    </StackPanel>
+                    
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>

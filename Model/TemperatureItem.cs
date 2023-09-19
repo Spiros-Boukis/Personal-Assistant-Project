@@ -19,9 +19,9 @@ namespace Personal_Assistant.Model
             } }
         public TemperatureItem(string name, string status)
         {
-            TimerSeconds = 0;
-            TimerMinutes = 1;
-            timerEnabled = false;
+           
+
+            scheduleEnabled = false;
             Id = Guid.NewGuid();
 
             Description = name;

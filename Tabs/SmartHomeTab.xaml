@@ -25,33 +25,40 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
             </Style.Triggers>
         </Style>
         <local1:SmartHomeItemDataTemplateSelector x:Key="smartHomeItemSelector"/>
-        <DataTemplate x:Key="lightBulbTemplate">
-            <DockPanel LastChildFill="False" Width="300">
+        <DataTemplate x:Key="lightBulbTemplate" >
+
+            <StackPanel Orientation="Horizontal">
+                <DockPanel LastChildFill="False" Width="450">
                 <TextBlock HorizontalAlignment="Center" DockPanel.Dock="Top" FontWeight="Heavy" FontSize="20" Text="{Binding Description}"></TextBlock>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Image  MouseUp="lightBulbClicked" HorizontalAlignment="Center" x:Name="image" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}"/>
-                    
-                        <ui:ToggleSwitch OnContent="" Width="40" Height="auto" OffContent="" UseSystemFocusVisuals="False" HorizontalAlignment="Center" IsOn="{Binding IsOn , Mode=TwoWay}" Toggled="LightBulbOnOff_SwitchToggled"/>
-                    
-                    
+                    <StackPanel IsEnabled="{Binding ItemStatus}" Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
+                    <Image HorizontalAlignment="Center" x:Name="image" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}"/>
+                        <ui:ToggleSwitch IsEnabled="{Binding BulbSwitchIsEnabled,Mode =TwoWay}" OnContent="" Width="40" Height="auto" OffContent="" UseSystemFocusVisuals="False" HorizontalAlignment="Center" IsOn="{Binding IsOn , Mode=TwoWay}" Toggled="LightBulbOnOff_SwitchToggled"/>
                 </StackPanel>
-                
-                <DockPanel LastChildFill="False">
-                    <Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center">Timer</Label>
-                    <StackPanel Orientation="Vertical">
-                        
-                        <Button FontSize="15" Click="SetBulbTimer_Click">Set Timer</Button>
-                        <Button IsEnabled="{Binding TimerEnabled, Mode=TwoWay}" FontSize="15" >Stop Timer</Button>
-                        <ui:ToggleSwitch />
-                        <ui:SimpleTimePicker ></ui:SimpleTimePicker>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox  FontSize="25" IsEnabled="true" Width="35" Text="{Binding TimerMinutes , Mode=TwoWay}"></TextBox>
-                            <Label FontSize="25" Content=":"/>
-                            <TextBox   FontSize="25" IsEnabled="true" Width="35" Text="{Binding TimerSeconds , Mode=TwoWay}"></TextBox>
-                        </StackPanel>
-                    </StackPanel>
+                    <DockPanel IsEnabled="{Binding ItemStatus}" LastChildFill="False" DockPanel.Dock="Bottom">
+                    <ui:SimpleTimePicker HorizontalAlignment="Center" SelectedDateTime="{Binding TimerTargetTime, Mode = TwoWay}" DockPanel.Dock="Top" ></ui:SimpleTimePicker>
+                    <ui:ToggleSwitch Toggled="ScheduleToggleClicked" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+                        <ui:ToggleSwitch.OnContentTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="15" Foreground="Green" FontWeight="Bold">Χρονοπρογραμματισμός Ενεργός</TextBlock>
+                            </DataTemplate>
+                        </ui:ToggleSwitch.OnContentTemplate>
+                        <ui:ToggleSwitch.OffContentTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="15" Foreground="Red" FontWeight="Bold">Χρονοπρογραμματισμός Ανενεργός</TextBlock>
+                            </DataTemplate>
+                        </ui:ToggleSwitch.OffContentTemplate>
+                    </ui:ToggleSwitch>
                 </DockPanel>
+
             </DockPanel>
+                <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                    <Label FontSize="25" FontWeight="DemiBold" Content="Κατάσταση"></Label>
+                    <Label FontSize="25" Content="{Binding Status}"  Style="{StaticResource statusLabelStyle}">
+                    </Label>
+                </StackPanel>
+                </StackPanel>
+        
+            
         </DataTemplate>
         <DataTemplate  x:Key="lightBulb">
             <Border>
@@ -60,7 +67,7 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
                     <StackPanel Orientation="Vertical">
                         <Label HorizontalAlignment="Center" FontWeight="Heavy" FontSize="20" Content="{Binding Description}"></Label>
                         <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center">
-                                <Image MouseUp="lightBulbClicked" x:Name="image" HorizontalAlignment="Center" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}">
+                                <Image  x:Name="image" HorizontalAlignment="Center" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}">
                                     
                                 </Image>
                                 <StackPanel Orientation="Horizontal">
