@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    >
 
     <Style x:Key="EmailFolderHeaderStyle" TargetType="{x:Type Label}">
        
@@ -25,6 +26,9 @@
 
     </Style>
 
+    <SolidColorBrush x:Key="myPrimary" Color="#e8ebe9" />
+    <SolidColorBrush x:Key="mySecondary" Color="#a6a6a6" />
 
+    
 
 </ResourceDictionary>

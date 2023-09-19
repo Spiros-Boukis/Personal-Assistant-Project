@@ -48,11 +48,9 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         </DataTemplate>
     </Window.Resources>
 
-    <Viewbox Stretch="Uniform">
+    <Viewbox>
         <Grid>
-            <StackPanel Orientation="Vertical">
-                <TextBlock>gwiodgiwjgiuwjgiuwsjs</TextBlock>
-                <local2:NotificationPopUp  x:Name="notificationPopUp"/>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                 <TabControl TabStripPlacement="Left">
                     <TabItem>
                         <TabItem.Header>

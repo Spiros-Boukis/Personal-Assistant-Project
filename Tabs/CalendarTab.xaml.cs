@@ -73,7 +73,7 @@ namespace Personal_Assistant.Tabs
         }
 
 
-        public void AddedSportsFixtureAppointment(string text,string time,int sport)
+        public void AddedSportsFixtureAppointment(string text,string date,string time,int sport)
         {
             var entry = new AppointmentEntry();
             entry.Title = text;
@@ -92,7 +92,7 @@ namespace Personal_Assistant.Tabs
 
             var selectedDate = CalendarControl.SelectedDate.Value;
             var _formattedDate = selectedDate.Month.ToString() + "/" + selectedDate.Day + "/" + selectedDate.Year;
-            var _date = CalendarControl.SelectedDate.Value.ToShortDateString();
+            var _date = date;
 
             if (Appointments.ContainsKey(_date))
             {
@@ -283,9 +283,6 @@ namespace Personal_Assistant.Tabs
                 var tempDate = CalendarControl.SelectedDate.Value;
                 CalendarControl.SelectedDate = DateTime.Now.AddMonths(1).ToUniversalTime();
                 CalendarControl.SelectedDate = tempDate;
-                //aTrigger dataTrigger = new DataTrigger() { Binding = new Binding("Date"), Value = _formattedDate };
-                //aTrigger.Setters.Add(new Setter(CalendarDayButton.BackgroundProperty, Brushes.LightGreen));
-                // s.Triggers.Add(dataTrigger);
 
                 CalendarControl.DisplayDate = tempDate.AddMonths(1);
                 CalendarControl.DisplayDate = tempDate;

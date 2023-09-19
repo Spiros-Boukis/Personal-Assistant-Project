@@ -34,16 +34,13 @@ namespace Personal_Assistant
         {
             InitializeComponent();
 
-            NotificationManager = notificationManager;
-            NotificationManager.Show("gijgiuw");
-            notificationPopUp.IsOpen = true;
+        
 
         }
 
         public void ShowNotifications(string notifyText)
         {
-            notificationPopUp.NotificationBody.Text = notifyText;
-            notificationPopUp.IsOpen = true;
+           
         }
 
       

@@ -6,49 +6,80 @@
              xmlns:local="clr-namespace:Personal_Assistant.CustomControls"
              xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d" 
-             Height="800" Width="auto">
+             Height="auto" Width="auto">
+    <UserControl.Resources>
+        <DataTemplate x:Key="testListTemplate">
+            <Border BorderBrush="{StaticResource mySecondary}" HorizontalAlignment="Center" Background="MintCream" BorderThickness="3" CornerRadius="15" Padding="5">
+                
+            
+            <StackPanel Orientation="Horizontal" MaxWidth="400" Width="400" HorizontalAlignment="Center" >
+                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Label  FontSize="22" FontWeight="ExtraLight" Content="{Binding Time}"></Label>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="25" Text="{Binding Team1}"></TextBlock>
+                            <TextBlock FontSize="25" FontWeight="Bold" Text=" v. "></TextBlock>
+                        <TextBlock FontSize="25" Text="{Binding Team2}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock FontSize="22" FontWeight="ExtraLight" Text="{Binding Place}"></TextBlock>
+    
+                    </StackPanel>
+                </StackPanel>
+                <Button Click="Notify_Football" Width="50" Height="50" VerticalAlignment="Center">
+                    <Image Source="/Resources/Images/notification.png"></Image>
+                </Button>
+            </StackPanel>
+            </Border>
+
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
+        <Border  BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10">
         <StackPanel>
+            
             <TabControl>
                 <TabItem>
                     <TabItem.Header>
                         <Image Source="/Resources/Images/Sports/football.png" Width="70" Height="70"></Image>
                     </TabItem.Header>
+                    
                     <StackPanel Orientation="Vertical">
-                        <ListView x:Name="footballFixturesListView" Width="1000" MaxWidth="1000" Padding="10" MaxHeight="500">
-                            <ListView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" Height="100"></StackPanel>
-                                </ItemsPanelTemplate>
-                            </ListView.ItemsPanel>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                                <Label  FontSize="22" FontWeight="ExtraLight" Content="{Binding Time}"></Label>
+                            <ui:ScrollViewerEx CanContentScroll="True" VerticalScrollBarVisibility="Auto" MaxHeight="500">
+                                <ItemsControl  Padding="30" x:Name="testItemsControl" Width="1000">
+                                    <ItemsControl.ItemTemplate>
 
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock FontSize="25" Text="{Binding Team1}"></TextBlock>
-                                                <TextBlock FontSize="25">v.</TextBlock>
-                                                <TextBlock FontSize="25" Text="{Binding Team2}"></TextBlock>
-                                            </StackPanel>
-                                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                                <TextBlock FontSize="22" FontWeight="ExtraLight" Text="{Binding Place}"></TextBlock>
+                                        <DataTemplate>
+                                            <Border  BorderThickness="5" CornerRadius="5">
+                                            <DockPanel>
+                                                 
+                                                <TextBlock FontWeight="ExtraBold" HorizontalAlignment="Center" FontSize="26" DockPanel.Dock="Top" Text="{Binding Date}"></TextBlock>
+                                                    <ui:ScrollViewerEx CanContentScroll="True" HorizontalScrollBarVisibility="Auto" MaxWidth="700">
+                                                        <ItemsControl  ItemTemplate="{StaticResource testListTemplate}" ItemsSource="{Binding Fixtures}" x:Name="footballFixturesListView" Padding="10" >
+                                                            <ItemsControl.ItemsPanel>
+                                                                <ItemsPanelTemplate>
+                                                                    <StackPanel Orientation="Horizontal" CanHorizontallyScroll="True"></StackPanel>
+                                                                </ItemsPanelTemplate>
+                                                            </ItemsControl.ItemsPanel>
+                                                        </ItemsControl>
+                                                    </ui:ScrollViewerEx>
+                                                </DockPanel>
+                                            </Border>
 
-                                            </StackPanel>
-                                        </StackPanel>
-                                        <Button Click="Notify_Football" Width="50" Height="50" VerticalAlignment="Center">
-                                            <Image Source="/Resources/Images/notification.png"></Image>
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            
+                            
+                        </ui:ScrollViewerEx>
                         
+                       
                         
+
                         
+
                     </StackPanel>
                     
                 </TabItem>
@@ -56,7 +87,12 @@
                     <TabItem.Header>
                         <Image Source="/Resources/Images/Sports/basketball.png" Width="70" Height="70"></Image>
                     </TabItem.Header>
-                    <ListView x:Name="basketballFixturesListView" Width="500" Height="500" MaxHeight="500">
+                    <ListView x:Name="footballFixturesListView" Width="1000" MaxWidth="1000" Padding="10" MaxHeight="500">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" Height="100"></StackPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -75,12 +111,10 @@
 
                                         </StackPanel>
                                     </StackPanel>
-                                    <Button Click="Notify_Basketball" Width="50" Height="50" VerticalAlignment="Center">
+                                    <Button Click="Notify_Football" Width="50" Height="50" VerticalAlignment="Center">
                                         <Image Source="/Resources/Images/notification.png"></Image>
                                     </Button>
                                 </StackPanel>
-
-
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
@@ -121,8 +155,8 @@
             </TabControl>
 
 
-           
+            
         </StackPanel>
-        
+        </Border>
     </Grid>
 </UserControl>
