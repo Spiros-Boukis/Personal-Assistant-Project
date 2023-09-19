@@ -9,10 +9,22 @@ using System.Windows.Media.Imaging;
 
 namespace Personal_Assistant.Model
 {
-    public class LightBulbItem : SmartHomeItem , INotifyPropertyChanged
+    public class LightBulbItem : SmartHomeItem 
     {
-        
-        public LightBulbItem(string name,string status)
+
+        private bool isOn;
+
+        public bool IsOn 
+        {
+            get { return isOn; }
+            set 
+            { 
+               isOn = value;
+                PropertyChangedMethod(this,"IsOn");
+            }
+        }
+
+        public LightBulbItem(string name,string status,bool _isOn)
         {
             TimerSeconds = 0;
             TimerMinutes = 1;
@@ -20,7 +32,7 @@ namespace Personal_Assistant.Model
             Id = Guid.NewGuid();
             Description = name;
             Status = status;
-            
+            IsOn = _isOn;
             if (status == "Online")
             {
 

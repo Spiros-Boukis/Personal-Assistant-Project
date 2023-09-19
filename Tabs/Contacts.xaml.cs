@@ -218,6 +218,9 @@ namespace Personal_Assistant.Tabs
                 messagesControl.scrollViewer.ScrollToBottom();
                 list.Items.Refresh();
 
+                var window = System.Windows.Application.Current.MainWindow as MainWindow;
+                window.ShowNotifications("New Text Message!!!");
+
                 //list.SelectedIndex = list.Items.Count - 1;
                 //list.ScrollIntoView(list.SelectedItem);
                 var test1 = contactsListView.FindVisualChildren<ListViewItem>();

@@ -20,6 +20,7 @@ using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
 using Notification.Wpf;
 using System.Media;
+using System.Windows.Threading;
 
 namespace Personal_Assistant
 {
@@ -34,13 +35,17 @@ namespace Personal_Assistant
             InitializeComponent();
 
             NotificationManager = notificationManager;
-
-           
+            NotificationManager.Show("gijgiuw");
+            notificationPopUp.IsOpen = true;
 
         }
 
+        public void ShowNotifications(string notifyText)
+        {
+            notificationPopUp.NotificationBody.Text = notifyText;
+            notificationPopUp.IsOpen = true;
+        }
 
-
-
+      
     }
 }

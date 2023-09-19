@@ -48,64 +48,61 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         </DataTemplate>
     </Window.Resources>
 
+    <Viewbox Stretch="Uniform">
+        <Grid>
+            <StackPanel Orientation="Vertical">
+                <TextBlock>gwiodgiwjgiuwjgiuwsjs</TextBlock>
+                <local2:NotificationPopUp  x:Name="notificationPopUp"/>
+                <TabControl TabStripPlacement="Left">
+                    <TabItem>
+                        <TabItem.Header>
+                            <Image Width="150" Height="150" Source="Resources/Images/calendar-flat.png"/>
+                        </TabItem.Header>
+                        <local4:CalendarTab Width="auto" Height="auto"></local4:CalendarTab>
+
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <Image Width="150" Height="150" Source="Resources/Images/mail-icon_.png"  />
+                        </TabItem.Header>
+
+                        <local4:EmailTab Width="auto" Height="auto"></local4:EmailTab>
 
 
-    <Grid>
-        <DockPanel LastChildFill="False">
-            <Popup DockPanel.Dock="Top"  Name="myPopup" IsOpen="True">
-                <Border BorderThickness="1">
-                    <TextBlock Name="myPopupText" Background="LightBlue" Foreground="Blue" Padding="30">
-                Popup Text
-                    </TextBlock>
-                </Border>
-            </Popup>
-            <TabControl TabStripPlacement="Left">
-                <TabItem>
-                    <TabItem.Header>
-                        <Image Width="150" Height="150" Source="Resources/Images/calendar-flat.png"/>
-                    </TabItem.Header>
-                    <local4:CalendarTab Width="auto" Height="auto"></local4:CalendarTab>
-
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <Image Width="150" Height="150" Source="Resources/Images/mail-icon_.png"  />
-                    </TabItem.Header>
-
-                    <local4:EmailTab Width="auto" Height="auto"></local4:EmailTab>
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <Image Width="150" Height="150" Source="Resources/Images/smart-home.png"  />
+                        </TabItem.Header>
+                        <local4:SmartHomeTab></local4:SmartHomeTab>
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <Image Width="150" Height="150" Source="Resources/Images/contacts_icon.png"/>
+                        </TabItem.Header>
+                        <local4:Contacts HorizontalContentAlignment="Left"/>
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <Image Width="150" Height="150" Source="Resources/Images/google.png"/>
+                        </TabItem.Header>
 
 
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <Image Width="150" Height="150" Source="Resources/Images/smart-home.png"  />
-                    </TabItem.Header>
-                    <local4:SmartHomeTab></local4:SmartHomeTab>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <Image Width="150" Height="150" Source="Resources/Images/contacts_icon.png"/>
-                    </TabItem.Header>
-                    <local4:Contacts HorizontalContentAlignment="Left"/>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <Image Width="150" Height="150" Source="Resources/Images/google.png"/>
-                    </TabItem.Header>
+                        <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <wv2:WebView2 Name="webView" Width="1200" Height="1000" 
+     Source="https://www.google.gr"/>
 
 
-                    <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <wv2:WebView2 Name="webView" Width="1200" Height="1000" 
-      Source="https://www.google.gr"/>
+                        </DockPanel>
 
 
-                    </DockPanel>
+                    </TabItem>
+                </TabControl>
 
+            </StackPanel>
+        </Grid>
 
-                </TabItem>
-            </TabControl>
-            
-        </DockPanel>
-    </Grid>
+    </Viewbox>
 
+ 
 </Window>

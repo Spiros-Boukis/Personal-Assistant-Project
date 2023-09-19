@@ -28,13 +28,22 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         <DataTemplate x:Key="lightBulbTemplate">
             <DockPanel LastChildFill="False" Width="300">
                 <TextBlock HorizontalAlignment="Center" DockPanel.Dock="Top" FontWeight="Heavy" FontSize="20" Text="{Binding Description}"></TextBlock>
-                <Image DockPanel.Dock="Left" MouseUp="lightBulbClicked" x:Name="image" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}"/>
-                <DockPanel LastChildFill="False" DockPanel.Dock="Right">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image  MouseUp="lightBulbClicked" HorizontalAlignment="Center" x:Name="image" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}"/>
+                    
+                        <ui:ToggleSwitch OnContent="" Width="40" Height="auto" OffContent="" UseSystemFocusVisuals="False" HorizontalAlignment="Center" IsOn="{Binding IsOn , Mode=TwoWay}" Toggled="LightBulbOnOff_SwitchToggled"/>
+                    
+                    
+                </StackPanel>
+                
+                <DockPanel LastChildFill="False">
                     <Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center">Timer</Label>
                     <StackPanel Orientation="Vertical">
-                        <ui:ToggleSwitch/>
+                        
                         <Button FontSize="15" Click="SetBulbTimer_Click">Set Timer</Button>
-                        <Button IsEnabled="{Binding TimerEnabled, Mode=TwoWay}" FontSize="15" Click="Button_Click">Stop Timer</Button>
+                        <Button IsEnabled="{Binding TimerEnabled, Mode=TwoWay}" FontSize="15" >Stop Timer</Button>
+                        <ui:ToggleSwitch />
+                        <ui:SimpleTimePicker ></ui:SimpleTimePicker>
                         <StackPanel Orientation="Horizontal">
                             <TextBox  FontSize="25" IsEnabled="true" Width="35" Text="{Binding TimerMinutes , Mode=TwoWay}"></TextBox>
                             <Label FontSize="25" Content=":"/>
@@ -59,7 +68,7 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
                                         <Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center">Timer</Label>
                                         <StackPanel Orientation="Vertical">
                                             <Button FontSize="15" Click="SetBulbTimer_Click">Set Timer</Button>
-                                            <Button IsEnabled="{Binding TimerEnabled, Mode=TwoWay}" FontSize="15" Click="Button_Click">Stop Timer</Button>
+                                            <Button IsEnabled="{Binding TimerEnabled, Mode=TwoWay}" FontSize="15" >Stop Timer</Button>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBox  FontSize="25" IsEnabled="true" Width="35" Text="{Binding TimerMinutes , Mode=TwoWay}"></TextBox>
                                                 <Label FontSize="25" Content=":"/>

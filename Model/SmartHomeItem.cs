@@ -102,5 +102,10 @@ namespace Personal_Assistant.Model
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        public void PropertyChangedMethod(object? sender,string propertyName)
+        {
+            PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

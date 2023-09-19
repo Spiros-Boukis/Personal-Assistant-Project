@@ -1,8 +1,10 @@
-﻿using ModernWpf.Controls;
+﻿using MahApps.Metro.Controls;
+using ModernWpf.Controls;
 using Personal_Assistant.Helpers;
 using Personal_Assistant.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -24,6 +26,7 @@ using Xceed.Wpf.AvalonDock.Controls;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using static System.Net.Mime.MediaTypeNames;
 using Image = System.Windows.Controls.Image;
+using ToggleSwitch = ModernWpf.Controls.ToggleSwitch;
 
 namespace Personal_Assistant.Tabs
 {
@@ -77,14 +80,15 @@ namespace Personal_Assistant.Tabs
 
 
             items = new List<SmartHomeItem>();
-            items.Add(new LightBulbItem("Κεντρικό Φως", "Online"));
-            items.Add(new LightBulbItem("Λαμπατέρ Σαλονιού", "Online"));
+            items.Add(new LightBulbItem("Κεντρικό Φως", "Online",true));
+            items.Add(new LightBulbItem("Λαμπατέρ Σαλονιού", "Online",false));
             items.Add(new TemperatureItem("Θερμοκρασία Χώρου", "Online"));
+            items.Add(new LightBulbItem("Λαμπατέρ Σαλονιού", "Online",false));
 
             items2 = new List<SmartHomeItem>();
-            items2.Add(new LightBulbItem("Φως κομοδίνου", "Offline"));
+            items2.Add(new LightBulbItem("Φως κομοδίνου", "Offline",false));
             items2.Add(new TemperatureItem("Θερμοκρασία Δωματίου", "Online"));
-            items2.Add(new LightBulbItem("Κεντρικά φώτα ", "Online"));
+            items2.Add(new LightBulbItem("Κεντρικά φώτα ", "Online", false));
 
             //livingRoomListView.ItemsSource = items;
 
@@ -230,10 +234,7 @@ namespace Personal_Assistant.Tabs
                         item.timerEnabled = false;
                         item.TimerSeconds = 0;
 
-                        if (item.ImagePath == "/Resources/Images/SmartHome/bulb_on.png")
-                            item.ImagePath = "/Resources/Images/SmartHome/bulb_off.png";
-                        else if (item.ImagePath == "/Resources/Images/SmartHome/bulb_off.png")
-                            item.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
+                       
                     }
                 }
             }
@@ -274,9 +275,30 @@ namespace Personal_Assistant.Tabs
          //   livingRoomListView.SelectedItem = item;   
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+     
+      
 
+
+        private void LightBulbOnOff_SwitchToggled(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch _switch = sender as ToggleSwitch;
+
+            
+
+            LightBulbItem selected = Helpers.ViewsHelpers.FindSelectedItemsControlItemContentByChild<ToggleSwitch, LightBulbItem>(livingRoomListView, _switch);
+
+            if (_switch.IsOn)
+            {
+                selected.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
+            }
+            else
+            {
+                selected.ImagePath = "/Resources/Images/SmartHome/bulb_off.png";
+            }
+         //   if (selected.ImagePath == "/Resources/Images/SmartHome/bulb_on.png")
+           //     selected.ImagePath = "/Resources/Images/SmartHome/bulb_off.png";
+           // else if (selected.ImagePath == "/Resources/Images/SmartHome/bulb_off.png")
+            //    selected.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
         }
     }
 }
