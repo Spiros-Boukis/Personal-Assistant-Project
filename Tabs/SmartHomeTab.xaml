@@ -143,22 +143,24 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid>
-        <DockPanel LastChildFill="False" HorizontalAlignment="Left">
 
-            <Label HorizontalContentAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Top" FontSize="50">Διαχείριση Έξυπνων Συσκευών</Label>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+    <Border  BorderBrush="{StaticResource myPrimaryDominant}" DockPanel.Dock="Top" Background="{StaticResource myPrimaryDominant}" BorderThickness="13" CornerRadius="10" Margin="10">
+        <DockPanel LastChildFill="False" HorizontalAlignment="Left">
+            <Border  BorderBrush="{StaticResource myPrimaryDominant}" DockPanel.Dock="Top" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10">
+                <Label HorizontalContentAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Top" FontSize="50">Διαχείριση Έξυπνων Συσκευών</Label>
+            </Border>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
 
                 <StackPanel  x:Name="livingRoomPanel" Orientation="Vertical" >
 
-                    <Border  CornerRadius="4" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,10">
+                    <Border  BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10">
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Label MouseDown="livingRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Living Room</Label>
                             </StackPanel>
                             <ItemsControl HorizontalContentAlignment="Center" x:Name="livingRoomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
-                                
+
                             </ItemsControl>
 
                         </StackPanel>
@@ -167,25 +169,25 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
                 </StackPanel>
 
                 <StackPanel x:Name="BedroomPanel" Orientation="Vertical">
-                    <Border CornerRadius="4" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,10">
+                    <Border  BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10">
 
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock MouseDown="bedRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalAlignment="Center">Bedroom</TextBlock>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock MouseDown="bedRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalAlignment="Center">Bedroom</TextBlock>
+                            </StackPanel>
+
+                            <ItemsControl HorizontalContentAlignment="Center" x:Name="BedroomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+
+                            </ItemsControl>
                         </StackPanel>
-
-                        <ItemsControl HorizontalContentAlignment="Center" x:Name="BedroomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
-
-                        </ItemsControl>
-                    </StackPanel>
-                </Border>
-            </StackPanel>
+                    </Border>
+                </StackPanel>
 
             </StackPanel>
-        </DockPanel>     
-       
-        
-        
-        
-    </Grid>
+        </DockPanel>
+    </Border>
+
+
+
+
 </UserControl>

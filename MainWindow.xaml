@@ -48,10 +48,10 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         </DataTemplate>
     </Window.Resources>
 
-    <Viewbox>
-        <Grid>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                <TabControl TabStripPlacement="Left">
+    
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+        
+            <TabControl TabStripPlacement="Left">
                     <TabItem>
                         <TabItem.Header>
                             <Image Width="150" Height="150" Source="Resources/Images/calendar-flat.png"/>
@@ -96,11 +96,11 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
 
                     </TabItem>
                 </TabControl>
+      
+    </StackPanel>
+        
 
-            </StackPanel>
-        </Grid>
-
-    </Viewbox>
+    
 
  
 </Window>

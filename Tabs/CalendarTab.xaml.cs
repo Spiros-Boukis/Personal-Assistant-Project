@@ -114,7 +114,7 @@ namespace Personal_Assistant.Tabs
 
             }
 
-            AppointmentsListView.ItemsSource = Appointments[FormattedDate()];
+            AppointmentsListView.ItemsSource = Appointments[_date];
             AppointmentsListView.Items.Refresh();
 
             //newAppointmentControl.Visibility = Visibility.Collapsed;
