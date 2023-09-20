@@ -97,132 +97,132 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
             </Border>
         </DataTemplate>
     </UserControl.Resources>
+    <Border  BorderBrush="{StaticResource myPrimaryDominant}" DockPanel.Dock="Top" Background="{StaticResource myPrimaryDominant}" BorderThickness="13" CornerRadius="10" Margin="10">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal">
 
-        <StackPanel Orientation="Horizontal">
 
-           
                 <Border  BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10">
-                <StackPanel x:Name="calendarStackPanel" Orientation="Vertical" KeyDown="calendarStackPanel_KeyDown">
-                    <DockPanel>
-                        <Label HorizontalAlignment="Left" Content="Ραντεβού Ημέρας:"  FontSize="40" FontWeight="Bold"></Label>
-                        <Label HorizontalAlignment="Left" Content=" 20/09/2023"  FontSize="40" FontWeight="Light"></Label>
-                    </DockPanel>
-                    
-                    <ToolBar MinWidth="850" Background="{StaticResource myPrimaryDominant}">
-                        <ToolBar.Items>
-                            <Button Click="NewAppointment_Click" ToolTip="Δημιουργία Ραντεβού [INS]">
-                                <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
-                            </Button>
-                            <Button ToolTip="Επεξεργασία" Click="Edit_Click">
-                                <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
+                    <StackPanel x:Name="calendarStackPanel" Orientation="Vertical" KeyDown="calendarStackPanel_KeyDown">
+                        <DockPanel>
+                            <Label HorizontalAlignment="Left" Content="Ραντεβού Ημέρας:"  FontSize="40" FontWeight="Bold"></Label>
+                            <Label HorizontalAlignment="Left" Content=" 20/09/2023"  FontSize="40" FontWeight="Light"></Label>
+                        </DockPanel>
+
+                        <ToolBar MinWidth="850" Background="{StaticResource myPrimaryDominant}">
+                            <ToolBar.Items>
+                                <Button Click="NewAppointment_Click" ToolTip="Δημιουργία Ραντεβού [INS]">
+                                    <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
+                                </Button>
+                                <Button ToolTip="Επεξεργασία" Click="Edit_Click">
+                                    <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
+
+                                </Button>
+                                <Button Click="Delete_Click" ToolTip="Διαγραφή επιλεγμένου ραντεβού [DEL]">
+                                    <Image  HorizontalAlignment="Right" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
+
+                                </Button>
+                            </ToolBar.Items>
+                        </ToolBar>
+                        <StackPanel x:Name="newAppointmentControl" Orientation="Horizontal" Width="auto">
+
+                            <Button Click="saveNewAppointment">
+                                <Image Source="/Resources/Images/save_icon.png" Width="40" Height="40"/>
 
                             </Button>
-                            <Button Click="Delete_Click" ToolTip="Διαγραφή επιλεγμένου ραντεβού [DEL]">
-                                <Image  HorizontalAlignment="Right" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
+                            <Button Click="cancelNewAppointment">
+                                <Image Source="/Resources/Images/cancel_icon.png" Width="40" Height="40"/>
 
                             </Button>
-                        </ToolBar.Items>
-                    </ToolBar>
-                    <StackPanel x:Name="newAppointmentControl" Orientation="Horizontal" Width="auto">
+                            <TextBox x:Name="newEntryText" MinWidth="500" FontSize="40" Text=". . . ."></TextBox>
+                            <Border  BorderThickness="2">
+                                <xctk:TimePicker x:Name="timePicker" AllowTextInput="False" FontSize="25" Width="100"></xctk:TimePicker>
+                            </Border>
 
-                        <Button Click="saveNewAppointment">
-                            <Image Source="/Resources/Images/save_icon.png" Width="40" Height="40"/>
-
-                        </Button>
-                        <Button Click="cancelNewAppointment">
-                            <Image Source="/Resources/Images/cancel_icon.png" Width="40" Height="40"/>
-
-                        </Button>
-                        <TextBox x:Name="newEntryText" MinWidth="500" FontSize="40" Text=". . . ."></TextBox>
-                        <Border  BorderThickness="2">
-                            <xctk:TimePicker x:Name="timePicker" AllowTextInput="False" FontSize="25" Width="100"></xctk:TimePicker>
-                        </Border>
-
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock FontSize="30">Προτεραιότητα</TextBlock>
-                            <ComboBox x:Name="priorityComboBox" FontSize="25">
-                                <ComboBoxItem FontSize="25" IsSelected="True" x:Name="normal">Normal</ComboBoxItem>
-                                <ComboBoxItem x:Name="important">Σημαντικό</ComboBoxItem >
-                                <ComboBoxItem x:Name="deadline">Deadline</ComboBoxItem >
-                            </ComboBox>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock FontSize="30">Προτεραιότητα</TextBlock>
+                                <ComboBox x:Name="priorityComboBox" FontSize="25">
+                                    <ComboBoxItem FontSize="25" IsSelected="True" x:Name="normal">Normal</ComboBoxItem>
+                                    <ComboBoxItem x:Name="important">Σημαντικό</ComboBoxItem >
+                                    <ComboBoxItem x:Name="deadline">Deadline</ComboBoxItem >
+                                </ComboBox>
+                            </StackPanel>
                         </StackPanel>
+
+                        <ListView x:Name="AppointmentsListView" MaxHeight="300"  ItemTemplateSelector="{StaticResource appointmentSelector}">
+
+                        </ListView>
+
                     </StackPanel>
+                </Border>
+                <Viewbox  MaxWidth="500">
 
-                    <ListView x:Name="AppointmentsListView" MaxHeight="300"  ItemTemplateSelector="{StaticResource appointmentSelector}">
+                    <Calendar  x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged">
+                        <Calendar.CalendarDayButtonStyle>
+                            <Style TargetType="{x:Type CalendarDayButton}">
+                                <Setter Property="helpers:DateHelper.Date" Value="{Binding}" />
+                                <Style.Triggers>
+                                    <Trigger Property="helpers:DateHelper.HasEntries" Value="True">
+                                        <Setter Property="Background" Value="LightGreen" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Calendar.CalendarDayButtonStyle>
+                    </Calendar>
+                </Viewbox>
+            </StackPanel>
+            <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" Visibility="Collapsed" x:Name="currentDate"></Label>
 
-                    </ListView>
+            <StackPanel Orientation="Horizontal">
+                <Border  BorderThickness="5" CornerRadius="12">
+                    <StackPanel x:Name="daysWeatherPanel" Orientation="Horizontal"  Width="auto">
 
-                </StackPanel>
-            </Border>
-            <Viewbox  MaxWidth="500">
 
-                <Calendar  x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged">
-                    <Calendar.CalendarDayButtonStyle>
-                        <Style TargetType="{x:Type CalendarDayButton}">
-                            <Setter Property="helpers:DateHelper.Date" Value="{Binding}" />
-                            <Style.Triggers>
-                                <Trigger Property="helpers:DateHelper.HasEntries" Value="True">
-                                    <Setter Property="Background" Value="LightGreen" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Calendar.CalendarDayButtonStyle>
-                </Calendar>
-            </Viewbox>
-        </StackPanel>
-        <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" Visibility="Collapsed" x:Name="currentDate"></Label>
 
-        <StackPanel Orientation="Horizontal">
-            <Border  BorderThickness="5" CornerRadius="12">
-                <StackPanel x:Name="daysWeatherPanel" Orientation="Horizontal"  Width="auto">
+                        <local2:SportsNewsControl x:Name="sportsControl"></local2:SportsNewsControl>
 
-                  
+                        <Border Background="{StaticResource myPrimaryDominant}" BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="5" CornerRadius="6">
 
-                    <local2:SportsNewsControl x:Name="sportsControl"></local2:SportsNewsControl>
 
-                    <Border Background="{StaticResource myPrimaryDominant}" BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="5" CornerRadius="6">
-                        
-                    
-                    <StackPanel >
-                        <Label FontSize="40" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="Εορτάζοντες" />
-                            <ListView MinWidth="500" x:Name="namedayListView" IsEnabled="False" >
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <StackPanel >
+                                <Label FontSize="40" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="Εορτάζοντες" />
+                                <ListView MinWidth="500" x:Name="namedayListView" IsEnabled="False" >
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
-                                        <BulletDecorator HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0"
+                                                <BulletDecorator HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0"
               VerticalAlignment="Center">
-                                            <BulletDecorator.Bullet>
-                                                <Image Source="/Resources/Images/bullet.png" Height="30" Width="30"/>
-                                            </BulletDecorator.Bullet>
-                                            <TextBlock FontSize="36" FontWeight="Thin" Width="auto" TextWrapping="Wrap" 
+                                                    <BulletDecorator.Bullet>
+                                                        <Image Source="/Resources/Images/bullet.png" Height="30" Width="30"/>
+                                                    </BulletDecorator.Bullet>
+                                                    <TextBlock FontSize="36" FontWeight="Thin" Width="auto" TextWrapping="Wrap" 
           
                                       VerticalAlignment="Center"
                               Text="{Binding}"/>
-                                        </BulletDecorator>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                                </BulletDecorator>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                        </Border>
+
                     </StackPanel>
-                    </Border>
-
-                </StackPanel>
-            </Border>
+                </Border>
 
 
 
+
+
+
+
+            </StackPanel>
 
 
 
 
         </StackPanel>
-
-
-
-
-    </StackPanel>
-
+    </Border>
 </UserControl>

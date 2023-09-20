@@ -98,53 +98,55 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
           
         </Grid.ColumnDefinitions>
 
+        <Border BorderThickness="8" BorderBrush="{StaticResource myPrimary}" CornerRadius="10" Background="{StaticResource myPrimary}">
+            <StackPanel Orientation="Vertical" KeyDown="StackPanel_KeyDown">
+                <ToolBar MinWidth="850" Background="{StaticResource mySecondary}">
+                    <ToolBar.Items>
+                        <Button Click="newEmailClick" ToolTip="Αποστολή Νέου Μηνύματος [INS]">
+                            <Image Height="50" Width="50" Source="/Resources/Images/new_email_icon.png"/>
+                        </Button>
+                        <Button>
+                            <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
 
-        <StackPanel Orientation="Vertical" KeyDown="StackPanel_KeyDown">
-            <ToolBar MinWidth="850" >
-                <ToolBar.Items>
-                    <Button Click="newEmailClick" ToolTip="Αποστολή Νέου Μηνύματος [INS]">
-                        <Image Height="50" Width="50" Source="/Resources/Images/new_email_icon.png"/>
-                    </Button>
-                    <Button>
-                        <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
+                        </Button>
+                        <Button >
+                            <Image  HorizontalAlignment="Right" ToolTip="Διαγραφή μηνύματος [DEL]" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
 
-                    </Button>
-                    <Button >
-                        <Image  HorizontalAlignment="Right" ToolTip="Διαγραφή μηνύματος [DEL]" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
+                        </Button>
+                    </ToolBar.Items>
+                </ToolBar>
+                <Border   BorderThickness="3" CornerRadius="7">
+                    <TabControl  OverridesDefaultStyle="True" TabStripPlacement="Left" >
+                        <TabItem >
+                            <TabItem.Header>
+                                <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
+                                    <Label Style="{StaticResource EmailFolderHeaderStyle}" FontSize="30">Εισερχόμενα</Label>
+                                </Border>
+                            </TabItem.Header>
+                            <StackPanel Orientation="Vertical" >
+                                <ListView Width="auto" Height="800" MaxHeight="800" x:Name="emailsListView" ItemTemplateSelector="{StaticResource styleSelector}" >
 
-                    </Button>
-                </ToolBar.Items>
-            </ToolBar>
-            <Border   BorderThickness="3" CornerRadius="7">
-                <TabControl  OverridesDefaultStyle="True" TabStripPlacement="Left" >
-                    <TabItem >
-                    <TabItem.Header>
-                        <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
-                            <Label Style="{StaticResource EmailFolderHeaderStyle}">Εισερχόμενα</Label>
-                        </Border>
-                    </TabItem.Header>
-                        <StackPanel Orientation="Vertical" >
-                        <ListView Width="auto" Height="800" MaxHeight="800" x:Name="emailsListView" ItemTemplateSelector="{StaticResource styleSelector}" >
-                            
-                        </ListView>
-                    </StackPanel>
-                </TabItem>
-                    <TabItem >
-                    <TabItem.Header>
-                        <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
-                            <Label Style="{StaticResource EmailFolderHeaderStyle}">Εξερχόμενα</Label>
-                        </Border>
-                    </TabItem.Header>
-                        <StackPanel Orientation="Vertical" >
-                            <ListView Height="800" MaxHeight="800" Width="auto" x:Name="sentemailsListView" ItemTemplateSelector="{StaticResource sentEmailStyleSelector}">
+                                </ListView>
+                            </StackPanel>
+                        </TabItem>
+                        <TabItem >
+                            <TabItem.Header>
+                                <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
+                                    <Label Style="{StaticResource EmailFolderHeaderStyle}" FontSize="30">Εξερχόμενα</Label>
+                                </Border>
+                            </TabItem.Header>
+                            <StackPanel Orientation="Vertical" >
+                                <ListView Height="800" MaxHeight="800" Width="auto" x:Name="sentemailsListView" ItemTemplateSelector="{StaticResource sentEmailStyleSelector}">
 
-                        </ListView>
-                    </StackPanel>
-                </TabItem>
+                                </ListView>
+                            </StackPanel>
+                        </TabItem>
 
-            </TabControl>
-            </Border>
-        </StackPanel>
+                    </TabControl>
+                </Border>
+            </StackPanel>
+        </Border>
+      
         
         
         

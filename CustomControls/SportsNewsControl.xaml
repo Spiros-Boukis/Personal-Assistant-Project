@@ -53,7 +53,7 @@
         <Border  BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10">
         <StackPanel>
             
-            <TabControl>
+            <TabControl >
                 <TabItem>
                     <TabItem.Header>
                         <Image Source="/Resources/Images/Sports/football.png" Width="70" Height="70"></Image>

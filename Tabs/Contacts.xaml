@@ -29,59 +29,68 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
 
         </DataTemplate>
     </UserControl.Resources>
-    <Grid>
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical"  HorizontalAlignment="Left" Width="600">
-                <Label FontSize="42" FontWeight="Bold">Επαφές</Label>
-                <ToolBar MinWidth="850">
-                    <ToolBar.Items>
-                        <Button Click="NewContact_Click" ToolTip="Δημιουργία Επαφής [INS]">
-                            <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
-                        </Button>
-                        <Button ToolTip="Επεξεργασία" Click="contactDoubleClicked" >
-                            <Image  Source="/Resources/Images/edit_icon.png" Width="40" Height="40" ></Image>
+    <Border  BorderBrush="{StaticResource myPrimaryDominant}" Background="{StaticResource myPrimaryDominant}" BorderThickness="13" CornerRadius="10" Margin="10">
 
-                        </Button>
-                        <Button Click="DeleteContact_Click" ToolTip="Διαγραφή επιλεγμένης επαφής [DEL]">
-                            <Image  HorizontalAlignment="Right" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
+        <Grid>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical"  HorizontalAlignment="Left" Width="600">
+                    <Label FontSize="42" FontWeight="Bold">Επαφές</Label>
+                    <Border BorderThickness="12" BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" CornerRadius="15">
+                        <ToolBar  Background="{StaticResource myPrimary}" MinWidth="850" Height="60">
+                            <ToolBar.Items>
+                                <Button Click="NewContact_Click" ToolTip="Δημιουργία Επαφής [INS]">
+                                    <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
+                                </Button>
+                                <Button ToolTip="Επεξεργασία" Click="contactDoubleClicked" >
+                                    <Image  Source="/Resources/Images/edit_icon.png" Width="40" Height="40" ></Image>
 
-                        </Button>
-                    </ToolBar.Items>
-                </ToolBar>
-                <StackPanel  HorizontalAlignment="Left" Height="auto" x:Name="newContactControl" Orientation="Horizontal" Width="500" >
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Button Click="saveNewContact" Width="40" Height="40" VerticalAlignment="Center">
-                            <Image Source="/Resources/Images/save_icon.png" Width="40" Height="40"/>
+                                </Button>
+                                <Button Click="DeleteContact_Click" ToolTip="Διαγραφή επιλεγμένης επαφής [DEL]">
+                                    <Image  HorizontalAlignment="Right" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
 
-                        </Button>
-                        <Button Click="cancelNewContact" Width="40" Height="40"  VerticalAlignment="Center">
-                            <Image Source="/Resources/Images/cancel_icon.png" Width="40" Height="40"/>
+                                </Button>
+                            </ToolBar.Items>
+                        </ToolBar>
+                    </Border>
+                 
+                    <StackPanel  HorizontalAlignment="Left" Height="auto" x:Name="newContactControl" Orientation="Horizontal" Width="500" >
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <Button Click="saveNewContact" Width="40" Height="40" VerticalAlignment="Center">
+                                <Image Source="/Resources/Images/save_icon.png" Width="40" Height="40"/>
 
-                        </Button>
-                    </StackPanel>
+                            </Button>
+                            <Button Click="cancelNewContact" Width="40" Height="40"  VerticalAlignment="Center">
+                                <Image Source="/Resources/Images/cancel_icon.png" Width="40" Height="40"/>
 
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Vertical">
-                            <Label FontSize="20" FontWeight="ExtraLight" FontStyle="Italic">Όνομα</Label>
-                            <TextBox x:Name="newContactName" Text="{Binding Name, Mode=TwoWay}" Width="300" FontSize="25" ></TextBox>
+                            </Button>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical">
-                            <Label FontSize="20" FontWeight="ExtraLight" FontStyle="Italic">Τηλέφωνο</Label>
-                            <TextBox x:Name="newContactNumber"  Width="300" FontSize="25" Text="{Binding PhoneNumber, Mode=TwoWay}"></TextBox>
+                            <StackPanel Orientation="Vertical">
+                                <Label FontSize="20" FontWeight="ExtraLight" FontStyle="Italic">Όνομα</Label>
+                                <TextBox x:Name="newContactName" Text="{Binding Name, Mode=TwoWay}" Width="300" FontSize="25" ></TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical">
+                                <Label FontSize="20" FontWeight="ExtraLight" FontStyle="Italic">Τηλέφωνο</Label>
+                                <TextBox x:Name="newContactNumber"  Width="300" FontSize="25" Text="{Binding PhoneNumber, Mode=TwoWay}"></TextBox>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
+                    <Border  BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10">
+                        <ListView MaxHeight="650" HorizontalAlignment="Left" SelectionChanged="contactsListView_SelectionChanged" x:Name="contactsListView" Width="500" ItemTemplate="{StaticResource ResourceKey=contactListTemplate}" ></ListView>
+                    </Border>
                 </StackPanel>
-                <ListView MaxHeight="400" HorizontalAlignment="Left" SelectionChanged="contactsListView_SelectionChanged" x:Name="contactsListView" Width="500" ItemTemplate="{StaticResource ResourceKey=contactListTemplate}" ></ListView>
+
+                <StackPanel>
+                    <Label FontSize="42" Margin="0,0,0,0" FontWeight="Bold">Μηνύματα</Label>
+                    <Border MaxHeight="700"   BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="0,92,0,0">
+                        <local2:ContactMessagesControl   x:Name="messagesControl"/>
+                    </Border>
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel>
-                <Label FontSize="42" FontWeight="Bold">Μηνύματα</Label>
-                <local2:ContactMessagesControl x:Name="messagesControl"/>
-               
-            </StackPanel>
-        </StackPanel>
-       
-        
-    </Grid>
+
+        </Grid>
+    </Border>
 </UserControl>
