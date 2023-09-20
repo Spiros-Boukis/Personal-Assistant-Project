@@ -129,8 +129,7 @@ namespace Personal_Assistant.Tabs
 
             
             InitializeComponent();
-            var window = Application.Current.MainWindow as MainWindow;
-            window.ShowNotifications("Calendar Showing");
+           
             InitNameDays();
             var _container = this.FindVisualAncestor<MainWindow>;
             //SystemSounds.Beep.Play();

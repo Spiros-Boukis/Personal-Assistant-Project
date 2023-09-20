@@ -219,7 +219,7 @@ namespace Personal_Assistant.Tabs
                 list.Items.Refresh();
 
                 var window = System.Windows.Application.Current.MainWindow as MainWindow;
-                window.ShowNotifications("New Text Message!!!");
+            
 
                 //list.SelectedIndex = list.Items.Count - 1;
                 //list.ScrollIntoView(list.SelectedItem);

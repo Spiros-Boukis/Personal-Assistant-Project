@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using Enterwell.Clients.Wpf.Notifications;
+using Personal_Assistant.Tabs;
 
 namespace Personal_Assistant
 {
@@ -32,11 +33,11 @@ namespace Personal_Assistant
         private void ConfigureServices(ServiceCollection services)
         {
 
-
+        
             services.AddTransient(typeof(MainWindow));
             services.AddTransient<INotificationManager, NotificationManager>();
-            services.AddTransient<INotificationMessageManager, NotificationMessageManager>();
-            var i = 0;
+            
+     
         }
 
         private void OnStartup(object sender, StartupEventArgs e)

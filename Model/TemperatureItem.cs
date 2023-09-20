@@ -10,18 +10,34 @@ using System.Xml.Linq;
 
 namespace Personal_Assistant.Model
 {
-    public class TemperatureItem : SmartHomeItem, INotifyPropertyChanged
+    public class TemperatureItem : SmartHomeItem
     {
+        public int ScheduleType {  get; set; } // 0 : increase , 1 :descreasevvvv
+        public int TargetTemperature {  get; set; } 
         private double temperature;
+        private string setTemperature;
         public double Temperature { get { return temperature; } set {
                 temperature = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Temperature"));
+                PropertyChangedMethod(this, "Temperature");
             } }
+
+        public string SetTemperature
+        {
+            get { return setTemperature; }
+            set
+            {
+                setTemperature = value;
+                PropertyChangedMethod(this, "SetTemperature");
+            }
+        }
+
+
+
         public TemperatureItem(string name, string status)
         {
-           
+            SetTemperature = "20";
 
-            scheduleEnabled = false;
+            ScheduleEnabled = false;
             Id = Guid.NewGuid();
 
             Description = name;
@@ -42,10 +58,10 @@ namespace Personal_Assistant.Model
                 Temperature = Temperature - random;
                 Temperature = Math.Round(Temperature, 2);
             }
-            ImagePath = new BitmapImage(new Uri("/Resources/Images/SmartHome/bulb_on.png" +
-                                "", UriKind.Relative)).ToString();
+            
+           
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+       
     }
 }

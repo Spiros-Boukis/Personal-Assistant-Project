@@ -17,20 +17,30 @@ namespace Personal_Assistant.Model
     {
         public DateTime ScheduleTime { get; set; }
         public DateTime ScheduleTargetTime { get; set; }
+        private bool isOn;
 
+        public bool IsOn
+        {
+            get { return isOn; }
+            set
+            {
+                isOn = value;
+                PropertyChangedMethod(this, "IsOn");
+            }
+        }
         private bool bulbSwitchIsEnabled;
         public bool BulbSwitchIsEnabled { get { return !ScheduleEnabled; } set { bulbSwitchIsEnabled = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BulbSwitchIsEnabled"));
+                PropertyChangedMethod(this, "BulbSwitchIsEnabled");
             } }
 
-        public bool scheduleEnabled;
+        private bool scheduleEnabled;
         public bool ScheduleEnabled
         {
             get { return scheduleEnabled; }
             set { scheduleEnabled = value;
                 BulbSwitchIsEnabled = !value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TimerEnabled"));
-                }
+                PropertyChangedMethod(this, "ScheduleEnabled");
+            }
         }
         public bool itemStatus;
 
@@ -52,7 +62,7 @@ namespace Personal_Assistant.Model
 
         private DateTime timerTargetTime;
         public DateTime TimerTargetTime { get { return timerTargetTime; } set { timerTargetTime = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TimerTargetTime"));
+                PropertyChangedMethod(this, "TimerTargetTime");
             } } 
       
 

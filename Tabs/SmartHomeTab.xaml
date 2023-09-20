@@ -32,12 +32,12 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
                     <TextBlock HorizontalAlignment="Center" DockPanel.Dock="Top" FontWeight="Heavy" FontSize="20" Text="{Binding Description}"></TextBlock>
                     <StackPanel IsEnabled="{Binding ItemStatus}" Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
                         <Image HorizontalAlignment="Center" x:Name="image" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}"/>
-                        <ui:ToggleSwitch IsEnabled="{Binding BulbSwitchIsEnabled,Mode =TwoWay}" OnContent="" Width="40" Height="auto" OffContent="" UseSystemFocusVisuals="False" HorizontalAlignment="Center" IsOn="{Binding IsOn , Mode=TwoWay}" Toggled="LightBulbOnOff_SwitchToggled"/>
+                            <ui:ToggleSwitch IsEnabled="{Binding BulbSwitchIsEnabled,Mode =TwoWay}" OnContent="" Width="40" Height="auto" OffContent="" UseSystemFocusVisuals="False" HorizontalAlignment="Center"  IsOn="{Binding IsOn , Mode=TwoWay}" Toggled="LightBulbOnOff_SwitchToggled"/>
                     </StackPanel>
                     <Border Margin="10" BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="9" CornerRadius="5" DockPanel.Dock="Bottom" >
                         <DockPanel IsEnabled="{Binding ItemStatus}" LastChildFill="False" DockPanel.Dock="Bottom">
                                 <ui:SimpleTimePicker Foreground="White"   Background="{StaticResource  darkPrimary}" HorizontalAlignment="Center" SelectedDateTime="{Binding TimerTargetTime, Mode = TwoWay}" DockPanel.Dock="Bottom" ></ui:SimpleTimePicker>
-                            <ui:ToggleSwitch   Toggled="ScheduleToggleClicked" DockPanel.Dock="Top" HorizontalAlignment="Center">
+                            <ui:ToggleSwitch  IsOn="{Binding ScheduleEnabled , Mode= TwoWay}" Toggled="ScheduleToggleClicked" DockPanel.Dock="Top" HorizontalAlignment="Center">
 
                                 <ui:ToggleSwitch.OnContentTemplate>
                                     <DataTemplate>
@@ -72,21 +72,22 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
                     <TextBlock HorizontalAlignment="Center" DockPanel.Dock="Top" FontWeight="Heavy" FontSize="20" Text="{Binding Description}"></TextBlock>
                     <StackPanel IsEnabled="{Binding ItemStatus}" Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
                         <Image HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/temperature_icon.png"></Image>
-                       
-                    </StackPanel>
+                            <Label VerticalAlignment="Center" FontSize="25" FontWeight="ExtraBold" Content="{Binding Temperature, Mode=TwoWay}"></Label>
+                            <Label VerticalAlignment="Center" FontSize="25" Content="°C"></Label>
+                        </StackPanel>
                         <Border Margin="10" BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="9" CornerRadius="5" DockPanel.Dock="Bottom" >
                             <DockPanel IsEnabled="{Binding ItemStatus}" LastChildFill="False" DockPanel.Dock="Bottom">
-                                <ui:SimpleTimePicker Foreground="White"   Background="{StaticResource  darkPrimary}" HorizontalAlignment="Center" SelectedDateTime="{Binding TimerTargetTime, Mode = TwoWay}" DockPanel.Dock="Bottom" ></ui:SimpleTimePicker>
-                                <ui:ToggleSwitch   Toggled="ScheduleToggleClicked" DockPanel.Dock="Top" HorizontalAlignment="Center">
+                                <ui:NumberBox SpinButtonPlacementMode="Inline" Minimum="15" Value="{Binding SetTemperature, Mode=TwoWay}"  Maximum="30"></ui:NumberBox>
+                                <ui:ToggleSwitch  IsOn="{Binding ScheduleEnabled , Mode= TwoWay}" Toggled="ScheduleToggleClicked" DockPanel.Dock="Top" HorizontalAlignment="Center">
 
-                                    <ui:ToggleSwitch.OnContentTemplate>
+                                    <ui:ToggleSwitch.OnContentTemplate >
                                         <DataTemplate>
-                                            <TextBlock FontSize="15" Foreground="Green" FontWeight="Bold">Χρονοπρογραμματισμός Ενεργός</TextBlock>
+                                            <TextBlock FontSize="15" Foreground="Green" FontWeight="Bold">Θερμοστάτης Ενεργός</TextBlock>
                                         </DataTemplate>
                                     </ui:ToggleSwitch.OnContentTemplate>
                                     <ui:ToggleSwitch.OffContentTemplate>
                                         <DataTemplate>
-                                            <TextBlock FontSize="15" Foreground="Red" FontWeight="Bold">Χρονοπρογραμματισμός Ανενεργός</TextBlock>
+                                            <TextBlock FontSize="15" Foreground="Red" FontWeight="Bold">Θερμοστάτης Ανενεργός</TextBlock>
                                         </DataTemplate>
                                     </ui:ToggleSwitch.OffContentTemplate>
                                 </ui:ToggleSwitch>

@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Personal_Assistant" xmlns:local4="clr-namespace:Personal_Assistant.Tabs"  xmlns:local1="clr-namespace:Personal_Assistant.ControlTemplateSelectors"
         xmlns:local2="clr-namespace:Personal_Assistant.CustomControls"
+        xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
          ui:WindowHelper.UseModernWindowStyle="True"
         
-        xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
+       
 xmlns:ui="http://schemas.modernwpf.com/2019"
 
         xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
@@ -50,7 +51,7 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
 
     
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-        
+        <notifications:NotificationArea  x:Name="WindowArea" Position="TopLeft" MaxItems="3" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
             <TabControl TabStripPlacement="Left">
                     <TabItem>
                         <TabItem.Header>

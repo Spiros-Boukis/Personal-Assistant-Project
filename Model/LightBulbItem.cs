@@ -12,33 +12,23 @@ namespace Personal_Assistant.Model
     public class LightBulbItem : SmartHomeItem 
     {
 
-        private bool isOn;
-
-        public bool IsOn 
-        {
-            get { return isOn; }
-            set 
-            { 
-               isOn = value;
-                PropertyChangedMethod(this,"IsOn");
-            }
-        }
+       
 
         public LightBulbItem(string name,string status,bool _isOn)
         {
             
-            scheduleEnabled = false;
+            ScheduleEnabled = false;
             Id = Guid.NewGuid();
             Description = name;
             Status = status;
             IsOn = _isOn;
-            if (status == "Online")
+            if (IsOn)
             {
 
                 ImagePath = new BitmapImage(new Uri("/Resources/Images/SmartHome/bulb_on.png" +
                                     "", UriKind.Relative)).ToString();
             }
-            else if(status =="Offline")
+            else if(!IsOn)
             {
                 ImagePath = new BitmapImage(new Uri("/Resources/Images/SmartHome/bulb_off.png" +
                                     "", UriKind.Relative)).ToString();
@@ -46,5 +36,7 @@ namespace Personal_Assistant.Model
             
             
         }
+
+       
     }
 }
