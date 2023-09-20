@@ -9,7 +9,7 @@
 xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"  
              Height="auto" Width="auto">
     <UserControl.Resources>
 
@@ -26,87 +26,86 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         </Style>
         <local1:SmartHomeItemDataTemplateSelector x:Key="smartHomeItemSelector"/>
         <DataTemplate x:Key="lightBulbTemplate" >
-
+            <Border BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="16" CornerRadius="5" DockPanel.Dock="Bottom" Margin="5" >
             <StackPanel Orientation="Horizontal">
                 <DockPanel LastChildFill="False" Width="450">
-                <TextBlock HorizontalAlignment="Center" DockPanel.Dock="Top" FontWeight="Heavy" FontSize="20" Text="{Binding Description}"></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" DockPanel.Dock="Top" FontWeight="Heavy" FontSize="20" Text="{Binding Description}"></TextBlock>
                     <StackPanel IsEnabled="{Binding ItemStatus}" Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
-                    <Image HorizontalAlignment="Center" x:Name="image" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}"/>
+                        <Image HorizontalAlignment="Center" x:Name="image" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}"/>
                         <ui:ToggleSwitch IsEnabled="{Binding BulbSwitchIsEnabled,Mode =TwoWay}" OnContent="" Width="40" Height="auto" OffContent="" UseSystemFocusVisuals="False" HorizontalAlignment="Center" IsOn="{Binding IsOn , Mode=TwoWay}" Toggled="LightBulbOnOff_SwitchToggled"/>
-                </StackPanel>
-                    <DockPanel IsEnabled="{Binding ItemStatus}" LastChildFill="False" DockPanel.Dock="Bottom">
-                    <ui:SimpleTimePicker HorizontalAlignment="Center" SelectedDateTime="{Binding TimerTargetTime, Mode = TwoWay}" DockPanel.Dock="Top" ></ui:SimpleTimePicker>
-                    <ui:ToggleSwitch Toggled="ScheduleToggleClicked" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
-                        <ui:ToggleSwitch.OnContentTemplate>
-                            <DataTemplate>
-                                <TextBlock FontSize="15" Foreground="Green" FontWeight="Bold">Χρονοπρογραμματισμός Ενεργός</TextBlock>
-                            </DataTemplate>
-                        </ui:ToggleSwitch.OnContentTemplate>
-                        <ui:ToggleSwitch.OffContentTemplate>
-                            <DataTemplate>
-                                <TextBlock FontSize="15" Foreground="Red" FontWeight="Bold">Χρονοπρογραμματισμός Ανενεργός</TextBlock>
-                            </DataTemplate>
-                        </ui:ToggleSwitch.OffContentTemplate>
-                    </ui:ToggleSwitch>
-                </DockPanel>
+                    </StackPanel>
+                    <Border Margin="10" BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="9" CornerRadius="5" DockPanel.Dock="Bottom" >
+                        <DockPanel IsEnabled="{Binding ItemStatus}" LastChildFill="False" DockPanel.Dock="Bottom">
+                                <ui:SimpleTimePicker Foreground="White"   Background="{StaticResource  darkPrimary}" HorizontalAlignment="Center" SelectedDateTime="{Binding TimerTargetTime, Mode = TwoWay}" DockPanel.Dock="Bottom" ></ui:SimpleTimePicker>
+                            <ui:ToggleSwitch   Toggled="ScheduleToggleClicked" DockPanel.Dock="Top" HorizontalAlignment="Center">
 
-            </DockPanel>
+                                <ui:ToggleSwitch.OnContentTemplate>
+                                    <DataTemplate>
+                                        <TextBlock FontSize="15" Foreground="Green" FontWeight="Bold">Χρονοπρογραμματισμός Ενεργός</TextBlock>
+                                    </DataTemplate>
+                                </ui:ToggleSwitch.OnContentTemplate>
+                                <ui:ToggleSwitch.OffContentTemplate>
+                                    <DataTemplate>
+                                        <TextBlock FontSize="15" Foreground="Red" FontWeight="Bold">Χρονοπρογραμματισμός Ανενεργός</TextBlock>
+                                    </DataTemplate>
+                                </ui:ToggleSwitch.OffContentTemplate>
+                            </ui:ToggleSwitch>
+                        </DockPanel>
+                    </Border>
+                    
+
+                </DockPanel>
                 <StackPanel VerticalAlignment="Center" Orientation="Vertical">
                     <Label FontSize="25" FontWeight="DemiBold" Content="Κατάσταση"></Label>
                     <Label FontSize="25" Content="{Binding Status}"  Style="{StaticResource statusLabelStyle}">
                     </Label>
                 </StackPanel>
-                </StackPanel>
-        
-            
+            </StackPanel>
+                </Border>
+
         </DataTemplate>
-        <DataTemplate  x:Key="lightBulb">
-            <Border>
-                <StackPanel Orientation="Horizontal" IsEnabled="{Binding ItemStatus}">
-                    <Border CornerRadius="4" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,10" Width="300" >
-                    <StackPanel Orientation="Vertical">
-                        <Label HorizontalAlignment="Center" FontWeight="Heavy" FontSize="20" Content="{Binding Description}"></Label>
-                        <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center">
-                                <Image  x:Name="image" HorizontalAlignment="Center" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}">
-                                    
-                                </Image>
-                                <StackPanel Orientation="Horizontal">
-                                    <DockPanel>
-                                        <Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center">Timer</Label>
-                                        <StackPanel Orientation="Vertical">
-                                            <Button FontSize="15" Click="SetBulbTimer_Click">Set Timer</Button>
-                                            <Button IsEnabled="{Binding TimerEnabled, Mode=TwoWay}" FontSize="15" >Stop Timer</Button>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBox  FontSize="25" IsEnabled="true" Width="35" Text="{Binding TimerMinutes , Mode=TwoWay}"></TextBox>
-                                                <Label FontSize="25" Content=":"/>
-                                                <TextBox   FontSize="25" IsEnabled="true" Width="35" Text="{Binding TimerSeconds , Mode=TwoWay}"></TextBox>
 
-
-                                            </StackPanel>
-                                            
-                                        </StackPanel>
-                                        
-                                    </DockPanel>
-
-
-
-                                </StackPanel>
-                            </StackPanel>
+        <DataTemplate x:Key="temperatureTemplate" >
+            <Border BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="16" CornerRadius="5" DockPanel.Dock="Bottom" Margin="5" >
+                <StackPanel Orientation="Horizontal">
+                <DockPanel LastChildFill="False" Width="450">
+                    <TextBlock HorizontalAlignment="Center" DockPanel.Dock="Top" FontWeight="Heavy" FontSize="20" Text="{Binding Description}"></TextBlock>
+                    <StackPanel IsEnabled="{Binding ItemStatus}" Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
+                        <Image HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/temperature_icon.png"></Image>
+                       
                     </StackPanel>
+                        <Border Margin="10" BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="9" CornerRadius="5" DockPanel.Dock="Bottom" >
+                            <DockPanel IsEnabled="{Binding ItemStatus}" LastChildFill="False" DockPanel.Dock="Bottom">
+                                <ui:SimpleTimePicker Foreground="White"   Background="{StaticResource  darkPrimary}" HorizontalAlignment="Center" SelectedDateTime="{Binding TimerTargetTime, Mode = TwoWay}" DockPanel.Dock="Bottom" ></ui:SimpleTimePicker>
+                                <ui:ToggleSwitch   Toggled="ScheduleToggleClicked" DockPanel.Dock="Top" HorizontalAlignment="Center">
+
+                                    <ui:ToggleSwitch.OnContentTemplate>
+                                        <DataTemplate>
+                                            <TextBlock FontSize="15" Foreground="Green" FontWeight="Bold">Χρονοπρογραμματισμός Ενεργός</TextBlock>
+                                        </DataTemplate>
+                                    </ui:ToggleSwitch.OnContentTemplate>
+                                    <ui:ToggleSwitch.OffContentTemplate>
+                                        <DataTemplate>
+                                            <TextBlock FontSize="15" Foreground="Red" FontWeight="Bold">Χρονοπρογραμματισμός Ανενεργός</TextBlock>
+                                        </DataTemplate>
+                                    </ui:ToggleSwitch.OffContentTemplate>
+                                </ui:ToggleSwitch>
+                            </DockPanel>
+                        </Border>
+
+                    </DockPanel>
+                <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                    <Label FontSize="25" FontWeight="DemiBold" Content="Κατάσταση"></Label>
+                    <Label FontSize="25" Content="{Binding Status}"  Style="{StaticResource statusLabelStyle}">
+                    </Label>
+                </StackPanel>
+            </StackPanel>
 
                 </Border>
-                    <StackPanel VerticalAlignment="Center" Orientation="Vertical">
-                        <Label FontSize="25" FontWeight="DemiBold" Content="Κατάσταση"></Label>
-                        <Label FontSize="25" Content="{Binding Status , Mode=TwoWay}" Style="{StaticResource statusLabelStyle}">
-                           
-                        </Label>
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-            
         </DataTemplate>
 
-        <DataTemplate  x:Key="temperatureTemplate">
+
+        <DataTemplate  x:Key="temperature1Template">
             <Border x:Name="temperatureItemContainer">
                 <StackPanel Orientation="Horizontal">
                     <Border CornerRadius="4" BorderThickness="2" BorderBrush="Black" Margin="0,0,0,10" Width="300" >

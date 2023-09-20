@@ -9,31 +9,44 @@
              Height="auto" Width="auto">
     <UserControl.Resources>
         <DataTemplate x:Key="testListTemplate">
-            <Border BorderBrush="{StaticResource mySecondary}" HorizontalAlignment="Center" Background="MintCream" BorderThickness="3" CornerRadius="15" Padding="5">
-                
-            
-            <StackPanel Orientation="Horizontal" MaxWidth="400" Width="400" HorizontalAlignment="Center" >
-                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Label  FontSize="22" FontWeight="ExtraLight" Content="{Binding Time}"></Label>
-
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="25" Text="{Binding Team1}"></TextBlock>
-                            <TextBlock FontSize="25" FontWeight="Bold" Text=" v. "></TextBlock>
-                        <TextBlock FontSize="25" Text="{Binding Team2}"></TextBlock>
+            <Border  BorderBrush="{StaticResource mySecondary}" HorizontalAlignment="Center" Background="MintCream" BorderThickness="3" CornerRadius="15" Padding="5">
+                <DockPanel Width="220" HorizontalAlignment="Center" >
+                    <StackPanel DockPanel.Dock="Top"  Orientation="Vertical">
+                        <Label  FontSize="18" FontWeight="ExtraLight" HorizontalAlignment="Center" Content="{Binding Time}"></Label>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <TextBlock FontSize="22" HorizontalAlignment="Center" Text="{Binding Team1}"></TextBlock>
+                            <TextBlock FontSize="25" HorizontalAlignment="Center" FontWeight="Bold" Text="vs"></TextBlock>
+                            <TextBlock FontSize="22" HorizontalAlignment="Center" Text="{Binding Team2}"></TextBlock>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <TextBlock FontSize="22" FontWeight="ExtraLight" Text="{Binding Place}"></TextBlock>
-    
-                    </StackPanel>
+                            <TextBlock HorizontalAlignment="Center" FontSize="17" FontWeight="ExtraLight" Text="{Binding Place}"></TextBlock>
+                        </StackPanel>
                 </StackPanel>
-                <Button Click="Notify_Football" Width="50" Height="50" VerticalAlignment="Center">
-                    <Image Source="/Resources/Images/notification.png"></Image>
-                </Button>
-            </StackPanel>
+                    <Button DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Click="Notify_Football"></Button>
+                </DockPanel>
             </Border>
 
+        </DataTemplate>
+
+        <DataTemplate x:Key="DayFixturesItemsControl">
+            <Border>
+                <DockPanel >
+                    <TextBlock FontWeight="ExtraBold" HorizontalAlignment="Center" FontSize="26" DockPanel.Dock="Top" Text="{Binding Date}"></TextBlock>
+                    <Border BorderThickness="0,9,0,9" CornerRadius="15"  BorderBrush="{StaticResource myPrimaryDominant}" >
+                        <ui:ScrollViewerEx  CanContentScroll="True" HorizontalScrollBarVisibility="auto" >
+
+                            <ItemsControl HorizontalContentAlignment="Center" HorizontalAlignment="Center" ItemTemplate="{StaticResource testListTemplate}" ItemsSource="{Binding Fixtures}" x:Name="footballFixturesListView">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" CanHorizontallyScroll="True">
+                                        </StackPanel>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </ui:ScrollViewerEx>
+                    </Border>
+                </DockPanel>
+            </Border>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
@@ -47,111 +60,44 @@
                     </TabItem.Header>
                     
                     <StackPanel Orientation="Vertical">
-                            <ui:ScrollViewerEx CanContentScroll="True" VerticalScrollBarVisibility="Auto" MaxHeight="500">
-                                <ItemsControl  Padding="30" x:Name="testItemsControl" Width="1000">
-                                    <ItemsControl.ItemTemplate>
+                            <ui:ScrollViewerEx CanContentScroll="True" VerticalScrollBarVisibility="Auto" Height="500" MaxHeight="500">
+                                <ItemsControl   x:Name="testItemsControl" Width="1000" ItemTemplate="{StaticResource DayFixturesItemsControl}">
 
-                                        <DataTemplate>
-                                            <Border  BorderThickness="5" CornerRadius="5">
-                                            <DockPanel>
-                                                 
-                                                <TextBlock FontWeight="ExtraBold" HorizontalAlignment="Center" FontSize="26" DockPanel.Dock="Top" Text="{Binding Date}"></TextBlock>
-                                                    <ui:ScrollViewerEx CanContentScroll="True" HorizontalScrollBarVisibility="Auto" MaxWidth="700">
-                                                        <ItemsControl  ItemTemplate="{StaticResource testListTemplate}" ItemsSource="{Binding Fixtures}" x:Name="footballFixturesListView" Padding="10" >
-                                                            <ItemsControl.ItemsPanel>
-                                                                <ItemsPanelTemplate>
-                                                                    <StackPanel Orientation="Horizontal" CanHorizontallyScroll="True"></StackPanel>
-                                                                </ItemsPanelTemplate>
-                                                            </ItemsControl.ItemsPanel>
-                                                        </ItemsControl>
-                                                    </ui:ScrollViewerEx>
-                                                </DockPanel>
-                                            </Border>
-
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                            
-                            
-                        </ui:ScrollViewerEx>
-                        
-                       
-                        
 
-                        
 
-                    </StackPanel>
+                            </ui:ScrollViewerEx>
+                        </StackPanel>
                     
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>
                         <Image Source="/Resources/Images/Sports/basketball.png" Width="70" Height="70"></Image>
                     </TabItem.Header>
-                    <ListView x:Name="footballFixturesListView" Width="1000" MaxWidth="1000" Padding="10" MaxHeight="500">
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" Height="100"></StackPanel>
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                            <Label  FontSize="22" FontWeight="ExtraLight" Content="{Binding Time}"></Label>
+                        <StackPanel Orientation="Vertical">
+                            <ui:ScrollViewerEx CanContentScroll="True" VerticalScrollBarVisibility="Auto" Height="500"  MaxHeight="500">
+                                <ItemsControl   x:Name="basketballItemsControl" Width="1000" ItemTemplate="{StaticResource DayFixturesItemsControl}">
 
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock FontSize="25" Text="{Binding Team1}"></TextBlock>
-                                            <TextBlock FontSize="25">v.</TextBlock>
-                                            <TextBlock FontSize="25" Text="{Binding Team2}"></TextBlock>
-                                        </StackPanel>
-                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                            <TextBlock FontSize="22" FontWeight="ExtraLight" Text="{Binding Place}"></TextBlock>
+                                </ItemsControl>
 
-                                        </StackPanel>
-                                    </StackPanel>
-                                    <Button Click="Notify_Football" Width="50" Height="50" VerticalAlignment="Center">
-                                        <Image Source="/Resources/Images/notification.png"></Image>
-                                    </Button>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </TabItem>
+
+                            </ui:ScrollViewerEx>
+                        </StackPanel>
+                    </TabItem>
                 <TabItem>
                     <TabItem.Header>
                         <Image Source="/Resources/Images/Sports/tennis.png" Width="70" Height="70"></Image>
                     </TabItem.Header>
-                    <ListView x:Name="tennisFixturesListView" Width="500" Height="500" MaxHeight="500">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                            <Label  FontSize="22" FontWeight="ExtraLight" Content="{Binding Time}"></Label>
+                        <StackPanel Orientation="Vertical">
+                            <ui:ScrollViewerEx CanContentScroll="True" VerticalScrollBarVisibility="Auto" Height="500"  MaxHeight="500">
+                                <ItemsControl   x:Name="tennisItemsControl" Width="1000" ItemTemplate="{StaticResource DayFixturesItemsControl}">
 
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label FontSize="25" Content="{Binding Team1}"></Label>
-                                            <Label FontSize="25">v.</Label>
-                                            <Label FontSize="25" Content="{Binding Team2}"></Label>
-                                        </StackPanel>
-                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                            <Label FontSize="22" FontWeight="ExtraLight" Content="{Binding Place}"></Label>
-
-                                        </StackPanel>
-                                    </StackPanel>
-                                    <Button Click="Notify_Tennis" Width="50" Height="50" VerticalAlignment="Center">
-                                        <Image Source="/Resources/Images/notification.png"></Image>
-                                    </Button>
-                                </StackPanel>
+                                </ItemsControl>
 
 
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </TabItem>
+                            </ui:ScrollViewerEx>
+                        </StackPanel>
+                    </TabItem>
             </TabControl>
 
 

@@ -13,7 +13,7 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
         mc:Ignorable="d"
          xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
-        Title="MainWindow" Height="auto" Width="auto">
+        Title="MainWindow"  Width="auto" Height="auto" SizeToContent="WidthAndHeight">
     <Window.Resources>
 
         <Style x:Key="cdbKey" TargetType="CalendarDayButton">

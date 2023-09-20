@@ -110,7 +110,7 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                         <Label HorizontalAlignment="Left" Content=" 20/09/2023"  FontSize="40" FontWeight="Light"></Label>
                     </DockPanel>
                     
-                    <ToolBar MinWidth="850">
+                    <ToolBar MinWidth="850" Background="{StaticResource myPrimaryDominant}">
                         <ToolBar.Items>
                             <Button Click="NewAppointment_Click" ToolTip="Δημιουργία Ραντεβού [INS]">
                                 <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
@@ -171,30 +171,8 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                     </Calendar.CalendarDayButtonStyle>
                 </Calendar>
             </Viewbox>
-            <StackPanel>
-                <Label FontSize="40" FontWeight="Bold" Content="Εορτάζοντες" />
-                <ListView x:Name="namedayListView" IsEnabled="False" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-
-                                <BulletDecorator HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0"
-              VerticalAlignment="Center">
-                                    <BulletDecorator.Bullet>
-                                        <Image Source="/Resources/Images/bullet.png" Height="30" Width="30"/>
-                                    </BulletDecorator.Bullet>
-                                    <TextBlock FontSize="36" FontWeight="Thin" Width="auto" TextWrapping="Wrap" 
-          
-                                      VerticalAlignment="Center"
-                              Text="{Binding}"/>
-                                </BulletDecorator>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackPanel>
         </StackPanel>
-        <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" x:Name="currentDate"></Label>
+        <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" Visibility="Collapsed" x:Name="currentDate"></Label>
 
         <StackPanel Orientation="Horizontal">
             <Border  BorderThickness="5" CornerRadius="12">
@@ -204,8 +182,32 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
 
                     <local2:SportsNewsControl x:Name="sportsControl"></local2:SportsNewsControl>
 
+                    <Border Background="{StaticResource myPrimaryDominant}" BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="5" CornerRadius="6">
+                        
+                    
+                    <StackPanel >
+                        <Label FontSize="40" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="Εορτάζοντες" />
+                            <ListView MinWidth="500" x:Name="namedayListView" IsEnabled="False" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
-
+                                        <BulletDecorator HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0"
+              VerticalAlignment="Center">
+                                            <BulletDecorator.Bullet>
+                                                <Image Source="/Resources/Images/bullet.png" Height="30" Width="30"/>
+                                            </BulletDecorator.Bullet>
+                                            <TextBlock FontSize="36" FontWeight="Thin" Width="auto" TextWrapping="Wrap" 
+          
+                                      VerticalAlignment="Center"
+                              Text="{Binding}"/>
+                                        </BulletDecorator>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                    </Border>
 
                 </StackPanel>
             </Border>

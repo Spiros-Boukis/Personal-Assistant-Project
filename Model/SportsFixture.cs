@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Personal_Assistant.Model
 {
+    
+
+
     public class SportsFixture
     {
+        public int Type { get; set; } // 0 : football , 1 : basketball , 3 : tennis
         private string team1, team2,place,time;
 
         public string Team1 { get { return team1; } set { team1 = value; } }
@@ -20,6 +24,15 @@ namespace Personal_Assistant.Model
 
         public SportsFixture(string _team1,string _team2,string _time,string _place)
         {
+            Type = 1;
+            team1 = _team1;
+            team2 = _team2;
+            place = _place;
+            time = _time;
+        }
+        public SportsFixture(string _team1, string _team2, string _time, string _place,int _type)
+        {
+            Type = _type;
             team1 = _team1;
             team2 = _team2;
             place = _place;

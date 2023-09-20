@@ -57,10 +57,10 @@ namespace Personal_Assistant.CustomControls
             footballLists = new List<DaySportsFixtures>();
             //Football
             List<SportsFixture> FixturesDay1 = new List<SportsFixture>();
-            FixturesDay1.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium"));
-            FixturesDay1.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium"));
-            FixturesDay1.Add(new SportsFixture("Real", "Barca", "19:00", "OAKA"));
-            FixturesDay1.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium"));
+            FixturesDay1.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium",0));
+            FixturesDay1.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 0));
+            FixturesDay1.Add(new SportsFixture("Real", "Barca", "19:00", "OAKA", 0));
+            FixturesDay1.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 0));
             var currentDay = DateTime.Now;
             string formattedDay = currentDay.ToString("dd/MM/yyyy");
       
@@ -69,58 +69,198 @@ namespace Personal_Assistant.CustomControls
             
 
             List<SportsFixture> FixturesDay2 = new List<SportsFixture>();
-            FixturesDay2.Add(new SportsFixture("Man City", "Arsenjal", "19:00", "OAKA Stadium"));
-            FixturesDay2.Add(new SportsFixture("QPR", "MU", "21:00", "Volos Stadium"));
-            FixturesDay2.Add(new SportsFixture("Chelsea", "Liverpool", "19:00", ""));
-            FixturesDay2.Add(new SportsFixture("Dortmund", "Herta", "19:00", "OAKA Stadium"));
+            FixturesDay2.Add(new SportsFixture("Man City", "Arsenjal", "19:00", "OAKA Stadium", 0));
+            FixturesDay2.Add(new SportsFixture("QPR", "MU", "21:00", "Volos Stadium", 0));
+            FixturesDay2.Add(new SportsFixture("Chelsea", "Liverpool", "19:00", "", 0));
+            FixturesDay2.Add(new SportsFixture("Dortmund", "Herta", "19:00", "OAKA Stadium", 0));
             formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
             footballLists.Add(new DaySportsFixtures(formattedDay, FixturesDay2));
             currentDay = currentDay.AddDays(1);
 
             List<SportsFixture> FixturesDay3 = new List<SportsFixture>();
-            FixturesDay3.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium"));
-            FixturesDay3.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium"));
-            FixturesDay3.Add(new SportsFixture("q", "w", "19:00", ""));
-            FixturesDay3.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium"));
+            FixturesDay3.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 0));
+            FixturesDay3.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 0));
+            FixturesDay3.Add(new SportsFixture("q", "w", "19:00", "", 0));
+            FixturesDay3.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 0));
             formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
             footballLists.Add(new DaySportsFixtures(formattedDay, FixturesDay3));
             currentDay = currentDay.AddDays(1);
 
             List<SportsFixture> FixturesDay4 = new List<SportsFixture>();
-            FixturesDay4.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium"));
-            FixturesDay4.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium"));
+            FixturesDay4.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 0));
+            FixturesDay4.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 0));
             FixturesDay4.Add(new SportsFixture("q", "w", "19:00", ""));
-            FixturesDay4.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium"));
+            FixturesDay4.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 0));
             formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
             footballLists.Add(new DaySportsFixtures(formattedDay, FixturesDay4));
             currentDay = currentDay.AddDays(1);
 
             List<SportsFixture> FixturesDay5 = new List<SportsFixture>();
-            FixturesDay5.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium"));
-            FixturesDay5.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium"));
-            FixturesDay5.Add(new SportsFixture("q", "w", "19:00", ""));
-            FixturesDay5.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium"));
+            FixturesDay5.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 0));
+            FixturesDay5.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 0));
+            FixturesDay5.Add(new SportsFixture("q", "w", "19:00", "", 0));
+            FixturesDay5.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 0));
             formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
             footballLists.Add(new DaySportsFixtures(formattedDay, FixturesDay5));
             currentDay = currentDay.AddDays(1);
 
             List<SportsFixture> FixturesDay6 = new List<SportsFixture>();
-            FixturesDay6.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium"));
-            FixturesDay6.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium"));
-            FixturesDay6.Add(new SportsFixture("q", "w", "19:00", ""));
-            FixturesDay6.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium"));
+            FixturesDay6.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 0));
+            FixturesDay6.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 0));
+            FixturesDay6.Add(new SportsFixture("q", "w", "19:00", "", 0));
+            FixturesDay6.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 0));
             formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
             footballLists.Add(new DaySportsFixtures(formattedDay, FixturesDay6));
             currentDay = currentDay.AddDays(1);
 
             List<SportsFixture> FixturesDay7 = new List<SportsFixture>();
-            FixturesDay7.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium"));
-            FixturesDay7.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium"));
-            FixturesDay7.Add(new SportsFixture("q", "w", "19:00", ""));
-            FixturesDay7.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium"));
+            FixturesDay7.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 0));
+            FixturesDay7.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 0));
+            FixturesDay7.Add(new SportsFixture("q", "w", "19:00", "", 0));
+            FixturesDay7.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 0));
             formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
             footballLists.Add(new DaySportsFixtures(formattedDay, FixturesDay7));
             currentDay = currentDay.AddDays(1);
+
+
+
+            basketballOflists = new List<DaySportsFixtures>();
+            //basket
+             FixturesDay1 = new List<SportsFixture>();
+            FixturesDay1.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 1));
+            FixturesDay1.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 1));
+            FixturesDay1.Add(new SportsFixture("Real", "Barca", "19:00", "OAKA", 1));
+            FixturesDay1.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 1));
+             currentDay = DateTime.Now;
+             formattedDay = currentDay.ToString("dd/MM/yyyy");
+
+            basketballOflists.Add(new DaySportsFixtures(formattedDay, FixturesDay1));
+            currentDay = currentDay.AddDays(1);
+
+
+             FixturesDay2 = new List<SportsFixture>();
+            FixturesDay2.Add(new SportsFixture("Man City", "Arsenjal", "19:00", "OAKA Stadium", 1));
+            FixturesDay2.Add(new SportsFixture("QPR", "MU", "21:00", "Volos Stadium", 1));
+            FixturesDay2.Add(new SportsFixture("Chelsea", "Liverpool", "19:00", "", 1));
+            FixturesDay2.Add(new SportsFixture("Dortmund", "Herta", "19:00", "OAKA Stadium", 1));
+            formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
+            basketballOflists.Add(new DaySportsFixtures(formattedDay, FixturesDay2));
+            currentDay = currentDay.AddDays(1);
+
+            FixturesDay3 = new List<SportsFixture>();
+            FixturesDay3.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 1));
+            FixturesDay3.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 1));
+            FixturesDay3.Add(new SportsFixture("q", "w", "19:00", "", 1));
+            FixturesDay3.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 1));
+            formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
+            basketballOflists.Add(new DaySportsFixtures(formattedDay, FixturesDay3));
+            currentDay = currentDay.AddDays(1);
+
+             FixturesDay4 = new List<SportsFixture>();
+            FixturesDay4.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 1));
+            FixturesDay4.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 1));
+            FixturesDay4.Add(new SportsFixture("q", "w", "19:00", "",1));
+            FixturesDay4.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 1));
+            formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
+            basketballOflists.Add(new DaySportsFixtures(formattedDay, FixturesDay4));
+            currentDay = currentDay.AddDays(1);
+
+           FixturesDay5 = new List<SportsFixture>();
+            FixturesDay5.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 1));
+            FixturesDay5.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 1));
+            FixturesDay5.Add(new SportsFixture("q", "w", "19:00", "", 1));
+            FixturesDay5.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 1));
+            formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
+            basketballOflists.Add(new DaySportsFixtures(formattedDay, FixturesDay5));
+            currentDay = currentDay.AddDays(1);
+
+            FixturesDay6 = new List<SportsFixture>();
+            FixturesDay6.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 1));
+            FixturesDay6.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 1));
+            FixturesDay6.Add(new SportsFixture("q", "w", "19:00", "", 1));
+            FixturesDay6.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 1));
+            formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
+            basketballOflists.Add(new DaySportsFixtures(formattedDay, FixturesDay6));
+            currentDay = currentDay.AddDays(1);
+
+             FixturesDay7 = new List<SportsFixture>();
+            FixturesDay7.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 1));
+            FixturesDay7.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 1));
+            FixturesDay7.Add(new SportsFixture("q", "w", "19:00", "", 1));
+            FixturesDay7.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 1));
+            formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
+            basketballOflists.Add(new DaySportsFixtures(formattedDay, FixturesDay7));
+            currentDay = currentDay.AddDays(1);
+
+
+            tennisLists = new List<DaySportsFixtures>();
+            //tennis
+            FixturesDay1 = new List<SportsFixture>();
+            FixturesDay1.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 2));
+            FixturesDay1.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 2));
+            FixturesDay1.Add(new SportsFixture("Real", "Barca", "19:00", "OAKA", 2));
+            FixturesDay1.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 2));
+            currentDay = DateTime.Now;
+            formattedDay = currentDay.ToString("dd/MM/yyyy");
+
+            tennisLists.Add(new DaySportsFixtures(formattedDay, FixturesDay1));
+            currentDay = currentDay.AddDays(1);
+
+
+            FixturesDay2 = new List<SportsFixture>();
+            FixturesDay2.Add(new SportsFixture("Man City", "Arsenjal", "19:00", "OAKA Stadium", 2));
+            FixturesDay2.Add(new SportsFixture("QPR", "MU", "21:00", "Volos Stadium", 2));
+            FixturesDay2.Add(new SportsFixture("Chelsea", "Liverpool", "19:00", "", 2));
+            FixturesDay2.Add(new SportsFixture("Dortmund", "Herta", "19:00", "OAKA Stadium", 2));
+            formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
+            tennisLists.Add(new DaySportsFixtures(formattedDay, FixturesDay2));
+            currentDay = currentDay.AddDays(1);
+
+            FixturesDay3 = new List<SportsFixture>();
+            FixturesDay3.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 2));
+            FixturesDay3.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 2));
+            FixturesDay3.Add(new SportsFixture("q", "w", "19:00", "", 2));
+            FixturesDay3.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 2));
+            formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
+            tennisLists.Add(new DaySportsFixtures(formattedDay, FixturesDay3));
+            currentDay = currentDay.AddDays(1);
+
+            FixturesDay4 = new List<SportsFixture>();
+            FixturesDay4.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 2));
+            FixturesDay4.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 2));
+            FixturesDay4.Add(new SportsFixture("q", "w", "19:00", "", 2));
+            FixturesDay4.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 2));
+            formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
+            tennisLists.Add(new DaySportsFixtures(formattedDay, FixturesDay4));
+            currentDay = currentDay.AddDays(1);
+
+            FixturesDay5 = new List<SportsFixture>();
+            FixturesDay5.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 2));
+            FixturesDay5.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 2));
+            FixturesDay5.Add(new SportsFixture("q", "w", "19:00", "", 2));
+            FixturesDay5.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 2));
+            formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
+            tennisLists.Add(new DaySportsFixtures(formattedDay, FixturesDay5));
+            currentDay = currentDay.AddDays(1);
+
+            FixturesDay6 = new List<SportsFixture>();
+            FixturesDay6.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 2));
+            FixturesDay6.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 2));
+            FixturesDay6.Add(new SportsFixture("q", "w", "19:00", "", 2));
+            FixturesDay6.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 2));
+            formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
+            tennisLists.Add(new DaySportsFixtures(formattedDay, FixturesDay6));
+            currentDay = currentDay.AddDays(1);
+
+            FixturesDay7 = new List<SportsFixture>();
+            FixturesDay7.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 2));
+            FixturesDay7.Add(new SportsFixture("Volos", "Aek", "21:00", "Volos Stadium", 2));
+            FixturesDay7.Add(new SportsFixture("q", "w", "19:00", "", 2));
+            FixturesDay7.Add(new SportsFixture("OSFP", "PAO", "19:00", "OAKA Stadium", 2));
+            formattedDay = formattedDay = currentDay.ToString("dd/MM/yyyy");
+            tennisLists.Add(new DaySportsFixtures(formattedDay, FixturesDay7));
+            currentDay = currentDay.AddDays(1);
+
 
         }
         public SportsNewsControl()
@@ -183,8 +323,8 @@ namespace Personal_Assistant.CustomControls
 
 
             testItemsControl.ItemsSource = footballLists;
-
-
+            basketballItemsControl.ItemsSource = basketballOflists;
+                tennisItemsControl.ItemsSource = tennisLists;
 
 
 
@@ -261,31 +401,24 @@ namespace Personal_Assistant.CustomControls
         {
             
 
-
             var fixture = FindButtonListViewContainerGeneric<SportsFixture>((Button)sender,testItemsControl);
-            
+            if(fixture==null)
+                fixture = FindButtonListViewContainerGeneric<SportsFixture>((Button)sender, basketballItemsControl);
+            if(fixture==null)
+                fixture = FindButtonListViewContainerGeneric<SportsFixture>((Button)sender, tennisItemsControl);
+
+
             DaySportsFixtures test = FindButtonListViewContainerGeneric<DaySportsFixtures>((Button)sender,testItemsControl) as DaySportsFixtures;
+            if (test == null)
+                test = FindButtonListViewContainerGeneric<DaySportsFixtures>((Button)sender, basketballItemsControl) as DaySportsFixtures;
+            if (test == null)
+                 test = FindButtonListViewContainerGeneric<DaySportsFixtures>((Button)sender, tennisItemsControl) as DaySportsFixtures;
 
             string notifyText = fixture.Team1 + " v. " + fixture.Team2;
 
-            container.AddedSportsFixtureAppointment(notifyText, test.Date, fixture.Time,0);
+            container.AddedSportsFixtureAppointment(notifyText, test.Date, fixture.Time,fixture.Type);
 
         }
-        private void Notify_Basketball(object sender, RoutedEventArgs e)
-        {
-            SportsFixture selected = footballFixturesListView.SelectedItem as SportsFixture;
-            string notifyText = selected.Team1 + " v. " + selected.Team2;
-
-            container.AddedSportsFixtureAppointment(notifyText, selected.Time,"", 1);
-
-        }
-        private void Notify_Tennis(object sender, RoutedEventArgs e)
-        {
-            SportsFixture selected = tennisFixturesListView.SelectedItem as SportsFixture;
-            string notifyText = selected.Team1 + " v. " + selected.Team2;
-
-            container.AddedSportsFixtureAppointment(notifyText, "", selected.Time, 2);
-
-        }
+       
     }
 }

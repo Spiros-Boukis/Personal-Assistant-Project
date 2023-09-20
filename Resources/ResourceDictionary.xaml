@@ -26,10 +26,11 @@
 
     </Style>
 
+    <SolidColorBrush x:Key="darkPrimary" Color= "#2A3E62" />
     <SolidColorBrush x:Key="myPrimary" Color="#e8ebe9" />
     <SolidColorBrush x:Key="mySecondary" Color="#a6a6a6" />
 
-    <SolidColorBrush x:Key="myPrimaryDominant" Color="#465e8d" />
-    <SolidColorBrush x:Key="mySecondaryDominant" Color="#465e8d" />
+    <SolidColorBrush x:Key="myPrimaryDominant" Color="#D1D4D2" />
+    <SolidColorBrush x:Key="mySecondaryDominant" Color="#42629A" />
 
 </ResourceDictionary>
