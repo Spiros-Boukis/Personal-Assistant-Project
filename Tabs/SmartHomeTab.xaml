@@ -149,7 +149,7 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
             <Border  BorderBrush="{StaticResource myPrimaryDominant}" DockPanel.Dock="Top" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10">
                 <Label HorizontalContentAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Top" FontSize="50">Διαχείριση Έξυπνων Συσκευών</Label>
             </Border>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
 
                 <StackPanel  x:Name="livingRoomPanel" Orientation="Vertical" >
