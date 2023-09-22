@@ -1,4 +1,6 @@
-﻿using Personal_Assistant.Model;
+﻿using Notifications.Wpf;
+using Personal_Assistant.CustomControls;
+using Personal_Assistant.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,6 +41,8 @@ namespace Personal_Assistant.Tabs
         {
             InitializeComponent();
 
+
+            this.KeyDown += list_KeyDown;
              contacts = new List<Contact>();
             var con1 = new Contact("Μαρία", "6906849572");
             con1.Messages.Add(new ContactMessage(0, "hi", con1));
@@ -72,12 +76,31 @@ namespace Personal_Assistant.Tabs
 
         private void DeleteContact_Click(object sender, RoutedEventArgs e)
         {
-            
-            var item = contactsListView.SelectedItem as Contact;
-            
-            contacts.Remove(item);
-            contactsListView.Items.Refresh();
 
+            var item = contactsListView.SelectedItem as Contact;
+
+            if (item != null)
+            {
+                if (MessageBox.Show("Να διαγραφεί ή επαφή?",
+                "Επιβεβαίωση", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+
+                    contacts.Remove(item);
+                    contactsListView.Items.Refresh();
+
+                    var window = System.Windows.Application.Current.MainWindow as MainWindow;
+                    window.ShowNotifications("H επαφή διαγράφηκε διαγράφηκε", NotificationType.Success);
+                }
+                else
+                {
+                    // Do not 
+                }
+            }
+            else
+            {
+                var window = System.Windows.Application.Current.MainWindow as MainWindow;
+                window.ShowNotifications("[DEL] Πρέπει να έχετε διαλέξει κάποια έγγραφη", NotificationType.Error);
+            }
         }
 
         private void saveNewContact(object sender, RoutedEventArgs e)
@@ -96,7 +119,9 @@ namespace Personal_Assistant.Tabs
 
             if(exists)
             {
-                MessageBox.Show("Υπάρχει ήδη καταχωρημένη εγγραφή για αυτόν τον αριθμό");
+                var window = System.Windows.Application.Current.MainWindow as MainWindow;
+                window.ShowNotifications("Υπάρχει ήδη καταχωρημένη εγγραφή για αυτόν τον αριθμό", Notifications.Wpf.NotificationType.Error);
+                
             }                
             else
             {
@@ -106,7 +131,9 @@ namespace Personal_Assistant.Tabs
                 newContactItem.PhoneNumber = "";
                 newContactItem.Name = "";
                 newContactControl.Visibility=Visibility.Collapsed;
-                
+                var window = System.Windows.Application.Current.MainWindow as MainWindow;
+                window.ShowNotifications("Η επαφή καταχωρήθηκε.", NotificationType.Success);
+
             }
             
         
@@ -137,8 +164,11 @@ namespace Personal_Assistant.Tabs
                         box.IsReadOnly = false;
                     }
 
+
+                  
+
                     var SaveButton = _item.FindVisualChildren<Button>();
-                    SaveButton.ElementAt(0).Visibility = Visibility.Visible;
+                    SaveButton.ElementAt(2).Visibility = Visibility.Visible;
 
                 }
             }    
@@ -146,6 +176,48 @@ namespace Personal_Assistant.Tabs
 
         }
 
+        private void list_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+
+
+                var item = contactsListView.SelectedItem as Contact;
+
+                if (item != null)
+                {
+                    if (MessageBox.Show("Να διαγραφεί ή επαφή?",
+                    "Επιβεβαίωση", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        
+                        contacts.Remove(item);
+                        contactsListView.Items.Refresh();
+                        
+                        var window = System.Windows.Application.Current.MainWindow as MainWindow;
+                        window.ShowNotifications("H επαφή διαγράφηκε διαγράφηκε", NotificationType.Success);
+                    }
+                    else
+                    {
+                        // Do not 
+                    }
+                }
+                else
+                {
+                    var window = System.Windows.Application.Current.MainWindow as MainWindow;
+                    window.ShowNotifications("[DEL] Πρέπει να έχετε διαλέξει κάποια έγγραφη", NotificationType.Error);
+                }
+            }
+            else if (e.Key == Key.Insert)
+            {
+                if (newContactControl.Visibility == Visibility.Visible)
+                    newContactControl.Visibility = Visibility.Collapsed;
+                else if (newContactControl.Visibility == Visibility.Collapsed)
+                    newContactControl.Visibility = Visibility.Visible;
+            }
+
+
+
+        }
 
         private void saveEditContact(object sender, RoutedEventArgs e)
         {
@@ -167,12 +239,19 @@ namespace Personal_Assistant.Tabs
                     }
 
                     var SaveButton = _item.FindVisualChildren<Button>();
-                    SaveButton.ElementAt(0).Visibility = Visibility.Hidden;
+                    SaveButton.ElementAt(2).Visibility = Visibility.Hidden;
 
                 }
             }
             
 
+        }
+
+
+        public class AutoReplyParameters
+        { 
+            
+        
         }
 
 
@@ -189,6 +268,7 @@ namespace Personal_Assistant.Tabs
             
 
         }
+
 
         public void DoWork(object _contact)
         {
@@ -215,10 +295,11 @@ namespace Personal_Assistant.Tabs
                 //contact = _contact as Contact;
                 contact.Messages.Add(new ContactMessage(0, "Generated Response", contact));
                 ItemsControl list = (ItemsControl)messagesControl.FindName("messagesListView");
+                var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
                 messagesControl.scrollViewer.ScrollToBottom();
                 list.Items.Refresh();
 
-                var window = System.Windows.Application.Current.MainWindow as MainWindow;
+                
             
 
                 //list.SelectedIndex = list.Items.Count - 1;
@@ -227,7 +308,17 @@ namespace Personal_Assistant.Tabs
                
                
                     var SaveButton = itemToChange.FindVisualChildren<Image>();
+
+            if (!(contactsListView.SelectedItem == itemToChange.DataContext))
+                {
                     SaveButton.ElementAt(0).Visibility = Visibility.Visible;
+                    var window = System.Windows.Application.Current.MainWindow as MainWindow;
+                    window.ShowNotifications("Νέο μήνυμα από τον χρήστη " + contact.Name,Notifications.Wpf.NotificationType.Information);
+                }
+                
+
+                    
+
                 
             });
         }

@@ -45,5 +45,11 @@ namespace Personal_Assistant.CustomControls
             _parent.Close();
             
         }
+
+        private void email_cancelclick(object sender, RoutedEventArgs e)
+        {
+            Window _parent = (Window)this.Parent;
+            _parent.Close();
+        }
     }
 }

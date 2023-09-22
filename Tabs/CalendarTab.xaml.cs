@@ -1,9 +1,10 @@
-﻿using Notification.Wpf;
+﻿using Notifications.Wpf;
 using Personal_Assistant.CustomControls;
 using Personal_Assistant.Helpers;
 using Personal_Assistant.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -18,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Xceed.Wpf.AvalonDock.Controls;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace Personal_Assistant.Tabs
 {
@@ -26,14 +28,28 @@ namespace Personal_Assistant.Tabs
     /// </summary>
     /// 
     
-    public partial class CalendarTab : UserControl
+    public partial class CalendarTab : UserControl , INotifyPropertyChanged
     {
         public Dictionary<string, List<AppointmentEntry>> Appointments;
-
+        MainWindow window;
         List<List<string>> nameDaysLists;
 
         Style s;
+        private string currentDateString;
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public string CurrentDateString
+        {
+            get { return currentDateString; }
+            set
+            {
+                currentDateString = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentDateString"));
+
+            }
+        }
+       
         public void InitNameDays()
         {
             nameDaysLists = new List<List<string>>(); 
@@ -97,6 +113,13 @@ namespace Personal_Assistant.Tabs
             if (Appointments.ContainsKey(_date))
             {
                 Appointments[_date].Add(entry);
+                var tempDate = CalendarControl.SelectedDate.Value;
+                CalendarControl.SelectedDate = DateTime.Now.AddMonths(1).ToUniversalTime();
+                CalendarControl.SelectedDate = tempDate;
+
+                CalendarControl.DisplayDate = tempDate.AddMonths(1);
+                CalendarControl.DisplayDate = tempDate;
+                window.ShowNotifications("Το ραντεβού δημιουργήθηκε", NotificationType.Success);
             }
             else
             {
@@ -105,17 +128,18 @@ namespace Personal_Assistant.Tabs
                 var tempDate = CalendarControl.SelectedDate.Value;
                 CalendarControl.SelectedDate = DateTime.Now.AddMonths(1).ToUniversalTime();
                 CalendarControl.SelectedDate = tempDate;
-                //aTrigger dataTrigger = new DataTrigger() { Binding = new Binding("Date"), Value = _formattedDate };
-                //aTrigger.Setters.Add(new Setter(CalendarDayButton.BackgroundProperty, Brushes.LightGreen));
-                // s.Triggers.Add(dataTrigger);
+               
 
                 CalendarControl.DisplayDate = tempDate.AddMonths(1);
                 CalendarControl.DisplayDate = tempDate;
+                CalendarControl.DisplayDate = tempDate.AddMonths(-1);
+                CalendarControl.DisplayDate = tempDate;
 
+                window.ShowNotifications("Το ραντεβού δημιουργήθηκε", NotificationType.Success);
             }
 
-            AppointmentsListView.ItemsSource = Appointments[_date];
-            AppointmentsListView.Items.Refresh();
+           // AppointmentsListView.SelectedIndex = AppointmentsListView.Items.Count - 1;
+           // AppointmentsListView.ScrollIntoView(AppointmentsListView.SelectedItem);
 
             //newAppointmentControl.Visibility = Visibility.Collapsed;
 
@@ -126,10 +150,15 @@ namespace Personal_Assistant.Tabs
 
         public CalendarTab()
         {
-
+            
             
             InitializeComponent();
-           
+
+            currentDateLabel.DataContext = this;
+
+            window = Application.Current.MainWindow as MainWindow;
+            this.KeyDown += calendarStackPanel_KeyDown;
+
             InitNameDays();
             var _container = this.FindVisualAncestor<MainWindow>;
             //SystemSounds.Beep.Play();
@@ -180,12 +209,14 @@ namespace Personal_Assistant.Tabs
         {
             var lowerBound = 0;
             var upperBound = 4;
+            
             var rNum = RandomNumberGenerator.GetInt32(lowerBound, upperBound);
             namedayListView.ItemsSource= nameDaysLists.ElementAt(rNum);
             var _date = CalendarControl.SelectedDate.Value.ToShortDateString();
             currentDate.Content = _date;
             //CalendarControl.SelectedDates.Add(_date);
             var test = _date;
+            CurrentDateString = _date;
             if (Appointments.ContainsKey(_date))
             {
                 AppointmentsListView.ItemsSource = Appointments[test];
@@ -223,12 +254,14 @@ namespace Personal_Assistant.Tabs
                     var temp = Appointments[test];
                     AppointmentsListView.ItemsSource = temp;
                     AppointmentsListView.Items.Refresh();
+                    window.ShowNotifications("Το ραντεβού διαγράφηκε.", NotificationType.Information);
                     if (Appointments[test].Count==0) 
                     {
                         Appointments.Remove(test);
                         var tempDate = CalendarControl.SelectedDate.Value;
                         CalendarControl.DisplayDate = tempDate.AddMonths(1);
                         CalendarControl.DisplayDate = tempDate;
+                        
                     }
                 }
                 else
@@ -274,6 +307,13 @@ namespace Personal_Assistant.Tabs
             if (Appointments.ContainsKey(_date))
             {
                 Appointments[_date].Add(entry);
+                var tempDate = CalendarControl.SelectedDate.Value;
+                CalendarControl.SelectedDate = DateTime.Now.AddMonths(1).ToUniversalTime();
+                CalendarControl.SelectedDate = tempDate;
+
+                CalendarControl.DisplayDate = tempDate.AddMonths(1);
+                CalendarControl.DisplayDate = tempDate;
+                window.ShowNotifications("Το ραντεβού δημιουργήθηκε", NotificationType.Success);
             }
             else
             {
@@ -285,6 +325,7 @@ namespace Personal_Assistant.Tabs
 
                 CalendarControl.DisplayDate = tempDate.AddMonths(1);
                 CalendarControl.DisplayDate = tempDate;
+                window.ShowNotifications("Το ραντεβού δημιουργήθηκε", NotificationType.Success);
 
             }
 
@@ -319,28 +360,42 @@ namespace Personal_Assistant.Tabs
         {
             if (e.Key == Key.Delete)
             {
+
+
+
                 var _date = CalendarControl.SelectedDate.Value.ToShortDateString();
 
-                var test = _date.ToString();
-                var prompt = MessageBox.Show("Θέλετε να διαγράψετε αυτό το ραντεβού?", "Διαγραφή", MessageBoxButton.YesNo);
-                if (prompt == MessageBoxResult.Yes)
+                var item = AppointmentsListView.SelectedItem as AppointmentEntry; 
+                if (item != null)
                 {
-                    AppointmentEntry item = (AppointmentEntry)AppointmentsListView.SelectedItem;
-
-                    Appointments[test].Remove(item);
-                    var temp = Appointments[test];
-                    AppointmentsListView.ItemsSource = temp;
-                    AppointmentsListView.Items.Refresh();
-                    if (Appointments[test].Count == 0)
+                    if (MessageBox.Show("Να διαγραφεί το ραντεβού?",
+                    "Επιβεβαίωση", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        Appointments.Remove(test);
-                        var tempDate = CalendarControl.SelectedDate.Value;
-                        CalendarControl.DisplayDate = tempDate.AddMonths(1);
-                        CalendarControl.DisplayDate = tempDate;
+                        var test = _date.ToString();
+                        Appointments[test].Remove(item);
+                        var temp = Appointments[test];
+                        AppointmentsListView.ItemsSource = temp;
+                        AppointmentsListView.Items.Refresh();
+                        if (Appointments[test].Count == 0)
+                        {
+                            Appointments.Remove(test);
+                            var tempDate = CalendarControl.SelectedDate.Value;
+                            CalendarControl.DisplayDate = tempDate.AddMonths(1);
+                            CalendarControl.DisplayDate = tempDate;
+                        }
+                        var window = Application.Current.MainWindow as MainWindow;
+                        window.ShowNotifications("To ραντεβού διαγράφηκε", NotificationType.Success);
+                    }
+                    else
+                    {
+                        // Do not 
                     }
                 }
                 else
-                { }
+                {
+                    var window = Application.Current.MainWindow as MainWindow;
+                    window.ShowNotifications("[DEL] Πρέπει να έχετε διαλέξει κάποια έγγραφη", NotificationType.Error);
+                }
             }
             else if(e.Key == Key.Insert) 
             {

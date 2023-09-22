@@ -1,7 +1,6 @@
-﻿using Notification.Wpf;
-using System;
+﻿using System;
 using System.Windows;
-
+using Notifications.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -9,7 +8,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
-using Enterwell.Clients.Wpf.Notifications;
 using Personal_Assistant.Tabs;
 
 namespace Personal_Assistant
@@ -35,7 +33,7 @@ namespace Personal_Assistant
 
         
             services.AddTransient(typeof(MainWindow));
-            services.AddTransient<INotificationManager, NotificationManager>();
+            services.AddTransient<INotificationManager, Notifications.Wpf.NotificationManager>();
             
      
         }

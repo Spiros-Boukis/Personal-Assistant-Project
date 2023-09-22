@@ -4,13 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Personal_Assistant.CustomControls"
-             mc:Ignorable="d" 
-                        
-             Height="auto" Width="auto">
-    <Border Width="1500" BorderThickness="10" BorderBrush="Azure">
-        <DockPanel>
-            <TextBlock  x:Name="myText" FontSize="30" ></TextBlock>
-        </DockPanel>
-    </Border>
+             
+>
+
+
+    <StackPanel Width="1300" Height="auto">
+        <Label HorizontalAlignment="Center" Width="130" FontSize="38">Ειδοποίηση</Label>
+        <TextBlock HorizontalAlignment="Center" Width="130" Foreground="White" TextWrapping="Wrap"  x:Name="myText" FontSize="30" ></TextBlock>
+    </StackPanel>        
+
+        
+   
+       
+        
   
 </UserControl>

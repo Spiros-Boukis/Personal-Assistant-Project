@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\add_icon.png" />
+    <None Remove="Resources\Images\alarmbell.png" />
     <None Remove="Resources\Images\bullet.png" />
     <None Remove="Resources\Images\calandar-icon.png" />
     <None Remove="Resources\Images\calendar-flat.png" />
@@ -51,6 +52,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\alarmbell.png" />
     <Resource Include="Resources\Images\contacts_icon.png" />
     <Resource Include="Resources\Images\email.png" />
     <Resource Include="Resources\Images\google.png" />
@@ -76,6 +78,7 @@
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
     <PackageReference Include="ModernWpfUI.MahApps" Version="0.9.5" />
     <PackageReference Include="Notification.Wpf" Version="7.0.0.2" />
+    <PackageReference Include="Notifications.Wpf" Version="0.1.1" />
   </ItemGroup>
 
   <ItemGroup>

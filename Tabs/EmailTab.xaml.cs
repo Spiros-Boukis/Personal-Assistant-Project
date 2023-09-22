@@ -1,4 +1,5 @@
-﻿using Personal_Assistant.CustomControls;
+﻿using Notifications.Wpf;
+using Personal_Assistant.CustomControls;
 using Personal_Assistant.Model;
 using System;
 using System.Collections.Generic;
@@ -127,8 +128,32 @@ namespace Personal_Assistant.Tabs
         {
             if (e.Key == Key.Delete)
             {
-              
+                var item = emailsListView.SelectedItem as EmailEntry;
+                if (item != null)
+                {
+                    if (MessageBox.Show("Να διαγραφεί το μήνυμα?",
+                    "Επιβεβαίωση", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        if (Emails.Contains(item))
+                        {
+                            Emails.Remove(item);
+                            emailsListView.Items.Refresh();
+                            var window = Application.Current.MainWindow as MainWindow;
+
+                            window.ShowNotifications("To μήνυμα διαγράφηκε", NotificationType.Success);
+                        }
+                    }
+                    else
+                    {
+                        // Do not 
+                    }
+                }
+                else{
+                    var window = Application.Current.MainWindow as MainWindow;
+                    window.ShowNotifications("[DEL] Πρέπει να έχετε διαλέξει κάποια έγγραφη", NotificationType.Error);
+                }
             }
+            
             else if (e.Key == Key.Insert)
             {
                 Window window = new Window

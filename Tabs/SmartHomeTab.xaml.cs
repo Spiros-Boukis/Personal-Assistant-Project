@@ -1,6 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using ModernWpf.Controls;
-using Notification.Wpf;
+using Notifications.Wpf;
 using Personal_Assistant.Helpers;
 using Personal_Assistant.Model;
 using System;
@@ -67,7 +67,7 @@ namespace Personal_Assistant.Tabs
         List<TimerSchedule> Schedules = new List<TimerSchedule>();
         Guid timedItemID;
         bool timerisSet = false;
-
+     
     
         public SmartHomeTab()
         {
@@ -81,7 +81,7 @@ namespace Personal_Assistant.Tabs
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Tick += _bulbTimerTick;
             timer.Start();
-
+             
 
             items = new List<SmartHomeItem>();
             items.Add(new LightBulbItem("Κεντρικό Φως", "Online",true));
@@ -106,7 +106,7 @@ namespace Personal_Assistant.Tabs
             livingRoomListView.ItemsSource = items;
 
             BedroomListView.ItemsSource = items2;
-            var t = new Thread(SimulateTemperatureChanges);
+            var t = new Thread(Loop);
             t.Start();
 
 
@@ -117,7 +117,7 @@ namespace Personal_Assistant.Tabs
 
         }
 
-        private void SimulateTemperatureChanges()
+        private void Loop()
         {
             while (true)
             {
@@ -210,13 +210,13 @@ namespace Personal_Assistant.Tabs
                     if (item.IsOn)
                     {
                         item.IsOn = false;
-                        q.ShowNotifications("Η λειτουργία χρονοδιακόπτη για την συσκευή " + item.Description + " στο δωμάτιο " + "Living Room απενεργοποιήθηκε. Η λάμπα έχει σβήσει");
+                        q.ShowNotifications("Η λειτουργία χρονοδιακόπτη για την συσκευή " + item.Description + " στο δωμάτιο " + "Living Room απενεργοποιήθηκε. Η λάμπα έχει σβήσει",NotificationType.Success);
 
                     }
                     else
                     {
                         item.IsOn = true;
-                        q.ShowNotifications("Η λειτουργία χρονοδιακόπτη για την συσκευή " + item.Description + " στο δωμάτιο " + "Living Room απενεργοποιήθηκε. Η λάμπα έχει Ανάψει");
+                        q.ShowNotifications("Η λειτουργία χρονοδιακόπτη για την συσκευή " + item.Description + " στο δωμάτιο " + "Living Room απενεργοποιήθηκε. Η λάμπα έχει Ανάψει", NotificationType.Success);
                     }
 
 
@@ -243,7 +243,7 @@ namespace Personal_Assistant.Tabs
                             item.IsOn = false;
                         var q = Application.Current.MainWindow as MainWindow;
 
-                        q.ShowNotifications("Η λειτουργία θερμοστάτη για την συσκευή " + item.Description + " στο δωμάτιο " + "Living Room απενεργοποιήθηκε. Η θερμοκρασία του χώρου είναι η επιθυμητή.");
+                        q.ShowNotifications("Η λειτουργία θερμοστάτη για την συσκευή " + item.Description + " στο δωμάτιο " + "Living Room απενεργοποιήθηκε. Η θερμοκρασία του χώρου είναι η επιθυμητή.", NotificationType.Success);
                     }
                 }
                 else if (item.ScheduleType == 1)
@@ -262,13 +262,85 @@ namespace Personal_Assistant.Tabs
                          item.IsOn = false;
                         var q = Application.Current.MainWindow as MainWindow;
                         
-                        q.ShowNotifications("Η λειτουργία θερμοστάτη για την συσκευή " +item.Description +" στο δωμάτιο "+"Living Room απενεργοποιήθηκε. Η θερμοκρασία του χώρου είναι η επιθυμητή.");
+                        q.ShowNotifications("Η λειτουργία θερμοστάτη για την συσκευή " +item.Description +" στο δωμάτιο "+"Living Room απενεργοποιήθηκε. Η θερμοκρασία του χώρου είναι η επιθυμητή.", NotificationType.Success);
                     }
                 }
 
            
                 }
+
+            foreach (LightBulbItem item in items2.Where(x => x.ScheduleEnabled == true && x.GetType() == typeof(LightBulbItem)))
+            {
+
+
+                if (DateTime.Now > item.ScheduleTargetTime)
+                {
+
+                    var q = Application.Current.MainWindow as MainWindow;
+                    item.ScheduleEnabled = false;
+
+                    if (item.IsOn)
+                    {
+                        item.IsOn = false;
+                        q.ShowNotifications("Η λειτουργία χρονοδιακόπτη για την συσκευή " + item.Description + " στο δωμάτιο " + "Living Room απενεργοποιήθηκε. Η λάμπα έχει σβήσει", NotificationType.Success);
+
+                    }
+                    else
+                    {
+                        item.IsOn = true;
+                        q.ShowNotifications("Η λειτουργία χρονοδιακόπτη για την συσκευή " + item.Description + " στο δωμάτιο " + "Living Room απενεργοποιήθηκε. Η λάμπα έχει Ανάψει", NotificationType.Success);
+                    }
+
+
+
+                }
             }
+            foreach (TemperatureItem item in items2.Where(x => x.ScheduleEnabled == true && x.GetType() == typeof(TemperatureItem)))
+            {
+
+
+                if (item.ScheduleType == 0)
+                {
+                    if (item.Temperature < item.TargetTemperature)
+                    {
+                        var random = (double)RandomNumberGenerator.GetInt32(0, 100);
+                        random = random * 0.01;
+                        item.Temperature += random;
+                        item.Temperature = Math.Round(item.Temperature, 2);
+                    }
+                    else //done 
+                    {
+                        item.ScheduleEnabled = false;
+
+                        item.IsOn = false;
+                        var q = Application.Current.MainWindow as MainWindow;
+
+                        q.ShowNotifications("Η λειτουργία θερμοστάτη για την συσκευή " + item.Description + " στο δωμάτιο " + "Living Room απενεργοποιήθηκε. Η θερμοκρασία του χώρου είναι η επιθυμητή.", NotificationType.Success);
+                    }
+                }
+                else if (item.ScheduleType == 1)
+                {
+                    if (item.Temperature > item.TargetTemperature)
+                    {
+                        var random = (double)RandomNumberGenerator.GetInt32(0, 100);
+                        random = random * 0.01;
+                        item.Temperature -= random;
+                        item.Temperature = Math.Round(item.Temperature, 2);
+                    }
+                    else //done 
+                    {
+                        item.ScheduleEnabled = false;
+
+                        item.IsOn = false;
+                        var q = Application.Current.MainWindow as MainWindow;
+
+                        q.ShowNotifications("Η λειτουργία θερμοστάτη για την συσκευή " + item.Description + " στο δωμάτιο " + "Living Room απενεργοποιήθηκε. Η θερμοκρασία του χώρου είναι η επιθυμητή.", NotificationType.Success);
+                    }
+                }
+
+
+            }
+        }
 
 
         
@@ -280,8 +352,16 @@ namespace Personal_Assistant.Tabs
             Button _button = sender as Button;
 
             LightBulbItem _selected = ViewsHelpers.FindSelectedItemsControlItemContentByChild<Button, LightBulbItem>(livingRoomListView, _button);
-           
+            if (_selected != null)
+            {
                 _selected.ScheduleEnabled = true;
+            }
+            else
+            {
+                LightBulbItem _selected1 = ViewsHelpers.FindSelectedItemsControlItemContentByChild<Button, LightBulbItem>(BedroomListView, _button);
+                _selected1.ScheduleEnabled = true;
+            }
+          
 
   
                 Schedules.Add(new TimerSchedule(_tempDate, timedItemID));        
@@ -320,7 +400,8 @@ namespace Personal_Assistant.Tabs
             
 
             LightBulbItem selected = Helpers.ViewsHelpers.FindSelectedItemsControlItemContentByChild<ToggleSwitch, LightBulbItem>(livingRoomListView, _switch);
-
+            if (selected == null)
+                selected = Helpers.ViewsHelpers.FindSelectedItemsControlItemContentByChild<ToggleSwitch, LightBulbItem>(BedroomListView, _switch);
             if (_switch.IsOn)
             {
                 selected.ImagePath = "/Resources/Images/SmartHome/bulb_on.png";
@@ -343,6 +424,9 @@ namespace Personal_Assistant.Tabs
 
             
             SmartHomeItem item  = Helpers.ViewsHelpers.FindSelectedItemsControlItemContentByChild<ToggleSwitch, SmartHomeItem>(livingRoomListView, Sender);
+            if(item==null)
+                item = Helpers.ViewsHelpers.FindSelectedItemsControlItemContentByChild<ToggleSwitch, SmartHomeItem>(BedroomListView, Sender);
+            
             var type = item.GetType();
             
             if (type == typeof(LightBulbItem)) 
@@ -354,6 +438,7 @@ namespace Personal_Assistant.Tabs
                     lightBulbItem.ScheduleEnabled = true;
 
                 }
+                
             }
             if (type == typeof(TemperatureItem))
             {

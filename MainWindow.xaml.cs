@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
-using Notification.Wpf;
+using Notifications.Wpf;
 using System.Media;
 using System.Windows.Threading;
 using Xceed.Wpf.AvalonDock.Controls;
@@ -35,57 +35,14 @@ namespace Personal_Assistant
         {
             InitializeComponent();
             NotificationManager = notificationManager;
-        
 
+            ShowNotifications("Welcome",NotificationType.Information);
         }
 
-        public void ShowNotifications(string notifyText)
+        public void ShowNotifications(string notifyText,NotificationType type)
         {
-           
-           
-
-
-            var grid = new Grid();
-            var text_block = new TextBlock { Text = notifyText, Margin = new Thickness(0, 10, 0, 0), HorizontalAlignment = HorizontalAlignment.Center };
-
-
-            var panelBTN = new StackPanel { Height = 100, Width= 600 , Margin = new Thickness(0, 40, 0, 0) };
-            var btn1 = new Button { Width = 200, Height = 40, Content = "Cancel" };
-            var text = new TextBlock { Foreground = Brushes.White, Text = "Hello, world", Margin = new Thickness(0, 10, 0, 0), HorizontalAlignment = HorizontalAlignment.Center };
-            panelBTN.VerticalAlignment = VerticalAlignment.Bottom;
-            panelBTN.Children.Add(btn1);
-
-            var row1 = new RowDefinition();
-            var row2 = new RowDefinition();
-            var row3 = new RowDefinition();
-
-            grid.RowDefinitions.Add(new RowDefinition());
-            grid.RowDefinitions.Add(new RowDefinition());
-            grid.RowDefinitions.Add(new RowDefinition());
-
-
-            grid.HorizontalAlignment = HorizontalAlignment.Center;
-            grid.Children.Add(text_block);
-            grid.Children.Add(text);
-            grid.Children.Add(panelBTN);
-
-            Grid.SetRow(panelBTN, 1);
-            Grid.SetRow(text_block, 0);
-            Grid.SetRow(text, 2);
-
-            object content = grid;
-
-            NotificationPanel testContent = new NotificationPanel();
-            testContent.myText.Text = notifyText;
-
             
-            var test = testContent.Content;
-            testContent.Content = null;
-
-
-            
-            NotificationManager.Show(test,"WindowArea", TimeSpan.MaxValue);
-
+            NotificationManager.Show(new NotificationContent { Title = "Ειδοποίηση", Message = notifyText, Type = type }, expirationTime: TimeSpan.FromSeconds(30));
             SystemSounds.Hand.Play();
 
         }

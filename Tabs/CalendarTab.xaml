@@ -12,76 +12,72 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
              xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
+             
              Height="auto" Width="auto">
 
     <UserControl.Resources>
 
 
-        <Style x:Key="cdbKey" TargetType="CalendarDayButton">
-            <Style.Triggers>
 
-
-            </Style.Triggers>
-        </Style>
 
         <local1:AppointmentEntrySelector x:Key="appointmentSelector"/>
         <DataTemplate x:Key="NormalAppointmentTemplate">
-            <Border Style="{StaticResource appointmentBorderStyle}">
+            <Border Style="{StaticResource appointmentBorderStyle}" >
                 <StackPanel Width="auto"  Orientation="Horizontal">
-                    <Label Width="40" Height="40" Margin="5"></Label>
-                    <xctk:TimePicker FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                    <Label Width="20" Height="20" Margin="5"></Label>
+                    <xctk:TimePicker VerticalAlignment="Center" FontSize="20" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
 
 
 
-                    <TextBlock FontSize="40" Text="{Binding Path=Title}"></TextBlock>
+                    <TextBlock VerticalAlignment="Center" FontSize="20" MaxWidth="300" TextWrapping="Wrap" Text="{Binding Path=Title}"></TextBlock>
                 </StackPanel>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="SportsAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
                 <StackPanel Width="auto" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
-                    <Image Source="/Resources/Images/Sports/football.png" Width="40" Height="40" Margin="5"></Image>
+                    <Image Source="/Resources/Images/Sports/football.png" Width="20" Height="20" Margin="5"></Image>
 
-                    <xctk:TimePicker  FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                    <xctk:TimePicker VerticalAlignment="Center"  FontSize="20" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
 
 
 
-                    <TextBlock FontSize="40" Text="{Binding Path=Title}"></TextBlock>
+                    <TextBlock VerticalAlignment="Center" FontSize="20" MaxWidth="300" TextWrapping="Wrap" Text="{Binding Path=Title}"></TextBlock>
                 </StackPanel>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="BasketballAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
                 <StackPanel Width="auto" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
-                    <Image Source="/Resources/Images/Sports/basketball.png" Width="40" Height="40" Margin="5"></Image>
+                    <Image Source="/Resources/Images/Sports/basketball.png" Width="20" Height="20" Margin="5"></Image>
 
-                    <xctk:TimePicker FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                    <xctk:TimePicker FontSize="20" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
 
 
 
-                    <TextBlock FontSize="40" Text="{Binding Path=Title}"></TextBlock>
+                    <TextBlock MaxWidth="300" TextWrapping="Wrap" FontSize="20" Text="{Binding Path=Title}"></TextBlock>
                 </StackPanel>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="TennisAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
                 <StackPanel Width="auto" Style="{StaticResource appointmentPanelStyle}" Orientation="Horizontal">
-                    <Image Source="/Resources/Images/Sports/tennis.png" Width="40" Height="40" Margin="5"></Image>
+                    <Image Source="/Resources/Images/Sports/tennis.png" Width="20" Height="20" Margin="5"></Image>
 
-                    <xctk:TimePicker  FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                    <xctk:TimePicker VerticalAlignment="Center"  FontSize="20" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
 
 
 
-                    <TextBlock FontSize="40" Text="{Binding Path=Title}"></TextBlock>
+                    <TextBlock MaxWidth="300" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" Text="{Binding Path=Title}"></TextBlock>
                 </StackPanel>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="ImportantAppointmentTemplate">
             <Border Style="{StaticResource appointmentBorderStyle}">
                 <StackPanel Width="auto" Orientation="Horizontal">
-                    <Image Source="/Resources/Images/important_icon.png" Width="40" Height="40" Margin="5"></Image>
-                    <xctk:TimePicker  FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
-                    <TextBlock FontWeight="Bold" FontSize="40" Text="{Binding Title}"></TextBlock>
+                    <Image Source="/Resources/Images/important_icon.png" Width="20" Height="20" Margin="5"></Image>
+                    <xctk:TimePicker VerticalAlignment="Center" FontSize="20" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                    <TextBlock MaxWidth="300" TextWrapping="Wrap" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Text="{Binding Title}"></TextBlock>
 
                 </StackPanel>
             </Border>
@@ -90,34 +86,30 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
 
             <Border Style="{StaticResource appointmentBorderStyle}">
                 <StackPanel Width="auto" Orientation="Horizontal">
-                    <Image Source="/Resources/Images/deadline_icon.png" Width="40" Height="40" Margin="5"></Image>
-                    <xctk:TimePicker Background="#eef5fd" FontSize="27" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
-                    <TextBlock FontWeight="Bold" FontSize="40" Text="{Binding Title}"></TextBlock>
+                    <Image Source="/Resources/Images/deadline_icon.png" Width="20" Height="20" Margin="5"></Image>
+                    <xctk:TimePicker VerticalAlignment="Center" Background="#eef5fd" FontSize="20" Margin="5"  Width="70" ShowButtonSpinner="False" ShowDropDownButton="False" AllowSpin="False" AllowDrop="False" AllowTextInput="False" Value="{Binding Path=Time}"/>
+                    <TextBlock MaxWidth="300" TextWrapping="Wrap" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Text="{Binding Title}"></TextBlock>
                 </StackPanel>
             </Border>
         </DataTemplate>
     </UserControl.Resources>
-    <Border  BorderBrush="{StaticResource myPrimaryDominant}" DockPanel.Dock="Top" Background="{StaticResource myPrimaryDominant}" BorderThickness="13" CornerRadius="10" Margin="10">
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Border  BorderBrush="{StaticResource myPrimaryDominant}" HorizontalAlignment="Center" VerticalAlignment="Center"  Background="{StaticResource myPrimaryDominant}" BorderThickness="13" CornerRadius="10" Margin="10">
+        <StackPanel  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" >
 
 
-                <Border  BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10">
-                    <StackPanel x:Name="calendarStackPanel" Orientation="Vertical" KeyDown="calendarStackPanel_KeyDown">
+                <Border VerticalAlignment="Center" BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10" Width="550" Height="400">
+                    <StackPanel x:Name="calendarStackPanel" Orientation="Vertical" >
                         <DockPanel>
-                            <Label HorizontalAlignment="Left" Content="Ραντεβού Ημέρας:"  FontSize="40" FontWeight="Bold"></Label>
-                            <Label HorizontalAlignment="Left" Content=" 20/09/2023"  FontSize="40" FontWeight="Light"></Label>
+                            <Label HorizontalAlignment="Left" Content="Ραντεβού Ημέρας:"  FontSize="30" FontWeight="Bold"></Label>
+                            <Label x:Name="currentDateLabel" HorizontalAlignment="Left" Content="{Binding CurrentDateString}"  FontSize="30" FontWeight="Light"></Label>
                         </DockPanel>
 
                         <ToolBar MinWidth="850" Background="{StaticResource myPrimaryDominant}">
                             <ToolBar.Items>
                                 <Button Click="NewAppointment_Click" ToolTip="Δημιουργία Ραντεβού [INS]">
                                     <Image Height="50" Width="50" Source="/Resources/Images/add_icon.png"/>
-                                </Button>
-                                <Button ToolTip="Επεξεργασία" Click="Edit_Click">
-                                    <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
-
                                 </Button>
                                 <Button Click="Delete_Click" ToolTip="Διαγραφή επιλεγμένου ραντεβού [DEL]">
                                     <Image  HorizontalAlignment="Right" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
@@ -128,49 +120,52 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
                         <StackPanel x:Name="newAppointmentControl" Orientation="Horizontal" Width="auto">
 
                             <Button Click="saveNewAppointment">
-                                <Image Source="/Resources/Images/save_icon.png" Width="40" Height="40"/>
+                                <Image Source="/Resources/Images/save_icon.png" Width="25" Height="25"/>
 
                             </Button>
                             <Button Click="cancelNewAppointment">
-                                <Image Source="/Resources/Images/cancel_icon.png" Width="40" Height="40"/>
+                                <Image Source="/Resources/Images/cancel_icon.png" Width="25" Height="25"/>
 
                             </Button>
-                            <TextBox x:Name="newEntryText" MinWidth="500" FontSize="40" Text=". . . ."></TextBox>
+                            <TextBox x:Name="newEntryText" TextWrapping="Wrap" MaxWidth="180" Height="60" Width="180" FontSize="20" Text=". . . ."></TextBox>
                             <Border  BorderThickness="2">
-                                <xctk:TimePicker x:Name="timePicker" AllowTextInput="False" FontSize="25" Width="100"></xctk:TimePicker>
+                                <xctk:TimePicker x:Name="timePicker" AllowTextInput="False" FontSize="25" Height="60" Width="100"></xctk:TimePicker>
                             </Border>
 
                             <StackPanel Orientation="Vertical">
-                                <TextBlock FontSize="30">Προτεραιότητα</TextBlock>
-                                <ComboBox x:Name="priorityComboBox" FontSize="25">
-                                    <ComboBoxItem FontSize="25" IsSelected="True" x:Name="normal">Normal</ComboBoxItem>
-                                    <ComboBoxItem x:Name="important">Σημαντικό</ComboBoxItem >
-                                    <ComboBoxItem x:Name="deadline">Deadline</ComboBoxItem >
+                                <TextBlock FontSize="18">Προτεραιότητα</TextBlock>
+                                <ComboBox x:Name="priorityComboBox" FontSize="10">
+                                    <ComboBoxItem FontSize="15" IsSelected="True" x:Name="normal">Normal</ComboBoxItem>
+                                    <ComboBoxItem FontSize="15" x:Name="important">Σημαντικό</ComboBoxItem >
+                                    <ComboBoxItem FontSize="15" x:Name="deadline">Deadline</ComboBoxItem >
                                 </ComboBox>
                             </StackPanel>
                         </StackPanel>
 
-                        <ListView x:Name="AppointmentsListView" MaxHeight="300"  ItemTemplateSelector="{StaticResource appointmentSelector}">
+                        <ListView ItemContainerStyle="{StaticResource listViewItemStyleNew}" x:Name="AppointmentsListView" Height="250" MaxHeight="250"  ItemTemplateSelector="{StaticResource appointmentSelector}">
 
                         </ListView>
 
                     </StackPanel>
                 </Border>
-                <Viewbox  MaxWidth="500">
+                <Viewbox VerticalAlignment="Center" Height="450" Width="450" MinWidth="450" MaxWidth="450" MinHeight="450" MaxHeight="450">
+                    <Border  VerticalAlignment="Center" BorderBrush="{StaticResource myPrimary}"  BorderThickness="13" CornerRadius="10" >
+                        <Calendar   VerticalAlignment="Center" x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged">
 
-                    <Calendar  x:Name="CalendarControl" SelectedDatesChanged="Calendar_SelectedDatesChanged">
-                        <Calendar.CalendarDayButtonStyle>
-                            <Style TargetType="{x:Type CalendarDayButton}">
-                                <Setter Property="helpers:DateHelper.Date" Value="{Binding}" />
-                                <Style.Triggers>
-                                    <Trigger Property="helpers:DateHelper.HasEntries" Value="True">
-                                        <Setter Property="Background" Value="LightGreen" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Calendar.CalendarDayButtonStyle>
-                    </Calendar>
+                            <Calendar.CalendarDayButtonStyle>
+                                <Style TargetType="{x:Type CalendarDayButton}">
+                                    <Setter Property="helpers:DateHelper.Date" Value="{Binding}" />
+                                    <Style.Triggers>
+                                        <Trigger Property="helpers:DateHelper.HasEntries" Value="True">
+                                            <Setter Property="Background" Value="LightGreen" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Calendar.CalendarDayButtonStyle>
+                        </Calendar>
+                    </Border>
                 </Viewbox>
+               
             </StackPanel>
             <Label FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" Visibility="Collapsed" x:Name="currentDate"></Label>
 
@@ -180,14 +175,14 @@ xmlns:helpers="clr-namespace:Personal_Assistant.Helpers"
 
 
 
-                        <local2:SportsNewsControl x:Name="sportsControl"></local2:SportsNewsControl>
+                        <local2:SportsNewsControl x:Name="sportsControl" ></local2:SportsNewsControl>
 
                         <Border Background="{StaticResource myPrimaryDominant}" BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="5" CornerRadius="6">
 
 
                             <StackPanel >
                                 <Label FontSize="40" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="Εορτάζοντες" />
-                                <ListView MinWidth="500" x:Name="namedayListView" IsEnabled="False" >
+                                <ListView MinWidth="400" x:Name="namedayListView" IsEnabled="False" >
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">

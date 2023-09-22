@@ -28,16 +28,16 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         <DataTemplate x:Key="lightBulbTemplate" >
             <Border BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="16" CornerRadius="5" DockPanel.Dock="Bottom" Margin="5" >
             <StackPanel Orientation="Horizontal">
-                <DockPanel LastChildFill="False" Width="450">
+                <DockPanel LastChildFill="False" Width="350">
                     <TextBlock HorizontalAlignment="Center" DockPanel.Dock="Top" FontWeight="Heavy" FontSize="20" Text="{Binding Description}"></TextBlock>
                     <StackPanel IsEnabled="{Binding ItemStatus}" Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
-                        <Image HorizontalAlignment="Center" x:Name="image" Width="80" Height="80" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}"/>
-                            <ui:ToggleSwitch IsEnabled="{Binding BulbSwitchIsEnabled,Mode =TwoWay}" OnContent="" Width="40" Height="auto" OffContent="" UseSystemFocusVisuals="False" HorizontalAlignment="Center"  IsOn="{Binding IsOn , Mode=TwoWay}" Toggled="LightBulbOnOff_SwitchToggled"/>
+                        <Image HorizontalAlignment="Center" x:Name="image" Width="50" Height="50" SourceUpdated="image_SourceUpdated" Source="{Binding ImagePath , Mode=TwoWay}"/>
+                            <ui:ToggleSwitch IsEnabled="{Binding BulbSwitchIsEnabled,Mode =TwoWay}" ToolTip="Ενεργοποίηση/Απενεργοποίηση Συσκευής" OnContent="" Width="40" Height="auto" OffContent="" UseSystemFocusVisuals="False" HorizontalAlignment="Center"  IsOn="{Binding IsOn , Mode=TwoWay}" Toggled="LightBulbOnOff_SwitchToggled"/>
                     </StackPanel>
                     <Border Margin="10" BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="9" CornerRadius="5" DockPanel.Dock="Bottom" >
                         <DockPanel IsEnabled="{Binding ItemStatus}" LastChildFill="False" DockPanel.Dock="Bottom">
                                 <ui:SimpleTimePicker Foreground="White"   Background="{StaticResource  darkPrimary}" HorizontalAlignment="Center" SelectedDateTime="{Binding TimerTargetTime, Mode = TwoWay}" DockPanel.Dock="Bottom" ></ui:SimpleTimePicker>
-                            <ui:ToggleSwitch  IsOn="{Binding ScheduleEnabled , Mode= TwoWay}" Toggled="ScheduleToggleClicked" DockPanel.Dock="Top" HorizontalAlignment="Center">
+                            <ui:ToggleSwitch ToolTip="Ενεργοποίηση/Απενεργοποίηση Χρονοδιακόπτη"  IsOn="{Binding ScheduleEnabled , Mode= TwoWay}" Toggled="ScheduleToggleClicked" DockPanel.Dock="Top" HorizontalAlignment="Center">
 
                                 <ui:ToggleSwitch.OnContentTemplate>
                                     <DataTemplate>
@@ -68,17 +68,17 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         <DataTemplate x:Key="temperatureTemplate" >
             <Border BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="16" CornerRadius="5" DockPanel.Dock="Bottom" Margin="5" >
                 <StackPanel Orientation="Horizontal">
-                <DockPanel LastChildFill="False" Width="450">
+                <DockPanel LastChildFill="False" Width="350">
                     <TextBlock HorizontalAlignment="Center" DockPanel.Dock="Top" FontWeight="Heavy" FontSize="20" Text="{Binding Description}"></TextBlock>
-                    <StackPanel IsEnabled="{Binding ItemStatus}" Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
-                        <Image HorizontalAlignment="Left" Width="80" Height="80" Source="/Resources/Images/SmartHome/temperature_icon.png"></Image>
+                    <StackPanel ToolTip="Θερμοκρασία Χώρου" IsEnabled="{Binding ItemStatus}" Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Top">
+                        <Image HorizontalAlignment="Left" Width="50" Height="50" Source="/Resources/Images/SmartHome/temperature_icon.png"></Image>
                             <Label VerticalAlignment="Center" FontSize="25" FontWeight="ExtraBold" Content="{Binding Temperature, Mode=TwoWay}"></Label>
                             <Label VerticalAlignment="Center" FontSize="25" Content="°C"></Label>
                         </StackPanel>
                         <Border Margin="10" BorderBrush="{StaticResource myPrimaryDominant}" BorderThickness="9" CornerRadius="5" DockPanel.Dock="Bottom" >
                             <DockPanel IsEnabled="{Binding ItemStatus}" LastChildFill="False" DockPanel.Dock="Bottom">
-                                <ui:NumberBox SpinButtonPlacementMode="Inline" Minimum="15" Value="{Binding SetTemperature, Mode=TwoWay}"  Maximum="30"></ui:NumberBox>
-                                <ui:ToggleSwitch  IsOn="{Binding ScheduleEnabled , Mode= TwoWay}" Toggled="ScheduleToggleClicked" DockPanel.Dock="Top" HorizontalAlignment="Center">
+                                <ui:NumberBox Width="100" SpinButtonPlacementMode="Inline" Minimum="15" Value="{Binding SetTemperature, Mode=TwoWay}" DockPanel.Dock="Bottom" Maximum="30"></ui:NumberBox>
+                                <ui:ToggleSwitch ToolTip="Ενεργοποίηση/Απενεργοποίηση Θερμοστάτη" IsOn="{Binding ScheduleEnabled , Mode= TwoWay}" Toggled="ScheduleToggleClicked" DockPanel.Dock="Top" HorizontalAlignment="Center">
 
                                     <ui:ToggleSwitch.OnContentTemplate >
                                         <DataTemplate>
@@ -154,14 +154,20 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
 
                 <StackPanel  x:Name="livingRoomPanel" Orientation="Vertical" >
 
-                    <Border  BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10">
+                    <Border x:Name="livingRoomListViewContainer" BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10">
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Label MouseDown="livingRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Living Room</Label>
+                                <Label MouseDown="livingRoomList_MouseDown"  Width="200" FontSize="30" FontWeight="ExtraBold" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Living Room</Label>
                             </StackPanel>
-                            <ItemsControl HorizontalContentAlignment="Center" x:Name="livingRoomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+                            <Border >
+                                <ScrollViewer MaxHeight="660" Height="660">
+                                    <ItemsControl  HorizontalContentAlignment="Center" x:Name="livingRoomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
 
-                            </ItemsControl>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Border>
+                            
+                            
 
                         </StackPanel>
 
@@ -173,12 +179,16 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
 
                         <StackPanel Orientation="Vertical">
                             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
-                                <TextBlock MouseDown="bedRoomList_MouseDown"  Width="700" FontSize="30" FontWeight="ExtraBold" HorizontalAlignment="Center">Bedroom</TextBlock>
+                                <TextBlock MouseDown="bedRoomList_MouseDown"  Width="200" FontSize="30" FontWeight="ExtraBold" HorizontalAlignment="Center">Bedroom</TextBlock>
                             </StackPanel>
 
-                            <ItemsControl HorizontalContentAlignment="Center" x:Name="BedroomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
+                            <ScrollViewer MaxHeight="660" Height="660">
+                                <ItemsControl  HorizontalContentAlignment="Center" x:Name="BedroomListView" ItemTemplateSelector="{StaticResource smartHomeItemSelector}">
 
-                            </ItemsControl>
+                                </ItemsControl>
+                            </ScrollViewer>
+
+                            
                         </StackPanel>
                     </Border>
                 </StackPanel>

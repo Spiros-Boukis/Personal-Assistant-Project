@@ -19,8 +19,8 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
                     <TextBox x:Name="nameText" IsReadOnlyCaretVisible="False" IsReadOnly="True" Width="200"  FontSize="30" FontWeight="Bold" Text="{Binding Name, Mode=TwoWay}"/>
                     <TextBox x:Name="phoneText" IsReadOnlyCaretVisible="False" IsReadOnly="True" Width="200" FontWeight="UltraLight" FontSize="26" Text="{Binding PhoneNumber, Mode=TwoWay}"/>
                 </StackPanel>
-                <Button Visibility="Hidden"  Margin="30,0,0,0" Width="50" Height="50" Click="saveEditContact">
-                    <Image  Height="50" Width="50" Source="/Resources/Images/save_icon.png"/>
+                <Button Visibility="Hidden"   Width="25" Height="25" Click="saveEditContact">
+                    <Image  Height="25" Width="25" Source="/Resources/Images/save_icon.png"/>
                 </Button>
                 
 
@@ -78,7 +78,7 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
                         </StackPanel>
                     </StackPanel>
                     <Border  BorderBrush="{StaticResource myPrimary}" Background="{StaticResource myPrimary}" BorderThickness="13" CornerRadius="10" Margin="10">
-                        <ListView MaxHeight="650" HorizontalAlignment="Left" SelectionChanged="contactsListView_SelectionChanged" x:Name="contactsListView" Width="500" ItemTemplate="{StaticResource ResourceKey=contactListTemplate}" ></ListView>
+                        <ListView SelectionMode="Single" ItemContainerStyle="{StaticResource listViewItemStyleNew}" MaxHeight="650" HorizontalAlignment="Left" SelectionChanged="contactsListView_SelectionChanged" x:Name="contactsListView" Width="500" ItemTemplate="{StaticResource ResourceKey=contactListTemplate}" ></ListView>
                     </Border>
                 </StackPanel>
 

@@ -12,25 +12,42 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
              Height="auto" Width="auto">
 
     <UserControl.Resources>
+
+
+        <Style x:Key="listViewItemStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource emailBodyBackground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <local1:EmailPreviewStyleSelector x:Key="styleSelector"/>
         <local1:SentEmailPreviewStyleSelector x:Key="sentEmailStyleSelector"/>
         <DataTemplate  x:Key="ReadEmailPreviewTemplate">
-            
-                    <Border BorderThickness="5px" CornerRadius="7" Width="700" >
-                    <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
+            <Border BorderThickness="5px" CornerRadius="7" Width="800" >
+                <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged">
                         <StackPanel x:Name="innerPanel" Orientation="Horizontal">
                             <TextBlock FontSize="20" x:Name="fromLabel"   Width="auto" Height="35">From:</TextBlock>
                         <TextBlock FontSize="20" x:Name="fromValue"  Text="{Binding From}" Width="auto" Height="35"/>
                         <TextBlock x:Name="titleLabel" VerticalAlignment="Center" FontSize="14" Width="auto" Height="auto">Title</TextBlock>
                         <TextBlock x:Name="titleValue" VerticalAlignment="Center" FontSize="20" Text="{Binding Title}" Width="auto" Height="auto"/>
-
-                        </StackPanel>
+                    </StackPanel>
 
                     <Label FontWeight="Light" x:Name="emailDate" FontSize="22" Content="{Binding Date}"/>
-                    <StackPanel x:Name="mailBody" Visibility="Collapsed">
-                    <TextBox  IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
+                    <StackPanel Background="{StaticResource emailBodyBackground}" x:Name="mailBody" Visibility="Collapsed" >
+                        <TextBox BorderThickness="0"  IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
                         
-                        <Button HorizontalAlignment="Left" Click="emailReply_Click" Content="Απάντηση" Width="100" Height="30" ></Button>
+                        <Button HorizontalAlignment="Left" Click="emailReply_Click" Content="Απάντηση" FontSize="20" ></Button>
                     </StackPanel>
                 </StackPanel>
                 </Border>
@@ -39,7 +56,7 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         </DataTemplate>
         <DataTemplate x:Key="UnreadEmailPreviewTemplate">
            
-                    <Border  BorderThickness="5px" CornerRadius="7" Width="700" >
+                    <Border  BorderThickness="5px" CornerRadius="7" Width="800" >
                     <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged" Height="auto">
                         <StackPanel Orientation="Horizontal">
                         <TextBlock FontSize="20" FontWeight="Bold"   Width="auto" Height="auto">From:</TextBlock>
@@ -48,9 +65,9 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
                         <TextBlock VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Text="{Binding Title}" Width="auto" Height="auto"/>
                         </StackPanel>
                     <Label FontWeight="Light" x:Name="emailDate" FontSize="22" Content="{Binding Date}"/>
-                    <StackPanel x:Name="mailBody" Visibility="Collapsed">
-                        <TextBox  IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
-                        <Button Click="emailReply_Click" HorizontalAlignment="Left" Content="Απάντηση" Width="100" Height="30" FontSize="20"></Button>
+                    <StackPanel Background="{StaticResource emailBodyBackground}" x:Name="mailBody" Visibility="Collapsed">
+                        <TextBox BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
+                        <Button Click="emailReply_Click" HorizontalAlignment="Left" Content="Απάντηση" FontSize="20"></Button>
                     </StackPanel>
                 </StackPanel>
                 
@@ -58,7 +75,7 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
         </DataTemplate>
 
         <DataTemplate x:Key="SentReadEmailPreviewTemplate">
-            <Border  BorderThickness="5px" CornerRadius="7" Width="700" >
+            <Border  BorderThickness="5px" CornerRadius="7" Width="800" >
                 <StackPanel Orientation="Vertical" Width="auto" MouseDown="emailsListView_SelectionChanged" >
                     <StackPanel Orientation="Horizontal" Height="auto">
                         <TextBlock FontSize="20"    Width="auto" Height="auto">To:</TextBlock>
@@ -67,15 +84,15 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
                         <TextBlock VerticalAlignment="Center" FontSize="20" Text="{Binding Title}" Width="auto" Height="auto"/>
                     </StackPanel>
                     <Label FontWeight="Light" x:Name="emailDate" FontSize="22" Content="{Binding Date}"/>
-                    <StackPanel x:Name="mailBody" Visibility="Collapsed">
-                        <TextBox   IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
+                    <StackPanel Background="{StaticResource emailBodyBackground}" x:Name="mailBody" Visibility="Collapsed">
+                        <TextBox BorderThickness="0"  IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
                         
                     </StackPanel>
                 </StackPanel>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="SentUnreadEmailPreviewTemplate">
-            <Border  BorderThickness="2px" Width="700" >
+            <Border  BorderThickness="2px" Width="800" >
                 <StackPanel Orientation="Vertical" Width="auto"   MouseDown="emailsListView_SelectionChanged">
                     <StackPanel Orientation="Horizontal" Height="auto">
                         <TextBlock FontSize="20" FontWeight="Bold"   Width="auto" Height="35">To:</TextBlock>
@@ -84,8 +101,8 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
                         <TextBlock VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Text="{Binding Title}" Width="auto" Height="auto"/>
                     </StackPanel>
                     <Label FontWeight="Light" x:Name="emailDate" FontSize="22" Content="{Binding Date}"/>
-                    <StackPanel x:Name="mailBody" Visibility="Collapsed">
-                        <TextBox  IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
+                    <StackPanel Background="{StaticResource emailBodyBackground}" x:Name="mailBody" Visibility="Collapsed">
+                        <TextBox BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  FontSize="23" MinWidth="500" MinHeight="70" MaxHeight="250" Text="{Binding Body}"></TextBox>
                         
                     </StackPanel>
                 </StackPanel>
@@ -102,30 +119,25 @@ xmlns:ui="http://schemas.modernwpf.com/2019"
             <StackPanel Orientation="Vertical" KeyDown="StackPanel_KeyDown">
                 <ToolBar MinWidth="850" Background="{StaticResource mySecondary}">
                     <ToolBar.Items>
-                        <Button Click="newEmailClick" ToolTip="Αποστολή Νέου Μηνύματος [INS]">
+                        <Button Click="newEmailClick" ToolTip="Δημιουργία Μηνύματος Ηλεκτρονικού Ταχυδρομείου [INS]">
                             <Image Height="50" Width="50" Source="/Resources/Images/new_email_icon.png"/>
                         </Button>
-                        <Button>
-                            <Image Source="/Resources/Images/edit_icon.png" Width="40" Height="40"></Image>
-
-                        </Button>
-                        <Button >
-                            <Image  HorizontalAlignment="Right" ToolTip="Διαγραφή μηνύματος [DEL]" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
-
+                        <Button  ToolTip="Διαγραφή Mηνύματος [DEL">
+                            <Image  HorizontalAlignment="Right" Source="/Resources/Images/delete_icon.png"  Width="40" Height="40"></Image>
                         </Button>
                     </ToolBar.Items>
                 </ToolBar>
-                <Border   BorderThickness="3" CornerRadius="7">
+                <Border  BorderThickness="3" CornerRadius="7">
                     <TabControl  OverridesDefaultStyle="True" TabStripPlacement="Left" >
-                        <TabItem >
+                        <TabItem>
                             <TabItem.Header>
                                 <Border Style="{StaticResource EmailFolderHeaderBorderStyle}">
                                     <Label Style="{StaticResource EmailFolderHeaderStyle}" FontSize="30">Εισερχόμενα</Label>
                                 </Border>
                             </TabItem.Header>
                             <StackPanel Orientation="Vertical" >
-                                <ListView Width="auto" Height="800" MaxHeight="800" x:Name="emailsListView" ItemTemplateSelector="{StaticResource styleSelector}" >
-
+                                <ListView   ItemContainerStyle="{StaticResource listViewItemStyle}" Width="auto" Height="800" MaxHeight="800" x:Name="emailsListView" ItemTemplateSelector="{StaticResource styleSelector}" >
+                                    
                                 </ListView>
                             </StackPanel>
                         </TabItem>
